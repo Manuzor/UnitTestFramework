@@ -65,11 +65,20 @@ unsigned int cppunit::UnitTestGroup::
     {
       CPPUNIT_LOG(logging::Mode::Success, "Unit test %s succeeded!\n", unitTestName);
     }
+    catch (const std::exception& ex)
+    {
+      ++failed;
+      CPPUNIT_LOG(logging::Mode::Failure, 
+        "Unit test %s failed due to an unhandled exception: %s\n",
+        unitTestName,
+        ex.what()
+        );
+    }
     catch (...)
     {
       ++failed;
       CPPUNIT_LOG(logging::Mode::Failure, 
-        "Unit test %s failed with an unhandled exception.\n",
+        "Unit test %s failed due to an unknown exception.\n",
         unitTestName
         );
     }

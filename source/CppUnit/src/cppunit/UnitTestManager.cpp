@@ -48,10 +48,10 @@ void cppunit::DefaultUnitTestManager::
       CPPUNIT_LOG(cppunit::logging::Mode::Success,
         "=== Unit test group passed ====================================================\n"
         "Group name: %s\n"
-        "Failed unit tests: %d/%d\n"
+        "Successful unit tests: %d/%d\n"
         "===============================================================================\n",
         unitTestGroupName,
-        failed, numberOfTests);
+        numberOfTests - failed, numberOfTests);
     }
     else
     {
@@ -60,24 +60,24 @@ void cppunit::DefaultUnitTestManager::
       CPPUNIT_LOG(cppunit::logging::Mode::Failure, 
         "=== Unit test group failed ====================================================\n"
         "Group name: %s\n"
-        "Failed unit tests: %d/%d\n"
+        "Successful unit tests: %d/%d\n"
         "===============================================================================\n",
         unitTestGroupName,
-        failed, numberOfTests);
+        numberOfTests - failed, numberOfTests);
     }
   }
 
   const char* finalMessage = "\n"
     "=== Final Statistics ==========================================================\n"
-    "Failed unit test groups:   %d/%d\n"
-    "Failed unit tests (total): %d/%d\n";
+    "Successful unit test groups:   %d/%d\n"
+    "Successful unit tests (total): %d/%d\n";
 
   if (m_statistics.testsFailed == 0)
   {
     CPPUNIT_LOG(cppunit::logging::Mode::Success, 
       finalMessage,
-      m_statistics.groupsFailed, m_statistics.groups,
-      m_statistics.testsFailed, m_statistics.tests);
+      m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
+      m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
     CPPUNIT_LOG(cppunit::logging::Mode::Success, 
       "=== All Unit Tests Passed! ====================================================\n");
@@ -86,8 +86,8 @@ void cppunit::DefaultUnitTestManager::
   {
     CPPUNIT_LOG(logging::Mode::Failure, 
       finalMessage,
-      m_statistics.groupsFailed, m_statistics.groups,
-      m_statistics.testsFailed, m_statistics.tests);
+      m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
+      m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
     CPPUNIT_LOG(cppunit::logging::Mode::Failure, 
       "=== All or Some Unit Tests Failed! ============================================\n");
