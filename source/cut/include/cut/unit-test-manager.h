@@ -27,9 +27,10 @@ namespace cut
 		public IUnitTestManager
 	{
 	public:
-		static DefaultUnitTestManager* instance();
+		static DefaultUnitTestManager& instance();
 
 		DefaultUnitTestManager();
+		virtual ~DefaultUnitTestManager();
 
 		virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup);
 

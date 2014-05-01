@@ -2,32 +2,29 @@
 #include "cut/unit-test-group.h"
 #include "cut/common.h"
 
-cut::DefaultUnitTestManager* cut::DefaultUnitTestManager::
-	instance()
+cut::DefaultUnitTestManager& cut::DefaultUnitTestManager::instance()
 {
-	static DefaultUnitTestManager* instance = nullptr;
-	if (instance == nullptr)
-	{
-		instance = new DefaultUnitTestManager();
-	}
+	static DefaultUnitTestManager instance;
 	return instance;
 }
 
-cut::DefaultUnitTestManager::
-	DefaultUnitTestManager() :
+cut::DefaultUnitTestManager::DefaultUnitTestManager() :
 	m_statistics(0, 0, 0, 0)
 {
 }
 
-void cut::DefaultUnitTestManager::
-	registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup)
+cut::DefaultUnitTestManager::~DefaultUnitTestManager()
+{
+
+}
+
+void cut::DefaultUnitTestManager::registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup)
 {
 	m_unitTestGroups[groupName] = testGroup;
 	++m_statistics.groups;
 }
 
-void cut::DefaultUnitTestManager::
-	runAll()
+void cut::DefaultUnitTestManager::runAll()
 {
 	for (auto& groupIter : m_unitTestGroups)
 	{
@@ -94,8 +91,8 @@ void cut::DefaultUnitTestManager::
 	}
 }
 
-size_t cut::DefaultUnitTestManager::
-	numberOfUnitTestGroups()
+size_t cut::DefaultUnitTestManager::numberOfUnitTestGroups()
 {
 	return m_unitTestGroups.size();
 }
+
