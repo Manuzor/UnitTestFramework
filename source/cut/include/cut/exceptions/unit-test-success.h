@@ -3,19 +3,19 @@
 
 namespace cut
 {
-  namespace exceptions
-  {
-    class UnitTestSuccess :
-      public cut::exceptions::Base
-    {
-    public:
-      UnitTestSuccess();
+	namespace exceptions
+	{
+		class UnitTestSuccess :
+			public cut::exceptions::Base
+		{
+		public:
+			UnitTestSuccess();
 
-      UnitTestSuccess(const char* file, unsigned int line, const char* message);
+			UnitTestSuccess(const char* file, unsigned int line, const char* message);
 
-    protected:
-    private:
-    };
+		protected:
+		private:
+		};
 
-  }
+	}
 }

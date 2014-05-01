@@ -4,44 +4,44 @@
 
 namespace cut
 {
-  // Forward declarations.
-  class IUnitTestGroup;
+	// Forward declarations.
+	class IUnitTestGroup;
 
-  // typedefs.
-  typedef containers::Map<const char*, IUnitTestGroup*>::type UnitTestGroupMap;
+	// typedefs.
+	typedef containers::Map<const char*, IUnitTestGroup*>::type UnitTestGroupMap;
 
-  // Class definitions.
-  class IUnitTestManager
-  {
-  public:
-    virtual ~IUnitTestManager() = 0 {}
+	// Class definitions.
+	class IUnitTestManager
+	{
+	public:
+		virtual ~IUnitTestManager() = 0 {}
 
-    virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup) = 0;
+		virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup) = 0;
 
-    virtual void runAll() = 0;
+		virtual void runAll() = 0;
 
-    virtual size_t numberOfUnitTestGroups() = 0;
-  };
+		virtual size_t numberOfUnitTestGroups() = 0;
+	};
 
-  class DefaultUnitTestManager :
-    public IUnitTestManager
-  {
-  public:
-    static DefaultUnitTestManager* instance();
+	class DefaultUnitTestManager :
+		public IUnitTestManager
+	{
+	public:
+		static DefaultUnitTestManager* instance();
 
-    DefaultUnitTestManager();
+		DefaultUnitTestManager();
 
-    virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup);
+		virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup);
 
-    virtual void runAll();
+		virtual void runAll();
 
-    virtual size_t numberOfUnitTestGroups();
+		virtual size_t numberOfUnitTestGroups();
 
-  protected:
-  private:
-    UnitTestStatistics m_statistics;
-    UnitTestGroupMap m_unitTestGroups;
-  };
+	protected:
+	private:
+		UnitTestStatistics m_statistics;
+		UnitTestGroupMap m_unitTestGroups;
+	};
 
-  typedef CUT_TYPE_TESTMANAGER TestManager;
+	typedef CUT_TYPE_TESTMANAGER TestManager;
 }

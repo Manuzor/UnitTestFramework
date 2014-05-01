@@ -8,7 +8,7 @@
 
 namespace cut
 {
-  typedef CUT_TYPE_LAMBDA _Lambda;
+	typedef CUT_TYPE_LAMBDA _Lambda;
 }
 
 //#define CUT_LOG ::cut::logging::Manager::instance()->logMessage

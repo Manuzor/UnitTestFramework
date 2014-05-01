@@ -3,8 +3,8 @@
 
 namespace cut
 {
-  namespace streams
-  {
-    typedef CUT_TYPE_FILESTREAM OutputFile;
-  }
+	namespace streams
+	{
+		typedef CUT_TYPE_FILESTREAM OutputFile;
+	}
 }

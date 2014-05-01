@@ -3,18 +3,18 @@
 
 namespace cut
 {
-  namespace exceptions
-  {
-    class UnitTestFailure :
-      public cut::exceptions::Base
-    {
-    public:
-      UnitTestFailure(const char* file, unsigned int line, const char* message);
+	namespace exceptions
+	{
+		class UnitTestFailure :
+			public cut::exceptions::Base
+		{
+		public:
+			UnitTestFailure(const char* file, unsigned int line, const char* message);
 
-      virtual ~UnitTestFailure();
+			virtual ~UnitTestFailure();
 
-    protected:
-    private:
-    };
-  }
+		protected:
+		private:
+		};
+	}
 }

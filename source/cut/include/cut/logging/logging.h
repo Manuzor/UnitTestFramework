@@ -5,8 +5,8 @@
 
 namespace cut
 {
-  namespace logging
-  {
-    typedef CUT_TYPE_LOGMANAGER Manager;
-  }
+	namespace logging
+	{
+		typedef CUT_TYPE_LOGMANAGER Manager;
+	}
 }

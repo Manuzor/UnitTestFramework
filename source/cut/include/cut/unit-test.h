@@ -2,10 +2,10 @@
 
 namespace cut
 {
-  class IUnitTest
-  {
-  public:
-    virtual ~IUnitTest() = 0 {}
-    virtual void run() = 0;
-  };
+	class IUnitTest
+	{
+	public:
+		virtual ~IUnitTest() = 0 {}
+		virtual void run() = 0;
+	};
 }

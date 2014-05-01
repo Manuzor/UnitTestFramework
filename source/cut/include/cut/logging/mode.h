@@ -2,13 +2,13 @@
 
 namespace cut
 {
-  namespace logging
-  {
-    enum class Mode
-    {
-      Normal,
-      Failure,
-      Success
-    };
-  }
+	namespace logging
+	{
+		enum class Mode
+		{
+			Normal,
+			Failure,
+			Success
+		};
+	}
 }
