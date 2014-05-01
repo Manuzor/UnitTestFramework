@@ -12,4 +12,4 @@ namespace cppunit
 }
 
 //#define CPPUNIT_LOG ::cppunit::logging::Manager::instance()->logMessage
-#define CPPUNIT_LOG ::cppunit::logging::DefaultManager::instance()->logMessage
+#define CPPUNIT_LOG (::cppunit::logging::DefaultManager::instance()->logMessage)

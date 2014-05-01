@@ -3,25 +3,18 @@
 
 namespace cppunit
 {
-  struct Assert
+  namespace Assert
   {
-    static void True(bool expr, const char* message = nullptr, ...);
-    static void False(bool expr, const char* message = nullptr, ...);
+    inline void True(bool expr, const char* message = nullptr, ...);
+    inline void False(bool expr, const char* message = nullptr, ...);
 
     template<typename T_Exception>
-    static void Throws(_Lambda& lambda, const char* message = nullptr);
+    inline void Throws(_Lambda& lambda, const char* message = nullptr);
 
-    static void DoesNotThrow(_Lambda& lambda, const char* message = nullptr);
+    inline void DoesNotThrow(_Lambda& lambda, const char* message = nullptr);
 
-    static void Fail(const char* message = nullptr, ...);
-    static void Succeed(const char* message = nullptr, ...);
-
-  private:
-    // Non-Copyable
-    Assert(){}
-    Assert(const Assert&){}
-    Assert(Assert&&){}
-    const Assert& operator=(const Assert&){}
+    inline void Fail(const char* message = nullptr, ...);
+    inline void Succeed(const char* message = nullptr, ...);
   };
 }
 

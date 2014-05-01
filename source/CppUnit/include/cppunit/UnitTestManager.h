@@ -1,6 +1,6 @@
 #pragma once
 #include "cppunit/containers/Map.h"
-#include "UnitTestStatistics.h"
+#include "cppunit/UnitTestStatistics.h"
 
 namespace cppunit
 {

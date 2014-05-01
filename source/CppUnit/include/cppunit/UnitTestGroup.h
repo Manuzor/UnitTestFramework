@@ -30,9 +30,9 @@ namespace cppunit
 
     UnitTestGroup(const char* groupName);
 
-    virtual ~UnitTestGroup();
+	virtual ~UnitTestGroup();
 
-    virtual void registerUnitTest( const char* unitTestName, IUnitTest* unitTest ) override;
+    virtual void registerUnitTest(const char* unitTestName, IUnitTest* unitTest) override;
 
     virtual unsigned int runAllTests() override;
 
