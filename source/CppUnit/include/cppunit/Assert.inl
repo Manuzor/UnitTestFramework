@@ -1,7 +1,7 @@
 #include "cppunit/exceptions/UnitTestSuccess.h"
 #include "cppunit/exceptions/UnitTestFailure.h"
 
-template<typename T>
+template<typename T_Exception>
 void cppunit::Assert::Throws(_Lambda& lambda, const char* message)
 {
   try
@@ -9,9 +9,13 @@ void cppunit::Assert::Throws(_Lambda& lambda, const char* message)
     lambda();
     throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
   }
-  catch (T&)
+  catch (T_Exception&)
   {
     // Success!
+  }
+  catch (...)
+  {
+	  throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
   }
 }
 

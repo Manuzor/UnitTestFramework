@@ -8,7 +8,7 @@ namespace cppunit
     static void True(bool expr, const char* message = nullptr, ...);
     static void False(bool expr, const char* message = nullptr, ...);
 
-    template<typename T>
+    template<typename T_Exception>
     static void Throws(_Lambda& lambda, const char* message = nullptr);
 
     static void DoesNotThrow(_Lambda& lambda, const char* message = nullptr);
