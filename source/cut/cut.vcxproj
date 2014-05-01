@@ -21,7 +21,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5E93AB69-B58A-49C2-AB80-D1CA20912830}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CppUnit</RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -55,19 +56,15 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="CppUnit_d.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="CppUnit_d.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="CppUnit.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="CppUnit.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -92,7 +89,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>CPPUNIT_API;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CUT_API;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -106,7 +103,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>CPPUNIT_API;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CUT_API;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -122,7 +119,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>CPPUNIT_API;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CUT_API;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -140,7 +137,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>CPPUNIT_API;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CUT_API;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -151,37 +148,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\cppunit\Assert.h" />
-    <ClInclude Include="include\cppunit\Common.h" />
-    <ClInclude Include="include\cppunit\containers\Map.h" />
-    <ClInclude Include="include\cppunit\exceptions\Base.h" />
-    <ClInclude Include="include\cppunit\exceptions\UnitTestFailure.h" />
-    <ClInclude Include="include\cppunit\exceptions\UnitTestSuccess.h" />
-    <ClInclude Include="include\cppunit\logging\Logging.h" />
-    <ClInclude Include="include\cppunit\logging\Mode.h" />
-    <ClInclude Include="include\cppunit\streams\OutputFile.h" />
-    <ClInclude Include="include\cppunit\Types.h" />
-    <ClInclude Include="include\cppunit\UnitTest.h" />
-    <ClInclude Include="include\cppunit\UnitTestGroup.h" />
-    <ClInclude Include="include\cppunit\UnitTestManager.h" />
-    <ClInclude Include="include\cppunit\logging\LogManager.h" />
-    <ClInclude Include="include\cppunit\Framework.h" />
-    <ClInclude Include="include\cppunit\UnitTestStatistics.h" />
+    <ClInclude Include="include\cut\assert.h" />
+    <ClInclude Include="include\cut\common.h" />
+    <ClInclude Include="include\cut\containers\map.h" />
+    <ClInclude Include="include\cut\exceptions\base.h" />
+    <ClInclude Include="include\cut\exceptions\unit-test-failure.h" />
+    <ClInclude Include="include\cut\exceptions\unit-test-success.h" />
+    <ClInclude Include="include\cut\logging\logging.h" />
+    <ClInclude Include="include\cut\logging\mode.h" />
+    <ClInclude Include="include\cut\streams\output-file.h" />
+    <ClInclude Include="include\cut\types.h" />
+    <ClInclude Include="include\cut\unit-test.h" />
+    <ClInclude Include="include\cut\unit-test-group.h" />
+    <ClInclude Include="include\cut\unit-test-manager.h" />
+    <ClInclude Include="include\cut\logging\log-manager.h" />
+    <ClInclude Include="include\cut\framework.h" />
+    <ClInclude Include="include\cut\unit-test-statistics.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CppUnit.props" />
-    <None Include="CppUnit_d.props" />
-    <None Include="include\cppunit\Assert.inl" />
+    <None Include="include\cut\assert.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\cppunit\UnitTestStatistics.cpp" />
-    <ClCompile Include="src\cppunit\exceptions\UnitTestSuccess.cpp" />
-    <ClCompile Include="src\cppunit\logging\LogManager.cpp" />
-    <ClCompile Include="src\cppunit\exceptions\Base.cpp" />
-    <ClCompile Include="src\cppunit\UnitTestGroup.cpp" />
-    <ClCompile Include="src\cppunit\UnitTestManager.cpp" />
-    <ClCompile Include="src\cppunit\exceptions\UnitTestFailure.cpp" />
-    <ClCompile Include="src\cppunit\Assert.cpp" />
+    <ClCompile Include="src\cut\unit-test-statistics.cpp" />
+    <ClCompile Include="src\cut\exceptions\unit-test-success.cpp" />
+    <ClCompile Include="src\cut\logging\log-manager.cpp" />
+    <ClCompile Include="src\cut\exceptions\base.cpp" />
+    <ClCompile Include="src\cut\unit-test-group.cpp" />
+    <ClCompile Include="src\cut\unit-test-manager.cpp" />
+    <ClCompile Include="src\cut\exceptions\unit-test-failure.cpp" />
+    <ClCompile Include="src\cut\assert.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
