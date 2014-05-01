@@ -9,7 +9,7 @@ cut::Assert::True(bool expr, const char* message /*= nullptr*/, ...)
 	if (!expr)
 	{
 		throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
-		CUT_DEBUG_BREAK;
+		debugBreak();
 	}
 }
 
@@ -19,7 +19,7 @@ cut::Assert::False(bool expr, const char* message /*= nullptr*/, ...)
 	if (expr)
 	{
 		throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
-		CUT_DEBUG_BREAK;
+		debugBreak();
 	}
 }
 
@@ -33,7 +33,7 @@ cut::Assert::DoesNotThrow(_Lambda& lambda, const char* message /*= nullptr*/)
 	catch (...)
 	{
 		throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
-		CUT_DEBUG_BREAK;
+		debugBreak();
 	}
 }
 
