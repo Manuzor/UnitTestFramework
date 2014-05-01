@@ -1,12 +1,12 @@
 #pragma once
-#include "cppunit/exceptions/Base.h"
+#include "cut/exceptions/base.h"
 
-namespace cppunit
+namespace cut
 {
   namespace exceptions
   {
     class UnitTestSuccess :
-      public cppunit::exceptions::Base
+      public cut::exceptions::Base
     {
     public:
       UnitTestSuccess();

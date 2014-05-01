@@ -1,13 +1,13 @@
-#include "cppunit/exceptions/UnitTestFailure.h"
+#include "cut/exceptions/unit-test-failure.h"
 
-cppunit::exceptions::UnitTestFailure::
+cut::exceptions::UnitTestFailure::
   UnitTestFailure(const char* file, unsigned int line, const char* message) :
   Base(file, line, message)
 {
 
 }
 
-cppunit::exceptions::UnitTestFailure::
+cut::exceptions::UnitTestFailure::
   ~UnitTestFailure()
 {
 

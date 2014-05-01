@@ -1,13 +1,13 @@
-#include "cppunit/exceptions/UnitTestSuccess.h"
+#include "cut/exceptions/unit-test-success.h"
 
-cppunit::exceptions::UnitTestSuccess::
+cut::exceptions::UnitTestSuccess::
   UnitTestSuccess() :
   Base(nullptr, 0U, nullptr)
 {
 
 }
 
-cppunit::exceptions::UnitTestSuccess::
+cut::exceptions::UnitTestSuccess::
   UnitTestSuccess(const char* file, unsigned int line, const char* message) :
   Base(file, line, message)
 {

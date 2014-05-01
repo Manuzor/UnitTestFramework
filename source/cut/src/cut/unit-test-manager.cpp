@@ -1,8 +1,8 @@
-#include "cppunit/UnitTestManager.h"
-#include "cppunit/UnitTestGroup.h"
-#include "cppunit/Common.h"
+#include "cut/unit-test-manager.h"
+#include "cut/unit-test-group.h"
+#include "cut/common.h"
 
-cppunit::DefaultUnitTestManager* cppunit::DefaultUnitTestManager::
+cut::DefaultUnitTestManager* cut::DefaultUnitTestManager::
   instance()
 {
   static DefaultUnitTestManager* instance = nullptr;
@@ -13,20 +13,20 @@ cppunit::DefaultUnitTestManager* cppunit::DefaultUnitTestManager::
   return instance;
 }
 
-cppunit::DefaultUnitTestManager::
+cut::DefaultUnitTestManager::
   DefaultUnitTestManager() :
   m_statistics(0, 0, 0, 0)
 {
 }
 
-void cppunit::DefaultUnitTestManager::
+void cut::DefaultUnitTestManager::
   registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup)
 {
   m_unitTestGroups[groupName] = testGroup;
   ++m_statistics.groups;
 }
 
-void cppunit::DefaultUnitTestManager::
+void cut::DefaultUnitTestManager::
   runAll()
 {
   for (auto& groupIter : m_unitTestGroups)
@@ -37,15 +37,15 @@ void cppunit::DefaultUnitTestManager::
 
     m_statistics.tests += numberOfTests;
 
-    CPPUNIT_LOG(logging::Mode::Normal, 
+    CUT_LOG(logging::Mode::Normal,
       "\n"
-      "Running unit test group %s with %d unit tests:\n", 
-      unitTestGroupName, 
+      "Running unit test group %s with %d unit tests:\n",
+      unitTestGroupName,
       numberOfTests);
     size_t failed = unitTestGroup->runAllTests();
     if (failed == 0)
     {
-      CPPUNIT_LOG(cppunit::logging::Mode::Success,
+      CUT_LOG(cut::logging::Mode::Success,
         "=== Unit test group passed ====================================================\n"
         "Group name: %s\n"
         "Successful unit tests: %d/%d\n"
@@ -57,7 +57,7 @@ void cppunit::DefaultUnitTestManager::
     {
       ++m_statistics.groupsFailed;
       m_statistics.testsFailed += failed;
-      CPPUNIT_LOG(cppunit::logging::Mode::Failure, 
+      CUT_LOG(cut::logging::Mode::Failure,
         "=== Unit test group failed ====================================================\n"
         "Group name: %s\n"
         "Successful unit tests: %d/%d\n"
@@ -74,27 +74,27 @@ void cppunit::DefaultUnitTestManager::
 
   if (m_statistics.testsFailed == 0)
   {
-    CPPUNIT_LOG(cppunit::logging::Mode::Success, 
+    CUT_LOG(cut::logging::Mode::Success,
       finalMessage,
       m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
       m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
-    CPPUNIT_LOG(cppunit::logging::Mode::Success, 
+    CUT_LOG(cut::logging::Mode::Success,
       "=== All Unit Tests Passed! ====================================================\n");
   }
   else
   {
-    CPPUNIT_LOG(logging::Mode::Failure, 
+    CUT_LOG(logging::Mode::Failure,
       finalMessage,
       m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
       m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
-    CPPUNIT_LOG(cppunit::logging::Mode::Failure, 
+    CUT_LOG(cut::logging::Mode::Failure,
       "=== All or Some Unit Tests Failed! ============================================\n");
   }
 }
 
-size_t cppunit::DefaultUnitTestManager::
+size_t cut::DefaultUnitTestManager::
   numberOfUnitTestGroups()
 {
   return m_unitTestGroups.size();

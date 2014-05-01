@@ -1,13 +1,13 @@
 #pragma once
 
-#include "cppunit/streams/OutputFile.h"
-#include "cppunit/logging/Mode.h"
+#include "cut/streams/output-file.h"
+#include "cut/logging/mode.h"
 
-#ifndef CPPUNIT_LOG_FORMATBUFFERSIZE
-#define CPPUNIT_LOG_FORMATBUFFERSIZE 1024
-#endif // !CPPUNIT_LOG_FORMATBUFFERSIZE
+#ifndef CUT_LOG_FORMATBUFFERSIZE
+#define CUT_LOG_FORMATBUFFERSIZE 1024
+#endif // !CUT_LOG_FORMATBUFFERSIZE
 
-namespace cppunit
+namespace cut
 {
   namespace logging
   {
@@ -19,7 +19,7 @@ namespace cppunit
       virtual void logMessage(Mode mode, const char* formatString, ...) = 0;
     };
 
-    class DefaultManager : 
+    class DefaultManager :
       public IManager
     {
     public:

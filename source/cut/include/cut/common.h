@@ -1,15 +1,15 @@
 #pragma once
 #include "Types.h"
-#include "cppunit/streams/OutputFile.h"
-#include "cppunit/containers/Map.h"
-#include "cppunit/logging/Logging.h"
+#include "cut/streams/output-file.h"
+#include "cut/containers/map.h"
+#include "cut/logging/logging.h"
 
-#define CPPUNIT_DEBUG_BREAK { __debugbreak(); }
+#define CUT_DEBUG_BREAK { __debugbreak(); }
 
-namespace cppunit
+namespace cut
 {
-  typedef CPPUNIT_TYPE_LAMBDA _Lambda;
+  typedef CUT_TYPE_LAMBDA _Lambda;
 }
 
-//#define CPPUNIT_LOG ::cppunit::logging::Manager::instance()->logMessage
-#define CPPUNIT_LOG (::cppunit::logging::DefaultManager::instance()->logMessage)
+//#define CUT_LOG ::cut::logging::Manager::instance()->logMessage
+#define CUT_LOG (::cut::logging::DefaultManager::instance()->logMessage)

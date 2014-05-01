@@ -1,6 +1,6 @@
 #pragma once
 
-namespace cppunit
+namespace cut
 {
   namespace logging
   {

@@ -1,30 +1,30 @@
-#include "cppunit/Common.h"
-#include "cppunit/Assert.h"
-#include "cppunit/exceptions/UnitTestFailure.h"
-#include "cppunit/exceptions/UnitTestSuccess.h"
+#include "cut/common.h"
+#include "cut/assert.h"
+#include "cut/exceptions/unit-test-failure.h"
+#include "cut/exceptions/unit-test-success.h"
 
 void
-cppunit::Assert::True(bool expr, const char* message /*= nullptr*/, ...)
+cut::Assert::True(bool expr, const char* message /*= nullptr*/, ...)
 {
   if (!expr)
   {
     throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
-    CPPUNIT_DEBUG_BREAK;
+    CUT_DEBUG_BREAK;
   }
 }
 
 void
-cppunit::Assert::False(bool expr, const char* message /*= nullptr*/, ...)
+cut::Assert::False(bool expr, const char* message /*= nullptr*/, ...)
 {
   if (expr)
   {
     throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
-    CPPUNIT_DEBUG_BREAK;
+    CUT_DEBUG_BREAK;
   }
 }
 
 void
-cppunit::Assert::DoesNotThrow(_Lambda& lambda, const char* message /*= nullptr*/)
+cut::Assert::DoesNotThrow(_Lambda& lambda, const char* message /*= nullptr*/)
 {
   try
   {
@@ -33,18 +33,18 @@ cppunit::Assert::DoesNotThrow(_Lambda& lambda, const char* message /*= nullptr*/
   catch (...)
   {
     throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
-    CPPUNIT_DEBUG_BREAK;
+    CUT_DEBUG_BREAK;
   }
 }
 
 void
-cppunit::Assert::Fail(const char* message /*= nullptr*/, ...)
+cut::Assert::Fail(const char* message /*= nullptr*/, ...)
 {
   throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
 }
 
 void
-cppunit::Assert::Succeed(const char* message /*= nullptr*/, ...)
+cut::Assert::Succeed(const char* message /*= nullptr*/, ...)
 {
   throw exceptions::UnitTestSuccess(__FILE__, __LINE__, message);
 }

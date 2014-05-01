@@ -1,6 +1,6 @@
-#include "cppunit/exceptions/Base.h"
+#include "cut/exceptions/base.h"
 
-cppunit::exceptions::Base::
+cut::exceptions::Base::
   Base( const char* file, unsigned int line, const char* message ) :
   m_file(file ? file : ""),
   m_line(line),
@@ -8,7 +8,7 @@ cppunit::exceptions::Base::
 {
 }
 
-cppunit::exceptions::Base::
+cut::exceptions::Base::
   ~Base()
 {
 }

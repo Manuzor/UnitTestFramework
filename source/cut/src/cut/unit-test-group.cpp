@@ -1,37 +1,35 @@
-#include "cppunit/Common.h"
-#include "cppunit/UnitTestGroup.h"
-#include "cppunit/UnitTestManager.h"
-#include "cppunit/UnitTest.h"
-#include "cppunit/exceptions/UnitTestSuccess.h"
-#include "cppunit/exceptions/UnitTestFailure.h"
+#include "cut/common.h"
+#include "cut/unit-test-group.h"
+#include "cut/unit-test-manager.h"
+#include "cut/unit-test.h"
+#include "cut/exceptions/unit-test-success.h"
+#include "cut/exceptions/unit-test-failure.h"
 
-cppunit::UnitTestGroup::
-  UnitTestGroup(const char* groupName)
+cut::UnitTestGroup::UnitTestGroup(const char* groupName)
 {
   TestManager::instance()->registerUnitTestGroup(groupName, this);
 }
 
-void cppunit::UnitTestGroup::
-  registerUnitTest( const char* unitTestName, IUnitTest* unitTest )
+void
+cut::UnitTestGroup::registerUnitTest( const char* unitTestName, IUnitTest* unitTest )
 {
   m_unitTests[unitTestName] = unitTest;
 }
 
-cppunit::UnitTestGroup::
-  ~UnitTestGroup()
+cut::UnitTestGroup::~UnitTestGroup()
 {
 
 }
 
-unsigned int cppunit::UnitTestGroup::
-  runAllTests()
+unsigned int
+cut::UnitTestGroup::runAllTests()
 {
   unsigned int failed = 0;
   for (auto& unitTestIterator : m_unitTests)
   {
     const char* unitTestName = unitTestIterator.first;
     IUnitTest* unitTest = unitTestIterator.second;
-    CPPUNIT_LOG(logging::Mode::Normal, "Running unit test %s...\n", unitTestName);
+    CUT_LOG(logging::Mode::Normal, "Running unit test %s...\n", unitTestName);
     try
     {
       unitTest->run();
@@ -43,32 +41,32 @@ unsigned int cppunit::UnitTestGroup::
 
       if (failure.message() == nullptr)
       {
-        CPPUNIT_LOG(logging::Mode::Failure, 
-          "Unit test %s failed in file %s at line %d.\n", 
-          unitTestName, 
-          failure.file(), 
+        CUT_LOG(logging::Mode::Failure,
+          "Unit test %s failed in file %s at line %d.\n",
+          unitTestName,
+          failure.file(),
           failure.line()
           );
       }
       else
       {
-        CPPUNIT_LOG(logging::Mode::Failure, 
-          "Unit test %s failed in file %s at line %d:\n  %s\n", 
-          unitTestName, 
-          failure.file(), 
-          failure.line(), 
+        CUT_LOG(logging::Mode::Failure,
+          "Unit test %s failed in file %s at line %d:\n  %s\n",
+          unitTestName,
+          failure.file(),
+          failure.line(),
           failure.message()
           );
       }
     }
     catch (const exceptions::UnitTestSuccess&)
     {
-      CPPUNIT_LOG(logging::Mode::Success, "Unit test %s succeeded!\n", unitTestName);
+      CUT_LOG(logging::Mode::Success, "Unit test %s succeeded!\n", unitTestName);
     }
     catch (const std::exception& ex)
     {
       ++failed;
-      CPPUNIT_LOG(logging::Mode::Failure, 
+      CUT_LOG(logging::Mode::Failure,
         "Unit test %s failed due to an unhandled exception: %s\n",
         unitTestName,
         ex.what()
@@ -77,7 +75,7 @@ unsigned int cppunit::UnitTestGroup::
     catch (...)
     {
       ++failed;
-      CPPUNIT_LOG(logging::Mode::Failure, 
+      CUT_LOG(logging::Mode::Failure,
         "Unit test %s failed due to an unknown exception.\n",
         unitTestName
         );
@@ -86,8 +84,8 @@ unsigned int cppunit::UnitTestGroup::
   return failed;
 }
 
-size_t cppunit::UnitTestGroup::
-  numberOfUnitTests()
+size_t
+cut::UnitTestGroup::numberOfUnitTests()
 {
   return m_unitTests.size();
 }

@@ -1,8 +1,8 @@
 #pragma once
-#include "cppunit/containers/Map.h"
-#include "cppunit/UnitTestStatistics.h"
+#include "cut/containers/map.h"
+#include "cut/unit-test-statistics.h"
 
-namespace cppunit
+namespace cut
 {
   // Forward declarations.
   class IUnitTestGroup;
@@ -43,5 +43,5 @@ namespace cppunit
     UnitTestGroupMap m_unitTestGroups;
   };
 
-  typedef CPPUNIT_TYPE_TESTMANAGER TestManager;
+  typedef CUT_TYPE_TESTMANAGER TestManager;
 }

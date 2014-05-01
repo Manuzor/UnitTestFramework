@@ -1,12 +1,12 @@
 #pragma once
 
-#include "cppunit/logging/LogManager.h"
+#include "cut/logging/log-manager.h"
 
 
-namespace cppunit
+namespace cut
 {
   namespace logging
   {
-    typedef CPPUNIT_TYPE_LOGMANAGER Manager;
+    typedef CUT_TYPE_LOGMANAGER Manager;
   }
 }

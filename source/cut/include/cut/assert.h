@@ -1,7 +1,7 @@
 #pragma once
-#include "cppunit/Common.h"
+#include "cut/common.h"
 
-namespace cppunit
+namespace cut
 {
   namespace Assert
   {
@@ -18,4 +18,4 @@ namespace cppunit
   };
 }
 
-#include "cppunit/Assert.inl"
+#include "cut/assert.inl"

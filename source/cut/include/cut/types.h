@@ -1,24 +1,24 @@
 #pragma once
 
-#ifndef CPPUNIT_TYPE_TESTMANAGER
-#define CPPUNIT_TYPE_TESTMANAGER ::cppunit::DefaultUnitTestManager
+#ifndef CUT_TYPE_TESTMANAGER
+#define CUT_TYPE_TESTMANAGER ::cut::DefaultUnitTestManager
 #endif
 
-#ifndef CPPUNIT_TYPE_LOGMANAGER
-#define CPPUNIT_TYPE_LOGMANAGER ::cppunit::logging::DefaultManager
+#ifndef CUT_TYPE_LOGMANAGER
+#define CUT_TYPE_LOGMANAGER ::cut::logging::DefaultManager
 #endif
 
-#ifndef CPPUNIT_TYPE_FILESTREAM
+#ifndef CUT_TYPE_FILESTREAM
 #include <fstream>
-#define CPPUNIT_TYPE_FILESTREAM ::std::ofstream
+#define CUT_TYPE_FILESTREAM ::std::ofstream
 #endif
 
-#ifndef CPPUNIT_TYPE_MAP
+#ifndef CUT_TYPE_MAP
 #include <map>
-#define CPPUNIT_TYPE_MAP ::std::map
+#define CUT_TYPE_MAP ::std::map
 #endif
 
-#ifndef CPPUNIT_TYPE_LAMBDA
+#ifndef CUT_TYPE_LAMBDA
 #include <functional>
-#define CPPUNIT_TYPE_LAMBDA ::std::function<void()>
+#define CUT_TYPE_LAMBDA ::std::function<void()>
 #endif

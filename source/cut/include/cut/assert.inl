@@ -1,9 +1,9 @@
-#include "cppunit/exceptions/UnitTestSuccess.h"
-#include "cppunit/exceptions/UnitTestFailure.h"
+#include "cut/exceptions/unit-test-success.h"
+#include "cut/exceptions/unit-test-failure.h"
 
 template<typename T_Exception>
 void
-cppunit::Assert::Throws(_Lambda& lambda, const char* message)
+cut::Assert::Throws(_Lambda& lambda, const char* message)
 {
 	try
 	{

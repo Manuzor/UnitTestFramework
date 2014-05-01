@@ -1,10 +1,10 @@
 #pragma once
-#include "cppunit/Types.h"
+#include "cut/types.h"
 
-namespace cppunit
+namespace cut
 {
   namespace streams
   {
-    typedef CPPUNIT_TYPE_FILESTREAM OutputFile;
+    typedef CUT_TYPE_FILESTREAM OutputFile;
   }
 }

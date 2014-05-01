@@ -4,24 +4,24 @@
 #error "Current compiler is not supported!"
 #endif
 
-#include "cppunit/Common.h"
-#include "cppunit/UnitTestManager.h"
-#include "cppunit/UnitTestGroup.h"
-#include "cppunit/UnitTest.h"
-#include "cppunit/Assert.h"
+#include "cut/common.h"
+#include "cut/unit-test-manager.h"
+#include "cut/unit-test-group.h"
+#include "cut/unit-test.h"
+#include "cut/assert.h"
 
 
-#define CPPUNIT_GROUP(groupName) class UnitTestGroup_##groupName :                \
-  public ::cppunit::UnitTestGroup                                                 \
+#define CUT_GROUP(groupName) class UnitTestGroup_##groupName :                \
+  public ::cut::UnitTestGroup                                                 \
 {                                                                                 \
 public:                                                                           \
   UnitTestGroup_##groupName() :                                                   \
-    ::cppunit::UnitTestGroup(#groupName){}                                        \
+    ::cut::UnitTestGroup(#groupName){}                                        \
 };                                                                                \
 UnitTestGroup_##groupName g_unitTestGroup_##groupName
 
-#define CPPUNIT_TEST(groupName, className) class UnitTest_##groupName##_##className :  \
-  public ::cppunit::IUnitTest                                                          \
+#define CUT_TEST(groupName, className) class UnitTest_##groupName##_##className :  \
+  public ::cut::IUnitTest                                                          \
 {                                                                                      \
 public:                                                                                \
   UnitTest_##groupName##_##className()                                                 \

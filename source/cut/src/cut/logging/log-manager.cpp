@@ -1,12 +1,12 @@
-#include "cppunit/logging/LogManager.h"
+#include "cut/logging/log-manager.h"
 #include <cstdarg>
 #include <windows.h>
 
-#ifndef CPPUNIT_LOGFILENAME
-#define CPPUNIT_LOGFILENAME "UnitTest.log"
-#endif // !CPPUNIT_LOGFILENAME
+#ifndef CUT_LOGFILENAME
+#define CUT_LOGFILENAME "UnitTest.log"
+#endif // !CUT_LOGFILENAME
 
-cppunit::logging::DefaultManager* cppunit::logging::DefaultManager::
+cut::logging::DefaultManager* cut::logging::DefaultManager::
   instance()
 {
   static DefaultManager* instance;
@@ -17,21 +17,21 @@ cppunit::logging::DefaultManager* cppunit::logging::DefaultManager::
   return instance;
 }
 
-cppunit::logging::DefaultManager::
+cut::logging::DefaultManager::
   DefaultManager() :
-  m_file(CPPUNIT_LOGFILENAME)
+  m_file(CUT_LOGFILENAME)
 {
-  m_buffer = new char[CPPUNIT_LOG_FORMATBUFFERSIZE];
+  m_buffer = new char[CUT_LOG_FORMATBUFFERSIZE];
 }
 
-cppunit::logging::DefaultManager::
+cut::logging::DefaultManager::
   ~DefaultManager()
 {
   delete[] m_buffer;
   m_buffer = nullptr;
 }
 
-void cppunit::logging::DefaultManager::
+void cut::logging::DefaultManager::
   logMessage(Mode mode, const char* formatString, ...)
 {
   va_list args;
@@ -40,7 +40,7 @@ void cppunit::logging::DefaultManager::
   {
     //TODO: Check if vsnprintf is MSC specific.
 #pragma warning(suppress : 4996)
-    vsnprintf(m_buffer, CPPUNIT_LOG_FORMATBUFFERSIZE - 1, formatString, args);
+    vsnprintf(m_buffer, CUT_LOG_FORMATBUFFERSIZE - 1, formatString, args);
   }
   catch (...)
   {
@@ -54,7 +54,7 @@ void cppunit::logging::DefaultManager::
   m_file << m_buffer;
 }
 
-void cppunit::logging::DefaultManager::
+void cut::logging::DefaultManager::
   writeToStdOut( Mode mode, const char* formattedString )
 {
   if (formattedString == nullptr)

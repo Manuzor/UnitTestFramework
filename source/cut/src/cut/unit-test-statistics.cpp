@@ -1,6 +1,6 @@
-#include "cppunit/UnitTestStatistics.h"
+#include "cut/unit-test-statistics.h"
 
-cppunit::UnitTestStatistics::UnitTestStatistics( size_t groups, size_t groupsFailed, size_t tests, size_t testsFailed ) :
+cut::UnitTestStatistics::UnitTestStatistics( size_t groups, size_t groupsFailed, size_t tests, size_t testsFailed ) :
   groups(groups),
   groupsFailed(groupsFailed),
   tests(tests),

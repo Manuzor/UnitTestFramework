@@ -1,8 +1,8 @@
 #pragma once
 
-#include "cppunit/containers/Map.h"
+#include "cut/containers/map.h"
 
-namespace cppunit
+namespace cut
 {
   // Forward declarations
   class IUnitTest;

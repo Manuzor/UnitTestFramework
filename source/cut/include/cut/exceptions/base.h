@@ -1,7 +1,7 @@
 #pragma once
 #include <exception>
 
-namespace cppunit
+namespace cut
 {
   namespace exceptions
   {
