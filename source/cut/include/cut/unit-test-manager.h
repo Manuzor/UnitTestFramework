@@ -4,13 +4,10 @@
 
 namespace cut
 {
-	// Forward declarations.
 	class IUnitTestGroup;
 
-	// typedefs.
 	typedef containers::Map<const char*, IUnitTestGroup*>::type UnitTestGroupMap;
 
-	// Class definitions.
 	class IUnitTestManager
 	{
 	public:

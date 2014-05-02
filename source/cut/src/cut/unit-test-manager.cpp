@@ -34,7 +34,7 @@ void cut::DefaultUnitTestManager::runAll()
 
 		m_statistics.tests += numberOfTests;
 
-		CUT_LOG(logging::Mode::Normal,
+		CUT_LOG(LogMode::Normal,
 			"\n"
 			"Running unit test group %s with %d unit tests:\n",
 			unitTestGroupName,
@@ -42,7 +42,7 @@ void cut::DefaultUnitTestManager::runAll()
 		size_t failed = unitTestGroup->runAllTests();
 		if (failed == 0)
 		{
-			CUT_LOG(cut::logging::Mode::Success,
+			CUT_LOG(cut::LogMode::Success,
 				"=== Unit test group passed ====================================================\n"
 				"Group name: %s\n"
 				"Successful unit tests: %d/%d\n"
@@ -54,7 +54,7 @@ void cut::DefaultUnitTestManager::runAll()
 		{
 			++m_statistics.groupsFailed;
 			m_statistics.testsFailed += failed;
-			CUT_LOG(cut::logging::Mode::Failure,
+			CUT_LOG(cut::LogMode::Failure,
 				"=== Unit test group failed ====================================================\n"
 				"Group name: %s\n"
 				"Successful unit tests: %d/%d\n"
@@ -71,22 +71,22 @@ void cut::DefaultUnitTestManager::runAll()
 
 	if (m_statistics.testsFailed == 0)
 	{
-		CUT_LOG(cut::logging::Mode::Success,
+		CUT_LOG(cut::LogMode::Success,
 			finalMessage,
 			m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
 			m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
-		CUT_LOG(cut::logging::Mode::Success,
+		CUT_LOG(cut::LogMode::Success,
 			"=== All Unit Tests Passed! ====================================================\n");
 	}
 	else
 	{
-		CUT_LOG(logging::Mode::Failure,
+		CUT_LOG(LogMode::Failure,
 			finalMessage,
 			m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
 			m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
-		CUT_LOG(cut::logging::Mode::Failure,
+		CUT_LOG(cut::LogMode::Failure,
 			"=== All or Some Unit Tests Failed! ============================================\n");
 	}
 }

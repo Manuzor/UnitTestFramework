@@ -14,4 +14,4 @@ namespace cut
 	}
 }
 
-#define CUT_LOG (::cut::logging::DefaultManager::instance()->logMessage)
+#define CUT_LOG (::cut::DefaultLogManager::instance().logMessage)

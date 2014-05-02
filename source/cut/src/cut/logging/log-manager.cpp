@@ -6,33 +6,27 @@
 #define CUT_LOGFILENAME "UnitTest.log"
 #endif // !CUT_LOGFILENAME
 
-cut::logging::DefaultManager* cut::logging::DefaultManager::
-	instance()
+cut::DefaultLogManager&
+cut::DefaultLogManager::instance()
 {
-	static DefaultManager* instance;
-	if (instance == nullptr)
-	{
-		instance = new DefaultManager();
-	}
+	static DefaultLogManager instance;
 	return instance;
 }
 
-cut::logging::DefaultManager::
-	DefaultManager() :
+cut::DefaultLogManager::DefaultLogManager() :
 	m_file(CUT_LOGFILENAME)
 {
 	m_buffer = new char[CUT_LOG_FORMATBUFFERSIZE];
 }
 
-cut::logging::DefaultManager::
-	~DefaultManager()
+cut::DefaultLogManager::~DefaultLogManager()
 {
 	delete[] m_buffer;
 	m_buffer = nullptr;
 }
 
-void cut::logging::DefaultManager::
-	logMessage(Mode mode, const char* formatString, ...)
+void
+cut::DefaultLogManager::logMessage(LogMode mode, const char* formatString, ...)
 {
 	va_list args;
 	va_start(args, formatString);
@@ -54,8 +48,8 @@ void cut::logging::DefaultManager::
 	m_file << m_buffer;
 }
 
-void cut::logging::DefaultManager::
-	writeToStdOut( Mode mode, const char* formattedString )
+void
+cut::DefaultLogManager::writeToStdOut(LogMode mode, const char* formattedString)
 {
 	if (formattedString == nullptr)
 	{
@@ -66,18 +60,18 @@ void cut::logging::DefaultManager::
 	HANDLE hStdOut = GetStdHandle( STD_OUTPUT_HANDLE );
 
 	CONSOLE_SCREEN_BUFFER_INFO initialConsoleState;
-	GetConsoleScreenBufferInfo( hStdOut, &initialConsoleState );
+	GetConsoleScreenBufferInfo(hStdOut, &initialConsoleState);
 
 	switch (mode)
 	{
-	case Mode::Normal:
-		SetConsoleTextAttribute( hStdOut, 0x07 ); // Regular
+	case LogMode::Normal:
+		SetConsoleTextAttribute(hStdOut, 0x07); // Regular
 		break;
-	case Mode::Failure:
-		SetConsoleTextAttribute( hStdOut, 0x0C ); // Red
+	case LogMode::Failure:
+		SetConsoleTextAttribute(hStdOut, 0x0C); // Red
 		break;
-	case Mode::Success:
-		SetConsoleTextAttribute( hStdOut, 0x0A ); // Green
+	case LogMode::Success:
+		SetConsoleTextAttribute(hStdOut, 0x0A); // Green
 		break;
 	default:
 		break;

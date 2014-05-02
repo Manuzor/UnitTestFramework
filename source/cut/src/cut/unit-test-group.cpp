@@ -29,7 +29,7 @@ cut::UnitTestGroup::runAllTests()
 	{
 		const char* unitTestName = unitTestIterator.first;
 		IUnitTest* unitTest = unitTestIterator.second;
-		CUT_LOG(logging::Mode::Normal, "Running unit test %s...\n", unitTestName);
+		CUT_LOG(LogMode::Normal, "Running unit test %s...\n", unitTestName);
 		try
 		{
 			unitTest->run();
@@ -41,7 +41,7 @@ cut::UnitTestGroup::runAllTests()
 
 			if (failure.message() == nullptr)
 			{
-				CUT_LOG(logging::Mode::Failure,
+				CUT_LOG(LogMode::Failure,
 					"Unit test %s failed in file %s at line %d.\n",
 					unitTestName,
 					failure.file(),
@@ -50,7 +50,7 @@ cut::UnitTestGroup::runAllTests()
 			}
 			else
 			{
-				CUT_LOG(logging::Mode::Failure,
+				CUT_LOG(LogMode::Failure,
 					"Unit test %s failed in file %s at line %d:\n	%s\n",
 					unitTestName,
 					failure.file(),
@@ -61,12 +61,12 @@ cut::UnitTestGroup::runAllTests()
 		}
 		catch (const exceptions::UnitTestSuccess&)
 		{
-			CUT_LOG(logging::Mode::Success, "Unit test %s succeeded!\n", unitTestName);
+			CUT_LOG(LogMode::Success, "Unit test %s succeeded!\n", unitTestName);
 		}
 		catch (const std::exception& ex)
 		{
 			++failed;
-			CUT_LOG(logging::Mode::Failure,
+			CUT_LOG(LogMode::Failure,
 				"Unit test %s failed due to an unhandled exception: %s\n",
 				unitTestName,
 				ex.what()
@@ -75,7 +75,7 @@ cut::UnitTestGroup::runAllTests()
 		catch (...)
 		{
 			++failed;
-			CUT_LOG(logging::Mode::Failure,
+			CUT_LOG(LogMode::Failure,
 				"Unit test %s failed due to an unknown exception.\n",
 				unitTestName
 				);

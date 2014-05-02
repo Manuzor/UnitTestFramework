@@ -4,7 +4,7 @@
 #include "cut/exceptions/unit-test-success.h"
 
 void
-cut::Assert::True(bool expr, const char* message /*= nullptr*/, ...)
+cut::assert::isTrue(bool expr, const char* message /*= nullptr*/, ...)
 {
 	if (!expr)
 	{
@@ -14,7 +14,7 @@ cut::Assert::True(bool expr, const char* message /*= nullptr*/, ...)
 }
 
 void
-cut::Assert::False(bool expr, const char* message /*= nullptr*/, ...)
+cut::assert::isFalse(bool expr, const char* message /*= nullptr*/, ...)
 {
 	if (expr)
 	{
@@ -24,7 +24,7 @@ cut::Assert::False(bool expr, const char* message /*= nullptr*/, ...)
 }
 
 void
-cut::Assert::DoesNotThrow(_Lambda& lambda, const char* message /*= nullptr*/)
+cut::assert::throwsNot(_Lambda& lambda, const char* message /*= nullptr*/)
 {
 	try
 	{
@@ -38,13 +38,13 @@ cut::Assert::DoesNotThrow(_Lambda& lambda, const char* message /*= nullptr*/)
 }
 
 void
-cut::Assert::Fail(const char* message /*= nullptr*/, ...)
+cut::assert::fail(const char* message /*= nullptr*/, ...)
 {
 	throw exceptions::UnitTestFailure(__FILE__, __LINE__, message);
 }
 
 void
-cut::Assert::Succeed(const char* message /*= nullptr*/, ...)
+cut::assert::succeed(const char* message /*= nullptr*/, ...)
 {
 	throw exceptions::UnitTestSuccess(__FILE__, __LINE__, message);
 }

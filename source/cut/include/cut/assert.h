@@ -3,18 +3,18 @@
 
 namespace cut
 {
-	namespace Assert
+	namespace assert
 	{
-		inline void True(bool expr, const char* message = nullptr, ...);
-		inline void False(bool expr, const char* message = nullptr, ...);
+		inline void isTrue(bool expr, const char* message = nullptr, ...);
+		inline void isFalse(bool expr, const char* message = nullptr, ...);
 
 		template<typename T_Exception>
-		inline void Throws(_Lambda& lambda, const char* message = nullptr);
+		inline void throws(_Lambda& lambda, const char* message = nullptr);
 
-		inline void DoesNotThrow(_Lambda& lambda, const char* message = nullptr);
+		inline void throwsNot(_Lambda& lambda, const char* message = nullptr);
 
-		inline void Fail(const char* message = nullptr, ...);
-		inline void Succeed(const char* message = nullptr, ...);
+		inline void fail(const char* message = nullptr, ...);
+		inline void succeed(const char* message = nullptr, ...);
 	};
 }
 

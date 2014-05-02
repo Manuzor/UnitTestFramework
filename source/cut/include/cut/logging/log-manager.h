@@ -9,34 +9,31 @@
 
 namespace cut
 {
-	namespace logging
+	class ILogManager
 	{
-		class IManager
-		{
-		public:
-			virtual ~IManager() = 0 {}
+	public:
+		virtual ~ILogManager() = 0 {}
 
-			virtual void logMessage(Mode mode, const char* formatString, ...) = 0;
-		};
+		virtual void logMessage(LogMode mode, const char* formatString, ...) = 0;
+	};
 
-		class DefaultManager :
-			public IManager
-		{
-		public:
+	class DefaultLogManager :
+		public ILogManager
+	{
+	public:
 
-			static DefaultManager* instance();
+		static DefaultLogManager& instance();
 
-			DefaultManager();
+		DefaultLogManager();
 
-			virtual ~DefaultManager();
+		virtual ~DefaultLogManager();
 
-			virtual void logMessage(Mode mode, const char* formatString, ...);
+		virtual void logMessage(LogMode mode, const char* formatString, ...);
 
-		private:
-			void writeToStdOut(Mode mode, const char* formattedString);
+	private:
+		void writeToStdOut(LogMode mode, const char* formattedString);
 
-			streams::OutputFile m_file;
-			char* m_buffer;
-		};
-	}
+		streams::OutputFile m_file;
+		char* m_buffer;
+	};
 }

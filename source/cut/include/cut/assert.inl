@@ -3,7 +3,7 @@
 
 template<typename T_Exception>
 void
-cut::Assert::Throws(_Lambda& lambda, const char* message)
+cut::assert::throws(_Lambda& lambda, const char* message)
 {
 	try
 	{
@@ -13,6 +13,7 @@ cut::Assert::Throws(_Lambda& lambda, const char* message)
 	catch (T_Exception&)
 	{
 		// Success!
+		return;
 	}
 	catch (...)
 	{

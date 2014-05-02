@@ -5,7 +5,7 @@
 #endif
 
 #ifndef CUT_TYPE_LOGMANAGER
-#define CUT_TYPE_LOGMANAGER ::cut::logging::DefaultManager
+#define CUT_TYPE_LOGMANAGER ::cut::DefaultLogManager
 #endif
 
 #ifndef CUT_TYPE_FILESTREAM
