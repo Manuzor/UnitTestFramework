@@ -85,8 +85,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>CUT_API;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -99,8 +98,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>CUT_API;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -114,8 +112,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -132,8 +129,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -148,14 +144,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\cut\api.h" />
+    <ClInclude Include="include\cut\assert-handler.h" />
     <ClInclude Include="include\cut\assert.h" />
     <ClInclude Include="include\cut\common.h" />
-    <ClInclude Include="include\cut\containers\map.h" />
-    <ClInclude Include="include\cut\exceptions\base.h" />
-    <ClInclude Include="include\cut\exceptions\unit-test-failure.h" />
-    <ClInclude Include="include\cut\exceptions\unit-test-success.h" />
+    <ClInclude Include="include\cut\exceptions.h" />
     <ClInclude Include="include\cut\logging\logging.h" />
     <ClInclude Include="include\cut\logging\mode.h" />
+    <ClInclude Include="include\cut\preprocessor.h" />
+    <ClInclude Include="include\cut\preprocessor\array-size.h" />
+    <ClInclude Include="include\cut\preprocessor\concat.h" />
+    <ClInclude Include="include\cut\preprocessor\construction.h" />
+    <ClInclude Include="include\cut\preprocessor\debug-break.h" />
+    <ClInclude Include="include\cut\preprocessor\minmax.h" />
+    <ClInclude Include="include\cut\preprocessor\override.h" />
+    <ClInclude Include="include\cut\preprocessor\parenthesis.h" />
+    <ClInclude Include="include\cut\preprocessor\scope-exit.h" />
+    <ClInclude Include="include\cut\preprocessor\source-file.h" />
+    <ClInclude Include="include\cut\preprocessor\source-line.h" />
+    <ClInclude Include="include\cut\preprocessor\stringize.h" />
+    <ClInclude Include="include\cut\preprocessor\unused.h" />
+    <ClInclude Include="include\cut\preprocessor\vararg-macros.h" />
+    <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\cut\streams\output-file.h" />
     <ClInclude Include="include\cut\types.h" />
     <ClInclude Include="include\cut\unit-test.h" />
@@ -169,14 +179,15 @@
     <None Include="include\cut\assert.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\cut\assert-handler.cpp" />
     <ClCompile Include="src\cut\unit-test-statistics.cpp" />
-    <ClCompile Include="src\cut\exceptions\unit-test-success.cpp" />
     <ClCompile Include="src\cut\logging\log-manager.cpp" />
-    <ClCompile Include="src\cut\exceptions\base.cpp" />
+    <ClCompile Include="src\cut\exceptions.cpp" />
     <ClCompile Include="src\cut\unit-test-group.cpp" />
     <ClCompile Include="src\cut\unit-test-manager.cpp" />
-    <ClCompile Include="src\cut\exceptions\unit-test-failure.cpp" />
-    <ClCompile Include="src\cut\assert.cpp" />
+    <ClCompile Include="src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

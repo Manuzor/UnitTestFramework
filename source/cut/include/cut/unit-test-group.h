@@ -1,14 +1,12 @@
 #pragma once
 
-#include "cut/containers/map.h"
-
 namespace cut
 {
 	// Forward declarations
 	class IUnitTest;
 
 	// typedefs
-	typedef containers::Map<const char*, IUnitTest*>::type UnitTestMap;
+	typedef std::map<const char*, IUnitTest*> UnitTestMap;
 
 	// class definitions
 	class IUnitTestGroup

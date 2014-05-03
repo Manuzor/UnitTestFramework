@@ -1,12 +1,11 @@
 #pragma once
-#include "cut/containers/map.h"
 #include "cut/unit-test-statistics.h"
 
 namespace cut
 {
 	class IUnitTestGroup;
 
-	typedef containers::Map<const char*, IUnitTestGroup*>::type UnitTestGroupMap;
+	typedef std::map<const char*, IUnitTestGroup*> UnitTestGroupMap;
 
 	class IUnitTestManager
 	{

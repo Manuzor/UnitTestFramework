@@ -24,18 +24,6 @@
     <ClInclude Include="include\cut\common.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\cut\containers\map.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\exceptions\base.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\exceptions\unit-test-failure.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\exceptions\unit-test-success.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\cut\logging\logging.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -66,6 +54,60 @@
     <ClInclude Include="include\cut\unit-test-statistics.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\array-size.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\concat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\construction.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\debug-break.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\minmax.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\override.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\parenthesis.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\scope-exit.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\source-file.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\source-line.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\stringize.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\unused.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\vararg-macros.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\assert-handler.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\api.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\exceptions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stdafx.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\cut\assert.inl">
@@ -76,13 +118,7 @@
     <ClCompile Include="src\cut\unit-test-statistics.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\cut\exceptions\unit-test-success.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\cut\logging\log-manager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cut\exceptions\base.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\cut\unit-test-group.cpp">
@@ -91,10 +127,13 @@
     <ClCompile Include="src\cut\unit-test-manager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\cut\exceptions\unit-test-failure.cpp">
+    <ClCompile Include="src\cut\exceptions.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\cut\assert.cpp">
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\assert-handler.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

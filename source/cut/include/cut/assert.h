@@ -1,21 +1,67 @@
 #pragma once
 #include "cut/common.h"
+#include "cut/exceptions.h"
 
 namespace cut
 {
-	namespace assert
+	template<const char* SZ_File, size_t N_Line>
+	struct assert
 	{
-		inline void isTrue(bool expr, const char* message = nullptr, ...);
-		inline void isFalse(bool expr, const char* message = nullptr, ...);
+		inline static void isTrue(bool expr, const char* message = nullptr, ...)
+		{
+			if(!expr)
+			{
+				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
+				debugBreak();
+			}
+		}
+
+		inline static void isFalse(bool expr, const char* message = nullptr, ...)
+		{
+			if(expr)
+			{
+				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
+				debugBreak();
+			}
+		}
 
 		template<typename T_Exception>
-		inline void throws(_Lambda& lambda, const char* message = nullptr);
+		inline static void throws(_Lambda& lambda, const char* message = nullptr)
+		{
+			try
+			{
+				lambda();
+				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
+			}
+			catch(T_Exception&) { return; }
+			catch(...) { throw exceptions::UnitTestFailure(SZ_File, N_Line, message); }
+		}
 
-		inline void throwsNot(_Lambda& lambda, const char* message = nullptr);
+		inline static void throwsNothing(_Lambda& lambda, const char* message = nullptr)
+		{
+			try
+			{
+				lambda();
+			}
+			catch(...)
+			{
+				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
+				debugBreak();
+			}
+		}
 
-		inline void fail(const char* message = nullptr, ...);
-		inline void succeed(const char* message = nullptr, ...);
+		inline static void fail(const char* message = nullptr, ...)
+		{
+			throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
+		}
+
+		inline static void succeed(const char* message = nullptr, ...)
+		{
+			throw exceptions::UnitTestSuccess(SZ_File, N_Line, message);
+		}
 	};
 }
+
+#define CUT_ASSERT ::cut::assert<__FILE__, __LINE__>
 
 #include "cut/assert.inl"

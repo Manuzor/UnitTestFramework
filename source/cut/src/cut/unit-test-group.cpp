@@ -1,9 +1,9 @@
+#include "stdafx.h"
 #include "cut/common.h"
 #include "cut/unit-test-group.h"
 #include "cut/unit-test-manager.h"
 #include "cut/unit-test.h"
-#include "cut/exceptions/unit-test-success.h"
-#include "cut/exceptions/unit-test-failure.h"
+#include "cut/exceptions.h"
 
 cut::UnitTestGroup::UnitTestGroup(const char* groupName)
 {

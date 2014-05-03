@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cut/logging/log-manager.h"
 #include <cstdarg>
 #include <windows.h>

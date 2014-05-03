@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cut/unit-test-manager.h"
 #include "cut/unit-test-group.h"
 #include "cut/common.h"
