@@ -39,25 +39,13 @@ cut::UnitTestGroup::runAllTests()
 		{
 			++failed;
 
-			if (failure.message() == nullptr)
-			{
-				CUT_LOG(LogMode::Failure,
-					"Unit test %s failed in file %s at line %d.\n",
-					unitTestName,
-					failure.file(),
-					failure.line()
-					);
-			}
-			else
-			{
-				CUT_LOG(LogMode::Failure,
-					"Unit test %s failed in file %s at line %d:\n	%s\n",
-					unitTestName,
-					failure.file(),
-					failure.line(),
-					failure.message()
-					);
-			}
+			CUT_LOG(LogMode::Failure,
+				"Unit test %s failed in file %s at line %d:\n	%s\n",
+				unitTestName,
+				failure.file(),
+				failure.line(),
+				failure.message()
+				);
 		}
 		catch (const exceptions::UnitTestSuccess&)
 		{

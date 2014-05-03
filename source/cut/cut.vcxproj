@@ -165,6 +165,7 @@
     <ClInclude Include="include\cut\preprocessor\stringize.h" />
     <ClInclude Include="include\cut\preprocessor\unused.h" />
     <ClInclude Include="include\cut\preprocessor\vararg-macros.h" />
+    <ClInclude Include="include\cut\string-ref.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\cut\streams\output-file.h" />
     <ClInclude Include="include\cut\types.h" />

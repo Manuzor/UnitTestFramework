@@ -22,3 +22,7 @@
 #include <functional>
 #define CUT_TYPE_LAMBDA ::std::function<void()>
 #endif
+
+#ifndef CUT_TYPE_STRING
+#include <string>
+#endif

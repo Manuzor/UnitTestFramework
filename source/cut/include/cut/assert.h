@@ -2,13 +2,14 @@
 #include "cut/common.h"
 #include "cut/exceptions.h"
 #include "cut/assert-handler.h"
+#include "cut/string-ref.h"
 
 namespace cut
 {
 	template<const char* SZ_File, size_t N_Line>
 	struct assert
 	{
-		inline static void isTrue(bool expr, const char* message = nullptr, ...)
+		inline static void isTrue(bool expr, StringRef message)
 		{
 			if(!expr)
 			{
@@ -16,7 +17,7 @@ namespace cut
 			}
 		}
 
-		inline static void isFalse(bool expr, const char* message = nullptr, ...)
+		inline static void isFalse(bool expr, StringRef message)
 		{
 			if(expr)
 			{
@@ -25,7 +26,7 @@ namespace cut
 		}
 
 		template<typename T_Exception>
-		inline static void throws(_Lambda& lambda, const char* message = nullptr)
+		inline static void throws(_Lambda& lambda, StringRef message)
 		{
 			try
 			{
@@ -39,7 +40,7 @@ namespace cut
 			}
 		}
 
-		inline static void throwsNothing(_Lambda& lambda, const char* message = nullptr)
+		inline static void throwsNothing(_Lambda& lambda, StringRef message)
 		{
 			try
 			{
@@ -51,12 +52,12 @@ namespace cut
 			}
 		}
 
-		inline static void fail(const char* message = nullptr, ...)
+		inline static void fail(StringRef message)
 		{
 			IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
 		}
 
-		inline static void succeed(const char* message = nullptr, ...)
+		inline static void succeed(StringRef message)
 		{
 			IAssertHandler::instance().handleSuccess(SZ_File, N_Line, message);
 		}

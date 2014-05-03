@@ -1,4 +1,5 @@
 #pragma once
+#include "string-ref.h"
 
 namespace cut
 {
@@ -9,8 +10,8 @@ namespace cut
 
 		virtual ~IAssertHandler() = 0;
 
-		virtual void handleFailure(const char* file, size_t line, const char* message) = 0;
-		virtual void handleSuccess(const char* file, size_t line, const char* message) = 0;
+		virtual void handleFailure(const char* file, size_t line, StringRef message) = 0;
+		virtual void handleSuccess(const char* file, size_t line, StringRef message) = 0;
 
 	protected:
 		static IAssertHandler* s_instance;
@@ -22,9 +23,9 @@ namespace cut
 		DefaultAssertHandler();
 		virtual ~DefaultAssertHandler();
 
-		virtual void handleFailure(const char* file, size_t line, const char* message) override;
+		virtual void handleFailure(const char* file, size_t line, StringRef message) override;
 
-		virtual void handleSuccess(const char* file, size_t line, const char* message) override;
+		virtual void handleSuccess(const char* file, size_t line, StringRef message) override;
 	};
 
 

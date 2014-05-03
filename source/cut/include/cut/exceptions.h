@@ -1,5 +1,6 @@
 #pragma once
 #include <exception>
+#include "cut/string-ref.h"
 
 namespace cut
 {
@@ -8,23 +9,26 @@ namespace cut
 		class ExpectionBase : public std::exception
 		{
 		public:
-			ExpectionBase(const char* file, unsigned int line, const char* message);
+			ExpectionBase(const char* file, unsigned int line, StringRef message);
 
 			virtual ~ExpectionBase();
+			
 			const char* file() const { return m_file; }
 			const unsigned int line() const { return m_line; }
-			const char* message() const { return m_message; }
+
+			const std::string& message() const { return m_message; }
+			std::string&       message()       { return m_message; }
 
 		private:
 			const char* m_file;
 			unsigned int m_line;
-			const char* m_message;
+			std::string m_message;
 		};
 
 		class UnitTestFailure : public ExpectionBase
 		{
 		public:
-			UnitTestFailure(const char* file, unsigned int line, const char* message);
+			UnitTestFailure(const char* file, unsigned int line, StringRef message);
 
 			virtual ~UnitTestFailure();
 
@@ -37,7 +41,7 @@ namespace cut
 		public:
 			UnitTestSuccess();
 
-			UnitTestSuccess(const char* file, unsigned int line, const char* message);
+			UnitTestSuccess(const char* file, unsigned int line, StringRef message);
 
 		protected:
 		private:

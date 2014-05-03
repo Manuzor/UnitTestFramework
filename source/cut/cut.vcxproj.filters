@@ -108,6 +108,9 @@
     <ClInclude Include="include\stdafx.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\cut\string-ref.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cut\unit-test-statistics.cpp">
