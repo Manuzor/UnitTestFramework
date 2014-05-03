@@ -1,6 +1,7 @@
 #pragma once
 #include "cut/common.h"
 #include "cut/exceptions.h"
+#include "cut/assert-handler.h"
 
 namespace cut
 {
@@ -11,8 +12,7 @@ namespace cut
 		{
 			if(!expr)
 			{
-				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
-				debugBreak();
+				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
 			}
 		}
 
@@ -20,8 +20,7 @@ namespace cut
 		{
 			if(expr)
 			{
-				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
-				debugBreak();
+				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
 			}
 		}
 
@@ -31,10 +30,13 @@ namespace cut
 			try
 			{
 				lambda();
-				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
+				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
 			}
 			catch(T_Exception&) { return; }
-			catch(...) { throw exceptions::UnitTestFailure(SZ_File, N_Line, message); }
+			catch(...)
+			{
+				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
+			}
 		}
 
 		inline static void throwsNothing(_Lambda& lambda, const char* message = nullptr)
@@ -45,23 +47,20 @@ namespace cut
 			}
 			catch(...)
 			{
-				throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
-				debugBreak();
+				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
 			}
 		}
 
 		inline static void fail(const char* message = nullptr, ...)
 		{
-			throw exceptions::UnitTestFailure(SZ_File, N_Line, message);
+			IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
 		}
 
 		inline static void succeed(const char* message = nullptr, ...)
 		{
-			throw exceptions::UnitTestSuccess(SZ_File, N_Line, message);
+			IAssertHandler::instance().handleSuccess(SZ_File, N_Line, message);
 		}
 	};
 }
 
 #define CUT_ASSERT ::cut::assert<__FILE__, __LINE__>
-
-#include "cut/assert.inl"

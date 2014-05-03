@@ -176,9 +176,6 @@
     <ClInclude Include="include\cut\unit-test-statistics.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\cut\assert.inl" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\cut\assert-handler.cpp" />
     <ClCompile Include="src\cut\unit-test-statistics.cpp" />
     <ClCompile Include="src\cut\logging\log-manager.cpp" />

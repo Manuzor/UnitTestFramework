@@ -110,11 +110,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\cut\assert.inl">
-      <Filter>include</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\cut\unit-test-statistics.cpp">
       <Filter>src</Filter>
     </ClCompile>
