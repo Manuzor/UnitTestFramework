@@ -148,6 +148,7 @@
     <ClInclude Include="include\cut\assert-handler.h" />
     <ClInclude Include="include\cut\assert.h" />
     <ClInclude Include="include\cut\common.h" />
+    <ClInclude Include="include\cut\empty-string.h" />
     <ClInclude Include="include\cut\exceptions.h" />
     <ClInclude Include="include\cut\logging\logging.h" />
     <ClInclude Include="include\cut\logging\mode.h" />

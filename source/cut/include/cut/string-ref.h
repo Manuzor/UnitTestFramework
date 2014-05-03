@@ -1,4 +1,5 @@
 #pragma once
+#include "cut/empty-string.h"
 
 namespace cut
 {
@@ -9,12 +10,6 @@ namespace cut
 			CString,
 			StdString,
 		};
-
-		inline static const std::string& emptyString()
-		{
-			static std::string str("");
-			return str;
-		}
 
 	public:
 
@@ -52,6 +47,7 @@ namespace cut
 
 			CUT_DEBUG_BREAK;
 			throw std::exception("Invalid type for StringRef!");
+			return nullptr;
 		}
 
 		inline operator bool()
@@ -61,22 +57,7 @@ namespace cut
 
 		inline operator const char*()
 		{
-			if(m_type == CString && m_pCString)
-			{
-				return m_pCString;
-			}
-
-			return nullptr;
-		}
-
-		inline operator const std::string&()
-		{
-			if(m_type == StdString && m_pStdString)
-			{
-				return *m_pStdString;
-			}
-
-			return emptyString();
+			return cString();
 		}
 
 	private:
