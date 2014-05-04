@@ -114,6 +114,15 @@
     <ClInclude Include="include\cut\empty-string.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\counter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\string-format.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\printf-format-string.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cut\unit-test-statistics.cpp">
@@ -135,6 +144,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\cut\assert-handler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\unit-test.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\string-format.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,6 +5,6 @@
 
 namespace
 {
-    template<typename T, size_t N>
-    char (&ArraySizeHelper(const T (&)[N]))[N];
+    template<typename T_Callable, std::size_t N>
+    char (&ArraySizeHelper(const T_Callable (&)[N]))[N];
 }

@@ -14,11 +14,11 @@ namespace cut
 	public:
 		virtual ~IUnitTestGroup() = 0 {}
 
-		virtual void registerUnitTest(const char* unitTestName, IUnitTest* unitTest) = 0;
+		virtual void registerUnitTest(IUnitTest* unitTest) = 0;
 
 		virtual unsigned int runAllTests() = 0;
 
-		virtual size_t numberOfUnitTests() = 0;
+		virtual std::size_t numberOfUnitTests() = 0;
 	};
 
 	class UnitTestGroup :
@@ -30,11 +30,11 @@ namespace cut
 
 	virtual ~UnitTestGroup();
 
-		virtual void registerUnitTest(const char* unitTestName, IUnitTest* unitTest) override;
+		virtual void registerUnitTest(IUnitTest* unitTest) override;
 
 		virtual unsigned int runAllTests() override;
 
-		virtual size_t numberOfUnitTests();
+		virtual std::size_t numberOfUnitTests();
 
 	protected:
 

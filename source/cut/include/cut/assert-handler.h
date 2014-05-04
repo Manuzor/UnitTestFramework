@@ -10,8 +10,8 @@ namespace cut
 
 		virtual ~IAssertHandler() {}
 
-		virtual void handleFailure(const char* file, size_t line, StringRef message) = 0;
-		virtual void handleSuccess(const char* file, size_t line, StringRef message) = 0;
+		virtual void handleFailure(const char* file, std::size_t line, StringRef message) = 0;
+		virtual void handleSuccess(const char* file, std::size_t line, StringRef message) = 0;
 
 	protected:
 		/// Overwrite this in your custom assert handler
@@ -24,8 +24,8 @@ namespace cut
 		DefaultAssertHandler();
 		virtual ~DefaultAssertHandler();
 
-		virtual void handleFailure(const char* file, size_t line, StringRef message) override;
+		virtual void handleFailure(const char* file, std::size_t line, StringRef message) override;
 
-		virtual void handleSuccess(const char* file, size_t line, StringRef message) override;
+		virtual void handleSuccess(const char* file, std::size_t line, StringRef message) override;
 	};
 }

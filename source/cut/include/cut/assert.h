@@ -9,9 +9,9 @@ namespace cut
 	struct Assert
 	{
 		const char* fileName;
-		size_t lineNumber;
+		std::size_t lineNumber;
 		
-		Assert(const char* fileName, size_t lineNumber) :
+		Assert(const char* fileName, std::size_t lineNumber) :
 			fileName(fileName),
 			lineNumber(lineNumber)
 		{

@@ -156,16 +156,19 @@
     <ClInclude Include="include\cut\preprocessor\array-size.h" />
     <ClInclude Include="include\cut\preprocessor\concat.h" />
     <ClInclude Include="include\cut\preprocessor\construction.h" />
+    <ClInclude Include="include\cut\preprocessor\counter.h" />
     <ClInclude Include="include\cut\preprocessor\debug-break.h" />
     <ClInclude Include="include\cut\preprocessor\minmax.h" />
     <ClInclude Include="include\cut\preprocessor\override.h" />
     <ClInclude Include="include\cut\preprocessor\parenthesis.h" />
+    <ClInclude Include="include\cut\preprocessor\printf-format-string.h" />
     <ClInclude Include="include\cut\preprocessor\scope-exit.h" />
     <ClInclude Include="include\cut\preprocessor\source-file.h" />
     <ClInclude Include="include\cut\preprocessor\source-line.h" />
     <ClInclude Include="include\cut\preprocessor\stringize.h" />
     <ClInclude Include="include\cut\preprocessor\unused.h" />
     <ClInclude Include="include\cut\preprocessor\vararg-macros.h" />
+    <ClInclude Include="include\cut\string-format.h" />
     <ClInclude Include="include\cut\string-ref.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\cut\streams\output-file.h" />
@@ -178,6 +181,10 @@
     <ClInclude Include="include\cut\unit-test-statistics.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\string-format.cpp">
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
+    </ClCompile>
+    <ClCompile Include="src\cut\unit-test.cpp" />
     <ClCompile Include="src\cut\assert-handler.cpp" />
     <ClCompile Include="src\cut\unit-test-statistics.cpp" />
     <ClCompile Include="src\cut\logging\log-manager.cpp" />

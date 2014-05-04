@@ -16,7 +16,7 @@ namespace cut
 
 		virtual void runAll() = 0;
 
-		virtual size_t numberOfUnitTestGroups() = 0;
+		virtual std::size_t numberOfUnitTestGroups() = 0;
 	};
 
 	class DefaultUnitTestManager :
@@ -32,7 +32,7 @@ namespace cut
 
 		virtual void runAll();
 
-		virtual size_t numberOfUnitTestGroups();
+		virtual std::size_t numberOfUnitTestGroups();
 
 	protected:
 	private:

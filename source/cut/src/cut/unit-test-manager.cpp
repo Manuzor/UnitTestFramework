@@ -31,7 +31,7 @@ void cut::DefaultUnitTestManager::runAll()
 	{
 		const char* unitTestGroupName = groupIter.first;
 		IUnitTestGroup* unitTestGroup = groupIter.second;
-		size_t numberOfTests = unitTestGroup->numberOfUnitTests();
+		std::size_t numberOfTests = unitTestGroup->numberOfUnitTests();
 
 		m_statistics.tests += numberOfTests;
 
@@ -40,7 +40,7 @@ void cut::DefaultUnitTestManager::runAll()
 			"Running unit test group %s with %d unit tests:\n",
 			unitTestGroupName,
 			numberOfTests);
-		size_t failed = unitTestGroup->runAllTests();
+		std::size_t failed = unitTestGroup->runAllTests();
 		if (failed == 0)
 		{
 			CUT_LOG(cut::LogMode::Success,
@@ -92,7 +92,7 @@ void cut::DefaultUnitTestManager::runAll()
 	}
 }
 
-size_t cut::DefaultUnitTestManager::numberOfUnitTestGroups()
+std::size_t cut::DefaultUnitTestManager::numberOfUnitTestGroups()
 {
 	return m_unitTestGroups.size();
 }

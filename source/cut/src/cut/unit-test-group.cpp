@@ -11,9 +11,9 @@ cut::UnitTestGroup::UnitTestGroup(const char* groupName)
 }
 
 void
-cut::UnitTestGroup::registerUnitTest( const char* unitTestName, IUnitTest* unitTest )
+cut::UnitTestGroup::registerUnitTest(IUnitTest* unitTest )
 {
-	m_unitTests[unitTestName] = unitTest;
+	m_unitTests[unitTest->getName()] = unitTest;
 }
 
 cut::UnitTestGroup::~UnitTestGroup()
@@ -72,7 +72,7 @@ cut::UnitTestGroup::runAllTests()
 	return failed;
 }
 
-size_t
+std::size_t
 cut::UnitTestGroup::numberOfUnitTests()
 {
 	return m_unitTests.size();

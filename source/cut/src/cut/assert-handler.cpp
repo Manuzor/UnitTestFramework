@@ -24,13 +24,13 @@ cut::DefaultAssertHandler::~DefaultAssertHandler()
 {
 }
 
-void cut::DefaultAssertHandler::handleFailure(const char* file, size_t line, StringRef message)
+void cut::DefaultAssertHandler::handleFailure(const char* file, std::size_t line, StringRef message)
 {
 	CUT_DEBUG_BREAK;
 	throw exceptions::UnitTestFailure(file, line, message);
 }
 
-void cut::DefaultAssertHandler::handleSuccess(const char* file, size_t line, StringRef message)
+void cut::DefaultAssertHandler::handleSuccess(const char* file, std::size_t line, StringRef message)
 {
 	throw exceptions::UnitTestSuccess(file, line, message);
 }
