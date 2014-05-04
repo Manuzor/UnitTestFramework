@@ -5,8 +5,11 @@
 
 namespace cut
 {
+	struct LogBlock;
+
 	class ILogManager
 	{
+		friend struct LogBlock;
 	public:
 		static ILogManager& instance();
 
@@ -20,5 +23,8 @@ namespace cut
 
 	protected:
 		static ILogManager* s_pInstance;
+
+		virtual void blockBegin() = 0;
+		virtual void blockEnd() = 0;
 	};
 }

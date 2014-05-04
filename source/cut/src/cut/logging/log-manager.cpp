@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include <windows.h>
 #include <cstdarg>
+#include <sstream>
 
 #include "cut/logging/log-manager.h"
 #include "cut-detail/log-manager.h"
 #include "cut/string-format.h"
+#include "cut/logging/log-block.h"
 
 cut::ILogManager* cut::ILogManager::s_pInstance = nullptr;
 
@@ -37,18 +39,25 @@ cut::DefaultLogManager::~DefaultLogManager()
 void
 cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 {
+	std::ostringstream messageStream;
+
+	for(std::size_t i = 0; i < m_blockLevel; ++i)
+	{
+		messageStream << "  ";
+	}
+
+	messageStream << formattedMessage.cString() << '\n';
+
 	// TODO: Add timestamp
-	writeToStdOut(mode, formattedMessage);
-	writeToFile(mode, formattedMessage);
+	writeToStdOut(mode, messageStream);
+	writeToFile(mode, messageStream);
 }
 
 #ifdef _WIN32
 
 void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, StringRef formattedString)
+cut::DefaultLogManager::writeToStdOut(LogMode mode, std::ostringstream& formattedString)
 {
-	if(!formattedString.valid()) { return; }
-
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	CONSOLE_SCREEN_BUFFER_INFO initialConsoleState;
@@ -70,7 +79,7 @@ cut::DefaultLogManager::writeToStdOut(LogMode mode, StringRef formattedString)
 		break;
 	}
 
-	printf(formattedString.cString());
+	printf(formattedString.str().c_str());
 
 	// Restore the default.
 	SetConsoleTextAttribute(hStdOut, initialConsoleState.wAttributes);
@@ -79,22 +88,20 @@ cut::DefaultLogManager::writeToStdOut(LogMode mode, StringRef formattedString)
 #else
 
 void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, StringRef formattedString)
+cut::DefaultLogManager::writeToStdOut(LogMode mode, std::ostringstream& formattedString)
 {
-	if(!formattedString.valid()) { return; }
-
-	printf(formattedString.cString());
+	printf(formattedString.str().c_str());
 }
 
 #endif // _WIN32
 
-void cut::DefaultLogManager::writeToFile(LogMode mode, StringRef formattedMessage)
+void cut::DefaultLogManager::writeToFile(LogMode mode, std::ostringstream& formattedMessage)
 {
 	if(!m_file.is_open())
 	{
 		m_file.open(m_fileName);
 	}
-	m_file << formattedMessage.cString();
+	m_file << formattedMessage.str();
 }
 
 void cut::DefaultLogManager::setLogFileName(StringRef fileName)
@@ -112,4 +119,14 @@ void cut::DefaultLogManager::setLogFileName(StringRef fileName)
 const cut::StringRef cut::DefaultLogManager::getLogFileName() const
 {
 	return m_fileName;
+}
+
+void cut::DefaultLogManager::blockBegin()
+{
+	++m_blockLevel;
+}
+
+void cut::DefaultLogManager::blockEnd()
+{
+	--m_blockLevel;
 }

@@ -6,6 +6,7 @@
 #include "cut/exceptions.h"
 #include "cut/string-ref.h"
 #include "cut/string-format.h"
+#include "cut/logging/log-block.h"
 
 cut::UnitTestGroup::UnitTestGroup(StringRef groupName) :
 	m_name(groupName),
@@ -32,11 +33,12 @@ cut::UnitTestGroup::runAllTests()
 	for (auto unitTest : m_unitTests)
 	{
 		auto unitTestName = unitTest->getName().cString();
-		logMessage(format("Running unit test %s...\n", unitTestName));
 		try
 		{
+			//logMessage(format("Running unit test \"%s\"...\n", unitTestName));
+			LogBlock runSingleTest(format("Running test \"%s\"", unitTestName));
 			unitTest->run();
-			throw exceptions::UnitTestSuccess();
+			//logSuccess(format("Unit test \"%s\" succeeded!\n", unitTestName));
 		}
 		catch (exceptions::UnitTestFailure& failure)
 		{
@@ -44,14 +46,14 @@ cut::UnitTestGroup::runAllTests()
 
 			if (failure.message().empty())
 			{
-				logFailure(format("Unit test '%s' failed in file %s at line %d.\n",
+				logFailure(format("Unit test \"%s\" failed in file %s at line %d.\n",
 								  unitTestName,
 								  failure.file(),
 								  failure.line()));
 			}
 			else
 			{
-				logFailure(format("Unit test '%s' failed in file %s at line %d:\n  %s\n",
+				logFailure(format("Unit test \"%s\" failed in file %s at line %d:\n  %s\n",
 								  unitTestName,
 								  failure.file(),
 								  failure.line(),
@@ -60,19 +62,19 @@ cut::UnitTestGroup::runAllTests()
 		}
 		catch (exceptions::UnitTestSuccess&)
 		{
-			logSuccess(format("Unit test %s succeeded!\n", unitTestName));
+			logSuccess(format("Unit test \"%s\" succeeded prematurely!\n", unitTestName));
 		}
 		catch (std::exception& ex)
 		{
 			++failed;
-			logFailure(format("Unit test %s failed due to an unhandled exception: %s\n",
+			logFailure(format("Unit test \"%s\" failed due to an unhandled std::exception: %s\n",
 							  unitTestName,
 							  ex.what()));
 		}
 		catch (...)
 		{
 			++failed;
-			logFailure(format("Unit test %s failed due to an unknown exception.\n", unitTestName));
+			logFailure(format("Unit test \"%s\" failed due to an unknown exception.\n", unitTestName));
 		}
 	}
 	return failed;

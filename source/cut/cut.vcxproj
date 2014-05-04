@@ -148,6 +148,7 @@
     <ClInclude Include="include\cut-detail\log-manager.h" />
     <ClInclude Include="include\cut-detail\unit-test-manager.h" />
     <ClInclude Include="include\cut\api.h" />
+    <ClInclude Include="include\cut\logging\log-block.h" />
     <ClInclude Include="include\cut\testing\assert-handler.h" />
     <ClInclude Include="include\cut\testing\assert.h" />
     <ClInclude Include="include\cut\common.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="include\cut\testing\unit-test-statistics.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\cut\logging\log-block.cpp" />
     <ClCompile Include="src\cut\assert.cpp" />
     <ClCompile Include="src\cut\string-format.cpp">
       <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>

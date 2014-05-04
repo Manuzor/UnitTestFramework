@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cut/logging/log-manager.h"
+#include "cut/logging/log-block.h"
 #include "cut/string-ref.h"
 
 namespace cut
