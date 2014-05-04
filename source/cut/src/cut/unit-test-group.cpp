@@ -44,7 +44,7 @@ cut::UnitTestGroup::runAllTests()
 
 			if (failure.message().empty())
 			{
-				logFailure(format("Unit test '%s' failed in file %s at line %d.",
+				logFailure(format("Unit test '%s' failed in file %s at line %d.\n",
 								  unitTestName,
 								  failure.file(),
 								  failure.line()));
