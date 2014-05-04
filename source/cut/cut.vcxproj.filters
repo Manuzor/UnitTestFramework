@@ -63,9 +63,6 @@
     <ClInclude Include="include\cut\preprocessor\construction.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\cut\preprocessor\debug-break.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\cut\preprocessor\minmax.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -127,6 +124,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\cut-detail\unit-test-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\debug-break.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

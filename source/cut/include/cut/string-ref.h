@@ -1,5 +1,5 @@
 #pragma once
-#include "cut/empty-string.h"
+#include "cut/debug-break.h"
 
 namespace cut
 {
@@ -45,7 +45,7 @@ namespace cut
 			case StdString: return m_pStdString->c_str();
 			}
 
-			CUT_DEBUG_BREAK;
+			debugBreak();
 			throw std::exception("Invalid type for StringRef!");
 			return nullptr;
 		}

@@ -29,7 +29,7 @@ void cut::DefaultAssertHandler::handleFailure(const char* file, std::size_t line
 {
 	if (g_settings.doDebugBreaks)
 	{
-		CUT_DEBUG_BREAK;
+		debugBreak();
 	}
 	
 	throw exceptions::UnitTestFailure(file, line, message);
