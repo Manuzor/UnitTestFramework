@@ -2,7 +2,7 @@
 #include "cut/string-format.h"
 #include "cut/assert.h"
 
-std::string cut::format(CUT_PRINTF_FORMAT_STRING const char* fmt, ...)
+std::string cut::format(CUT_PRINTF_FORMAT_STRING StringRef fmt, ...)
 {
 	static const std::size_t maxAllocationSize(1024 * 1024 * 10); // 10 MB
 	static const std::size_t bufferSize(1024);

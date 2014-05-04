@@ -5,3 +5,6 @@
 #include "cut/unit-test-group.h"
 #include "cut/unit-test-manager.h"
 #include "cut/unit-test-statistics.h"
+
+#include "cut/string-ref.h"
+#include "cut/string-format.h"

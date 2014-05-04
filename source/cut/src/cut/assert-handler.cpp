@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cut/assert-handler.h"
 #include "cut/exceptions.h"
+#include "cut/unit-test-settings.h"
 
 cut::IAssertHandler* cut::IAssertHandler::s_instance = nullptr;
 
@@ -26,7 +27,11 @@ cut::DefaultAssertHandler::~DefaultAssertHandler()
 
 void cut::DefaultAssertHandler::handleFailure(const char* file, std::size_t line, StringRef message)
 {
-	CUT_DEBUG_BREAK;
+	if (g_settings.doDebugBreaks)
+	{
+		CUT_DEBUG_BREAK;
+	}
+	
 	throw exceptions::UnitTestFailure(file, line, message);
 }
 
