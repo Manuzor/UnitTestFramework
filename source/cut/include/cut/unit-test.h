@@ -1,4 +1,5 @@
 #pragma once
+#include "string-ref.h"
 
 namespace cut
 {
@@ -10,7 +11,7 @@ namespace cut
 		virtual ~IUnitTest() {}
 		virtual void run() = 0;
 
-		virtual const char* getName() const = 0;
+		virtual StringRef getName() const = 0;
 	};
 
 	/// \brief Standard unit test class
@@ -25,14 +26,14 @@ namespace cut
 	class UnitTest : public IUnitTest
 	{
 	public:
-		UnitTest(IUnitTestGroup& testGroup, const char* testName, Lambda_t lambda);
+		UnitTest(IUnitTestGroup& testGroup, StringRef testName, Lambda_t lambda);
 
 		virtual void run() override { m_lambda(); }
 
-		virtual const char* getName() const CUT_OVERRIDE{ return m_name; }
+		virtual StringRef getName() const CUT_OVERRIDE { return m_name; }
 
 	private:
-		const char* m_name;
+		std::string m_name;
 		std::function<void()> m_lambda;
 	};
 }

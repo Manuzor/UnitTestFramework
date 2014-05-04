@@ -5,7 +5,7 @@
 
 #ifndef CUT_LOGFILENAME
 #define CUT_LOGFILENAME "UnitTest.log"
-#endif // !CUT_LOGFILENAME
+#endif // CUT_LOGFILENAME
 
 cut::DefaultLogManager&
 cut::DefaultLogManager::instance()

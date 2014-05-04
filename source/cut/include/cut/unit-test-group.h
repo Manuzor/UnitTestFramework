@@ -31,7 +31,7 @@ namespace cut
 
 		virtual void registerUnitTest(IUnitTest* unitTest) CUT_OVERRIDE;
 
-		virtual unsigned int runAllTests() CUT_OVERRIDE;
+		virtual std::size_t runAllTests() CUT_OVERRIDE;
 
 		virtual std::size_t numberOfUnitTests();
 

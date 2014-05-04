@@ -9,25 +9,25 @@ namespace cut
 		class ExpectionBase : public std::exception
 		{
 		public:
-			ExpectionBase(const char* file, unsigned int line, StringRef message);
+			ExpectionBase(const char* file, std::size_t line, StringRef message);
 			virtual ~ExpectionBase();
 			
 			const char* file() const { return m_file; }
-			const unsigned int line() const { return m_line; }
+			const std::size_t line() const { return m_line; }
 
-			const std::string& message() const { return m_message; }
-			std::string&       message()       { return m_message; }
+			const StringRef message() const { return m_message; }
+			StringRef       message()       { return m_message; }
 
 		private:
 			const char* m_file;
-			unsigned int m_line;
+			std::size_t m_line;
 			std::string m_message;
 		};
 
 		class UnitTestFailure : public ExpectionBase
 		{
 		public:
-			UnitTestFailure(const char* file, unsigned int line, StringRef message);
+			UnitTestFailure(const char* file, std::size_t line, StringRef message);
 			virtual ~UnitTestFailure();
 		};
 
@@ -35,7 +35,7 @@ namespace cut
 		{
 		public:
 			UnitTestSuccess();
-			UnitTestSuccess(const char* file, unsigned int line, StringRef message);
+			UnitTestSuccess(const char* file, std::size_t line, StringRef message);
 			virtual ~UnitTestSuccess();
 		};
 	}

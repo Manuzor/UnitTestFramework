@@ -5,5 +5,4 @@
 namespace cut
 {
 	std::string format(CUT_PRINTF_FORMAT_STRING StringRef fmt, ...);
-
 }
