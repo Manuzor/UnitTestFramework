@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "cut/unit-test-settings.h"
+#include "cut/testing/unit-test-settings.h"
 #include <string.h>
 
 void processArgument(char* arg)

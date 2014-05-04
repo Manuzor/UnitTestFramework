@@ -1,6 +1,6 @@
 #pragma once
-#include "cut/unit-test-manager.h"
-#include "cut/unit-test-statistics.h"
+#include "cut/testing/unit-test-manager.h"
+#include "cut/testing/unit-test-statistics.h"
 
 namespace cut
 {

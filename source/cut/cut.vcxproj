@@ -146,8 +146,8 @@
   <ItemGroup>
     <ClInclude Include="include\cut-detail\unit-test-manager.h" />
     <ClInclude Include="include\cut\api.h" />
-    <ClInclude Include="include\cut\assert-handler.h" />
-    <ClInclude Include="include\cut\assert.h" />
+    <ClInclude Include="include\cut\testing\assert-handler.h" />
+    <ClInclude Include="include\cut\testing\assert.h" />
     <ClInclude Include="include\cut\common.h" />
     <ClInclude Include="include\cut\debug-break.h" />
     <ClInclude Include="include\cut\empty-string.h" />
@@ -171,16 +171,15 @@
     <ClInclude Include="include\cut\preprocessor\vararg-macros.h" />
     <ClInclude Include="include\cut\string-format.h" />
     <ClInclude Include="include\cut\string-ref.h" />
-    <ClInclude Include="include\cut\unit-test-settings.h" />
+    <ClInclude Include="include\cut\testing\unit-test-settings.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\cut\streams\output-file.h" />
     <ClInclude Include="include\cut\types.h" />
-    <ClInclude Include="include\cut\unit-test.h" />
-    <ClInclude Include="include\cut\unit-test-group.h" />
-    <ClInclude Include="include\cut\unit-test-manager.h" />
+    <ClInclude Include="include\cut\testing\unit-test.h" />
+    <ClInclude Include="include\cut\testing\unit-test-group.h" />
+    <ClInclude Include="include\cut\testing\unit-test-manager.h" />
     <ClInclude Include="include\cut\logging\log-manager.h" />
-    <ClInclude Include="include\cut\framework.h" />
-    <ClInclude Include="include\cut\unit-test-statistics.h" />
+    <ClInclude Include="include\cut\testing\unit-test-statistics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cut\assert.cpp" />
@@ -199,7 +198,7 @@
     <ClCompile Include="src\cut\unit-test-settings.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\cut\assert.inl" />
+    <None Include="include\cut\testing\assert.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

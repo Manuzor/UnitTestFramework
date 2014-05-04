@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "cut/unit-test.h"
-#include "cut/unit-test-group.h"
+#include "cut/testing/unit-test.h"
+#include "cut/testing/unit-test-group.h"
 #include "cut/string-ref.h"
 
 

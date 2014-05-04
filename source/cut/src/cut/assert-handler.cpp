@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "cut/assert-handler.h"
 #include "cut/exceptions.h"
-#include "cut/unit-test-settings.h"
+#include "cut/testing/assert-handler.h"
+#include "cut/testing/unit-test-settings.h"
 
 cut::IAssertHandler* cut::IAssertHandler::s_instance = nullptr;
 

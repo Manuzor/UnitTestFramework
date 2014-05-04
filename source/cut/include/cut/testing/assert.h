@@ -24,6 +24,6 @@ namespace cut
 	};
 }
 
-#include "cut/assert.inl"
+#include "cut/testing/assert.inl"
 
 #define CUT_ASSERT ::cut::Assert(CUT_SOURCE_FILE, CUT_SOURCE_LINE)

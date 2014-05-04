@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "cut/assert.h"
-#include "cut/assert-handler.h"
+#include "cut/testing/assert.h"
+#include "cut/testing/assert-handler.h"
 
 cut::Assert::Assert(const char* fileName, std::size_t lineNumber) :
 fileName(fileName),

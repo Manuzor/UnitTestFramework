@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "cut/string-format.h"
-#include "cut/assert.h"
+#include "cut/testing/assert.h"
 
 std::string cut::format(CUT_PRINTF_FORMAT_STRING StringRef fmt, ...)
 {

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "cut-detail/unit-test-manager.h"
-#include "cut/unit-test-group.h"
+#include "cut/testing/unit-test-group.h"
 #include "cut/common.h"
 #include "cut/string-format.h"
 

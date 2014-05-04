@@ -1,10 +1,10 @@
 
 #include "cut/common.h"
-#include "cut/assert.h"
-#include "cut/unit-test.h"
-#include "cut/unit-test-group.h"
-#include "cut/unit-test-manager.h"
-#include "cut/unit-test-statistics.h"
+#include "cut/testing/assert.h"
+#include "cut/testing/unit-test.h"
+#include "cut/testing/unit-test-group.h"
+#include "cut/testing/unit-test-manager.h"
+#include "cut/testing/unit-test-statistics.h"
 
 #include "cut/string-ref.h"
 #include "cut/string-format.h"

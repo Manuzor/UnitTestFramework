@@ -18,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\cut\assert.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\cut\common.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -36,22 +33,7 @@
     <ClInclude Include="include\cut\types.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\cut\unit-test.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\unit-test-group.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\unit-test-manager.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\cut\logging\log-manager.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\framework.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\unit-test-statistics.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\cut\preprocessor\array-size.h">
@@ -90,9 +72,6 @@
     <ClInclude Include="include\cut\preprocessor\vararg-macros.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\cut\assert-handler.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\cut\preprocessor.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -120,13 +99,31 @@
     <ClInclude Include="include\cut\preprocessor\printf-format-string.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\cut\unit-test-settings.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\cut-detail\unit-test-manager.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\cut\debug-break.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-group.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-settings.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-statistics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\assert.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\assert-handler.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -163,7 +160,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\cut\assert.inl">
+    <None Include="include\cut\testing\assert.inl">
       <Filter>include</Filter>
     </None>
   </ItemGroup>
