@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 		processArgument(argv[i]);
 	}
 
-	cut::DefaultUnitTestManager::instance().runAll();
+	cut::IUnitTestManager::instance().runAll();
 
 	system("pause");
 	return 0;

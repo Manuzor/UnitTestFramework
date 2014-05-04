@@ -3,20 +3,27 @@
 #include "cut/unit-test-group.h"
 #include "cut/common.h"
 
-cut::DefaultUnitTestManager& cut::DefaultUnitTestManager::instance()
+cut::IUnitTestManager* cut::IUnitTestManager::s_instance(nullptr);
+
+cut::IUnitTestManager& cut::IUnitTestManager::instance()
 {
-	static DefaultUnitTestManager instance;
-	return instance;
+	static DefaultUnitTestManager default;
+
+	if (s_instance == nullptr)
+	{
+		s_instance = &default;
+	}
+
+	return *s_instance;
 }
 
 cut::DefaultUnitTestManager::DefaultUnitTestManager() :
-	m_statistics(0, 0, 0, 0)
+	m_statistics()
 {
 }
 
 cut::DefaultUnitTestManager::~DefaultUnitTestManager()
 {
-
 }
 
 void cut::DefaultUnitTestManager::registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup)

@@ -188,7 +188,6 @@
     </ClCompile>
     <ClCompile Include="src\cut\unit-test.cpp" />
     <ClCompile Include="src\cut\assert-handler.cpp" />
-    <ClCompile Include="src\cut\unit-test-statistics.cpp" />
     <ClCompile Include="src\cut\logging\log-manager.cpp" />
     <ClCompile Include="src\cut\exceptions.cpp" />
     <ClCompile Include="src\cut\unit-test-group.cpp" />

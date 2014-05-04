@@ -10,6 +10,8 @@ namespace cut
 	class IUnitTestManager
 	{
 	public:
+		static IUnitTestManager& instance();
+
 		virtual ~IUnitTestManager() = 0 {}
 
 		virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup) = 0;
@@ -17,13 +19,15 @@ namespace cut
 		virtual void runAll() = 0;
 
 		virtual std::size_t numberOfUnitTestGroups() = 0;
+
+	protected:
+		static IUnitTestManager* s_instance;
 	};
 
 	class DefaultUnitTestManager :
 		public IUnitTestManager
 	{
 	public:
-		static DefaultUnitTestManager& instance();
 
 		DefaultUnitTestManager();
 		virtual ~DefaultUnitTestManager();

@@ -128,9 +128,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\cut\unit-test-statistics.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\cut\logging\log-manager.cpp">
       <Filter>src</Filter>
     </ClCompile>
