@@ -3,18 +3,18 @@
 #include "cut/testing/assert-handler.h"
 #include "cut/testing/unit-test-settings.h"
 
-cut::IAssertHandler* cut::IAssertHandler::s_instance = nullptr;
+cut::IAssertHandler* cut::IAssertHandler::s_pInstance = nullptr;
 
 cut::IAssertHandler& cut::IAssertHandler::instance()
 {
 	static DefaultAssertHandler defaultHandler;
 
-	if(s_instance == nullptr)
+	if(s_pInstance == nullptr)
 	{
-		s_instance = &defaultHandler;
+		s_pInstance = &defaultHandler;
 	}
 
-	return *s_instance;
+	return *s_pInstance;
 }
 
 cut::DefaultAssertHandler::DefaultAssertHandler()

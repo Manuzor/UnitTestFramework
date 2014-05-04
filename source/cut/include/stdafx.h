@@ -1,5 +1,7 @@
 #pragma once
 
+#include <windows.h>
+
 // Used by cut::format
 #include <cstdarg>
 #include <cstdlib>

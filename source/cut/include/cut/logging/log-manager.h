@@ -1,11 +1,7 @@
 #pragma once
 
-#include "cut/streams/output-file.h"
 #include "cut/logging/mode.h"
-
-#ifndef CUT_LOG_FORMATBUFFERSIZE
-#define CUT_LOG_FORMATBUFFERSIZE 1024
-#endif // CUT_LOG_FORMATBUFFERSIZE
+#include "cut/string-ref.h"
 
 namespace cut
 {
@@ -16,27 +12,13 @@ namespace cut
 
 		virtual ~ILogManager() = 0 {}
 
-		virtual void logMessage(LogMode mode, const char* formatString, ...) = 0;
+		/// \remark If you need to format your message, use cut::format
+		virtual void logMessage(LogMode mode, StringRef formattedMessage) = 0;
+
+		virtual void setLogFileName(StringRef fileName) = 0;
+		virtual const StringRef getLogFileName() const = 0;
 
 	protected:
 		static ILogManager* s_pInstance;
-	};
-
-	class DefaultLogManager :
-		public ILogManager
-	{
-	public:
-
-		DefaultLogManager();
-
-		virtual ~DefaultLogManager();
-
-		virtual void logMessage(LogMode mode, const char* formatString, ...);
-
-	private:
-		void writeToStdOut(LogMode mode, const char* formattedString);
-
-		streams::OutputFile m_file;
-		char* m_buffer;
 	};
 }

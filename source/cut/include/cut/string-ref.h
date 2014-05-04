@@ -37,7 +37,7 @@ namespace cut
 			m_type = rhs.m_type;
 		}
 
-		inline const char* cString()
+		inline const char* cString() const
 		{
 			switch(m_type)
 			{
@@ -50,12 +50,12 @@ namespace cut
 			return nullptr;
 		}
 
-		inline bool valid()
+		inline bool valid() const
 		{
 			return m_pAll != nullptr;
 		}
 
-		inline bool empty()
+		inline bool empty() const
 		{
 			if(valid())
 			{
@@ -69,12 +69,12 @@ namespace cut
 			return true;
 		}
 
-		inline operator bool()
+		inline operator bool() const
 		{
 			return valid();
 		}
 
-		inline operator const char*()
+		inline operator const char*() const
 		{
 			return cString();
 		}
@@ -90,5 +90,15 @@ namespace cut
 
 		Enum m_type;
 	};
+
+	// Compares string contents
+	inline bool operator == (const StringRef& lhs, const StringRef& rhs)
+	{
+		if (lhs.valid() && rhs.valid())
+		{
+			return strcmp(lhs, rhs) == 0;
+		}
+		return false;
+	}
 	
 }

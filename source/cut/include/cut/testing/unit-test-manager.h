@@ -20,6 +20,6 @@ namespace cut
 		virtual const UnitTestStatistics& statistics() const = 0;
 
 	protected:
-		static IUnitTestManager* s_instance;
+		static IUnitTestManager* s_pInstance;
 	};
 }

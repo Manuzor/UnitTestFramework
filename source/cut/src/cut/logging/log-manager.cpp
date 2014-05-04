@@ -1,11 +1,10 @@
 #include "stdafx.h"
-#include "cut/logging/log-manager.h"
-#include <cstdarg>
 #include <windows.h>
+#include <cstdarg>
 
-#ifndef CUT_LOGFILENAME
-#define CUT_LOGFILENAME "UnitTest.log"
-#endif // CUT_LOGFILENAME
+#include "cut/logging/log-manager.h"
+#include "cut-detail/log-manager.h"
+#include "cut/string-format.h"
 
 cut::ILogManager* cut::ILogManager::s_pInstance = nullptr;
 
@@ -22,56 +21,40 @@ cut::ILogManager::instance()
 	return *s_pInstance;
 }
 
+//////////////////////////////////////////////////////////////////////////
+
 cut::DefaultLogManager::DefaultLogManager() :
-	m_file(CUT_LOGFILENAME)
+	m_fileName("unit-tests.log"),
+	m_file()
 {
-	m_buffer = new char[CUT_LOG_FORMATBUFFERSIZE];
 }
 
 cut::DefaultLogManager::~DefaultLogManager()
 {
-	delete[] m_buffer;
-	m_buffer = nullptr;
+	m_file.close();
 }
 
 void
-cut::DefaultLogManager::logMessage(LogMode mode, const char* formatString, ...)
+cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 {
-	va_list args;
-	va_start(args, formatString);
-	try
-	{
-		//TODO: Check if vsnprintf is MSC specific.
-#pragma warning(suppress : 4996)
-		vsnprintf(m_buffer, CUT_LOG_FORMATBUFFERSIZE - 1, formatString, args);
-	}
-	catch (...)
-	{
-		printf("ERROR! Format String b0rken!");
-	}
-	va_end(args);
-
-	// actually log stuff
 	// TODO: Add timestamp
-	writeToStdOut(mode, m_buffer);
-	m_file << m_buffer;
+	writeToStdOut(mode, formattedMessage);
+	writeToFile(mode, formattedMessage);
 }
 
-void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, const char* formattedString)
-{
-	if (formattedString == nullptr)
-	{
-		return;
-	}
+#ifdef _WIN32
 
-#if defined(_WIN32)
-	HANDLE hStdOut = GetStdHandle( STD_OUTPUT_HANDLE );
+void
+cut::DefaultLogManager::writeToStdOut(LogMode mode, StringRef formattedString)
+{
+	if(!formattedString.valid()) { return; }
+
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	CONSOLE_SCREEN_BUFFER_INFO initialConsoleState;
 	GetConsoleScreenBufferInfo(hStdOut, &initialConsoleState);
 
-	switch (mode)
+	switch(mode)
 	{
 	case LogMode::Normal:
 		SetConsoleTextAttribute(hStdOut, 0x07); // Regular
@@ -83,14 +66,50 @@ cut::DefaultLogManager::writeToStdOut(LogMode mode, const char* formattedString)
 		SetConsoleTextAttribute(hStdOut, 0x0A); // Green
 		break;
 	default:
+		debugBreak();
 		break;
 	}
-#endif
 
-	printf(formattedString);
+	printf(formattedString.cString());
 
-#if defined(_WIN32)
 	// Restore the default.
 	SetConsoleTextAttribute(hStdOut, initialConsoleState.wAttributes);
-#endif
+}
+
+#else
+
+void
+cut::DefaultLogManager::writeToStdOut(LogMode mode, StringRef formattedString)
+{
+	if(!formattedString.valid()) { return; }
+
+	printf(formattedString.cString());
+}
+
+#endif // _WIN32
+
+void cut::DefaultLogManager::writeToFile(LogMode mode, StringRef formattedMessage)
+{
+	if(!m_file.is_open())
+	{
+		m_file.open(m_fileName);
+	}
+	m_file << formattedMessage.cString();
+}
+
+void cut::DefaultLogManager::setLogFileName(StringRef fileName)
+{
+	if(fileName == m_fileName) { return; }
+
+	if(m_file.is_open())
+	{
+		m_file.close();
+	}
+
+	m_fileName = fileName;
+}
+
+const cut::StringRef cut::DefaultLogManager::getLogFileName() const
+{
+	return m_fileName;
 }

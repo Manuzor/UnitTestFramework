@@ -3,7 +3,6 @@
 #include "cut/logging/log-manager.h"
 #include "cut/string-ref.h"
 
-
 namespace cut
 {
 	inline void log(LogMode mode, StringRef message)

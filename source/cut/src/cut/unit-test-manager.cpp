@@ -4,18 +4,18 @@
 #include "cut/common.h"
 #include "cut/string-format.h"
 
-cut::IUnitTestManager* cut::IUnitTestManager::s_instance(nullptr);
+cut::IUnitTestManager* cut::IUnitTestManager::s_pInstance(nullptr);
 
 cut::IUnitTestManager& cut::IUnitTestManager::instance()
 {
 	static DefaultUnitTestManager default;
 
-	if (s_instance == nullptr)
+	if (s_pInstance == nullptr)
 	{
-		s_instance = &default;
+		s_pInstance = &default;
 	}
 
-	return *s_instance;
+	return *s_pInstance;
 }
 
 cut::DefaultUnitTestManager::DefaultUnitTestManager() :

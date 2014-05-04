@@ -15,7 +15,7 @@ namespace cut
 
 	protected:
 		/// Overwrite this in your custom assert handler
-		static IAssertHandler* s_instance;
+		static IAssertHandler* s_pInstance;
 	};
 	
 	class DefaultAssertHandler : public IAssertHandler

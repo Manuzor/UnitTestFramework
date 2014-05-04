@@ -126,6 +126,9 @@
     <ClInclude Include="include\cut\testing\assert-handler.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\cut-detail\log-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cut\logging\log-manager.cpp">
