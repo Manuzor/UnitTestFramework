@@ -6,8 +6,6 @@
 
 namespace cut
 {
-	typedef CUT_TYPE_LAMBDA _Lambda;
-
 	inline void debugBreak()
 	{
 		__debugbreak();

@@ -13,11 +13,18 @@ namespace cut
 		virtual const char* getName() const = 0;
 	};
 
+	/// \brief Standard unit test class
+	///
+	/// Example:
+	///	UnitTestGroup g_group1("Unit test group number 1");
+	///	UnitTest test1(g_group1, "Unit test number 1 within group number 1", []()
+	///	{
+	///		CUT_ASSERT.succeed("First test always succeeds!");
+	///	});
+	///
 	class UnitTest : public IUnitTest
 	{
 	public:
-		typedef std::function<void()> Lambda_t;
-
 		UnitTest(IUnitTestGroup& testGroup, const char* testName, Lambda_t lambda);
 
 		virtual void run() override { m_lambda(); }

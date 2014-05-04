@@ -20,7 +20,7 @@
 
 #ifndef CUT_TYPE_LAMBDA
 #include <functional>
-#define CUT_TYPE_LAMBDA ::std::function<void()>
+namespace cut { typedef ::std::function<void()> Lambda_t; }
 #endif
 
 #ifndef CUT_TYPE_STRING

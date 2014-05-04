@@ -170,6 +170,7 @@
     <ClInclude Include="include\cut\preprocessor\vararg-macros.h" />
     <ClInclude Include="include\cut\string-format.h" />
     <ClInclude Include="include\cut\string-ref.h" />
+    <ClInclude Include="include\cut\unit-test-settings.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\cut\streams\output-file.h" />
     <ClInclude Include="include\cut\types.h" />
@@ -181,7 +182,8 @@
     <ClInclude Include="include\cut\unit-test-statistics.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\string-format.cpp">
+    <ClCompile Include="src\cut\assert.cpp" />
+    <ClCompile Include="src\cut\string-format.cpp">
       <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
     <ClCompile Include="src\cut\unit-test.cpp" />
@@ -194,6 +196,10 @@
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\cut\unit-test-settings.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\cut\assert.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

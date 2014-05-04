@@ -1,75 +1,29 @@
 #pragma once
-#include "cut/common.h"
-#include "cut/exceptions.h"
-#include "cut/assert-handler.h"
 #include "cut/string-ref.h"
 
 namespace cut
 {
+	struct StringRef;
+
 	struct Assert
 	{
 		const char* fileName;
 		std::size_t lineNumber;
 		
-		Assert(const char* fileName, std::size_t lineNumber) :
-			fileName(fileName),
-			lineNumber(lineNumber)
-		{
-		}
+		Assert(const char* fileName, std::size_t lineNumber);
 
-		inline void isTrue(bool expr, StringRef message = nullptr)
-		{
-			if(!expr)
-			{
-				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
-			}
-		}
-
-		inline void isFalse(bool expr, StringRef message = nullptr)
-		{
-			if(expr)
-			{
-				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
-			}
-		}
+		void isTrue(bool expr, StringRef message = nullptr);
+		void isFalse(bool expr, StringRef message = nullptr);
 
 		template<typename T_Exception>
-		inline void throws(_Lambda& lambda, StringRef message = nullptr)
-		{
-			try
-			{
-				lambda();
-				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
-			}
-			catch(T_Exception&) { return; }
-			catch(...)
-			{
-				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
-			}
-		}
+		void throws(Lambda_t& lambda, StringRef message = nullptr);
+		void throwsNothing(Lambda_t& lambda, StringRef message = nullptr);
 
-		inline void throwsNothing(_Lambda& lambda, StringRef message = nullptr)
-		{
-			try
-			{
-				lambda();
-			}
-			catch(...)
-			{
-				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
-			}
-		}
-
-		inline void fail(StringRef message = nullptr)
-		{
-			IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
-		}
-
-		inline void succeed(StringRef message = nullptr)
-		{
-			IAssertHandler::instance().handleSuccess(fileName, lineNumber, message);
-		}
+		void fail(StringRef message = nullptr);
+		void succeed(StringRef message = nullptr);
 	};
 }
+
+#include "cut/assert.inl"
 
 #define CUT_ASSERT ::cut::Assert(CUT_SOURCE_FILE, CUT_SOURCE_LINE)

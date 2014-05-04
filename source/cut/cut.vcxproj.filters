@@ -123,6 +123,9 @@
     <ClInclude Include="include\cut\preprocessor\printf-format-string.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\cut\unit-test-settings.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cut\unit-test-statistics.cpp">
@@ -149,8 +152,19 @@
     <ClCompile Include="src\cut\unit-test.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\string-format.cpp">
+    <ClCompile Include="src\cut\unit-test-settings.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\cut\string-format.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\assert.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\cut\assert.inl">
+      <Filter>include</Filter>
+    </None>
   </ItemGroup>
 </Project>
