@@ -26,14 +26,14 @@ namespace cut
 		}
 
 		inline StringRef(const StringRef& rhs) :
-			m_both(rhs.m_both),
+			m_pAll(rhs.m_pAll),
 			m_type(rhs.m_type)
 		{
 		}
 
 		inline StringRef& operator = (const StringRef& rhs)
 		{
-			m_both = rhs.m_both;
+			m_pAll = rhs.m_pAll;
 			m_type = rhs.m_type;
 		}
 
@@ -52,7 +52,7 @@ namespace cut
 
 		inline operator bool()
 		{
-			return m_both != nullptr;
+			return m_pAll != nullptr;
 		}
 
 		inline operator const char*()
@@ -61,14 +61,12 @@ namespace cut
 		}
 
 	private:
-		struct
+		union
 		{
-			union
-			{
-				const char* m_pCString;
-				const std::string* m_pStdString;
-			};
-			void* m_both;
+			const char* m_pCString;
+			const std::string* m_pStdString;
+
+			void* m_pAll;
 		};
 
 		Enum m_type;

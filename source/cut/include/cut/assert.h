@@ -6,41 +6,49 @@
 
 namespace cut
 {
-	template<const char* SZ_File, size_t N_Line>
-	struct assert
+	struct Assert
 	{
-		inline static void isTrue(bool expr, StringRef message)
+		const char* fileName;
+		size_t lineNumber;
+		
+		Assert(const char* fileName, size_t lineNumber) :
+			fileName(fileName),
+			lineNumber(lineNumber)
+		{
+		}
+
+		inline void isTrue(bool expr, StringRef message = nullptr)
 		{
 			if(!expr)
 			{
-				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
+				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
 			}
 		}
 
-		inline static void isFalse(bool expr, StringRef message)
+		inline void isFalse(bool expr, StringRef message = nullptr)
 		{
 			if(expr)
 			{
-				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
+				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
 			}
 		}
 
 		template<typename T_Exception>
-		inline static void throws(_Lambda& lambda, StringRef message)
+		inline void throws(_Lambda& lambda, StringRef message = nullptr)
 		{
 			try
 			{
 				lambda();
-				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
+				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
 			}
 			catch(T_Exception&) { return; }
 			catch(...)
 			{
-				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
+				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
 			}
 		}
 
-		inline static void throwsNothing(_Lambda& lambda, StringRef message)
+		inline void throwsNothing(_Lambda& lambda, StringRef message = nullptr)
 		{
 			try
 			{
@@ -48,20 +56,20 @@ namespace cut
 			}
 			catch(...)
 			{
-				IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
+				IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
 			}
 		}
 
-		inline static void fail(StringRef message)
+		inline void fail(StringRef message = nullptr)
 		{
-			IAssertHandler::instance().handleFailure(SZ_File, N_Line, message);
+			IAssertHandler::instance().handleFailure(fileName, lineNumber, message);
 		}
 
-		inline static void succeed(StringRef message)
+		inline void succeed(StringRef message = nullptr)
 		{
-			IAssertHandler::instance().handleSuccess(SZ_File, N_Line, message);
+			IAssertHandler::instance().handleSuccess(fileName, lineNumber, message);
 		}
 	};
 }
 
-#define CUT_ASSERT ::cut::assert<__FILE__, __LINE__>
+#define CUT_ASSERT ::cut::Assert(CUT_SOURCE_FILE, CUT_SOURCE_LINE)

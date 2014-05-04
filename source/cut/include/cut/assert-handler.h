@@ -6,14 +6,15 @@ namespace cut
 	class IAssertHandler
 	{
 	public:
-		inline static IAssertHandler& instance() { return *s_instance; }
+		static IAssertHandler& instance();
 
-		virtual ~IAssertHandler() = 0;
+		virtual ~IAssertHandler() {}
 
 		virtual void handleFailure(const char* file, size_t line, StringRef message) = 0;
 		virtual void handleSuccess(const char* file, size_t line, StringRef message) = 0;
 
 	protected:
+		/// Overwrite this in your custom assert handler
 		static IAssertHandler* s_instance;
 	};
 	
@@ -27,6 +28,4 @@ namespace cut
 
 		virtual void handleSuccess(const char* file, size_t line, StringRef message) override;
 	};
-
-
 }

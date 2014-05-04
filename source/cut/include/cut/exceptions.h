@@ -10,7 +10,6 @@ namespace cut
 		{
 		public:
 			ExpectionBase(const char* file, unsigned int line, StringRef message);
-
 			virtual ~ExpectionBase();
 			
 			const char* file() const { return m_file; }
@@ -29,22 +28,15 @@ namespace cut
 		{
 		public:
 			UnitTestFailure(const char* file, unsigned int line, StringRef message);
-
 			virtual ~UnitTestFailure();
-
-		protected:
-		private:
 		};
 
 		class UnitTestSuccess : public ExpectionBase
 		{
 		public:
 			UnitTestSuccess();
-
 			UnitTestSuccess(const char* file, unsigned int line, StringRef message);
-
-		protected:
-		private:
+			virtual ~UnitTestSuccess();
 		};
 	}
 }

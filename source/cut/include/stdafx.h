@@ -1,2 +1,3 @@
+#pragma once
 
-#include "cut/api.h"
+#include "cut/common.h"

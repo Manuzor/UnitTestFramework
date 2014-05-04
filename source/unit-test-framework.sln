@@ -1,7 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cut", "cut\cut.vcxproj", "{5E93AB69-B58A-49C2-AB80-D1CA20912830}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cut-samples", "cut-samples\cut-samples.vcxproj", "{6C287B14-C1FE-46AE-A231-1429C2010193}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5E93AB69-B58A-49C2-AB80-D1CA20912830} = {5E93AB69-B58A-49C2-AB80-D1CA20912830}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +26,14 @@ Global
 		{5E93AB69-B58A-49C2-AB80-D1CA20912830}.Release|Win32.Build.0 = Release|Win32
 		{5E93AB69-B58A-49C2-AB80-D1CA20912830}.Release|x64.ActiveCfg = Release|x64
 		{5E93AB69-B58A-49C2-AB80-D1CA20912830}.Release|x64.Build.0 = Release|x64
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Debug|Win32.Build.0 = Debug|Win32
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Debug|x64.ActiveCfg = Debug|x64
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Debug|x64.Build.0 = Debug|x64
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Release|Win32.ActiveCfg = Release|Win32
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Release|Win32.Build.0 = Release|Win32
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Release|x64.ActiveCfg = Release|x64
+		{6C287B14-C1FE-46AE-A231-1429C2010193}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
