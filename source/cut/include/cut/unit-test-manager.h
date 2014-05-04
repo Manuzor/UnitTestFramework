@@ -5,8 +5,6 @@ namespace cut
 {
 	class IUnitTestGroup;
 
-	typedef std::map<const char*, IUnitTestGroup*> UnitTestGroupMap;
-
 	class IUnitTestManager
 	{
 	public:
@@ -14,11 +12,12 @@ namespace cut
 
 		virtual ~IUnitTestManager() = 0 {}
 
-		virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup) = 0;
+		virtual void registerUnitTestGroup(IUnitTestGroup* testGroup) = 0;
 
 		virtual void runAll() = 0;
 
-		virtual std::size_t numberOfUnitTestGroups() = 0;
+		virtual void updateStatistics() = 0;
+		virtual const UnitTestStatistics& statistics() const = 0;
 
 	protected:
 		static IUnitTestManager* s_instance;

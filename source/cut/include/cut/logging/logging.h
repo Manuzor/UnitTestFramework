@@ -5,5 +5,5 @@
 
 namespace cut
 {
-	typedef CUT_TYPE_LOGMANAGER Manager;
+	typedef DefaultLogManager Manager;
 }

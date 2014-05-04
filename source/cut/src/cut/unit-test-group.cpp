@@ -4,16 +4,20 @@
 #include "cut/unit-test-manager.h"
 #include "cut/unit-test.h"
 #include "cut/exceptions.h"
+#include "cut/string-ref.h"
 
-cut::UnitTestGroup::UnitTestGroup(const char* groupName)
+cut::UnitTestGroup::UnitTestGroup(StringRef groupName) :
+	m_name(groupName),
+	m_numFailedTests(0),
+	m_unitTests()
 {
-	IUnitTestManager::instance().registerUnitTestGroup(groupName, this);
+	IUnitTestManager::instance().registerUnitTestGroup(this);
 }
 
 void
 cut::UnitTestGroup::registerUnitTest(IUnitTest* unitTest )
 {
-	m_unitTests[unitTest->getName()] = unitTest;
+	m_unitTests.push_back(unitTest);
 }
 
 cut::UnitTestGroup::~UnitTestGroup()
@@ -25,17 +29,16 @@ unsigned int
 cut::UnitTestGroup::runAllTests()
 {
 	unsigned int failed = 0;
-	for (auto& unitTestIterator : m_unitTests)
+	for (auto unitTest : m_unitTests)
 	{
-		const char* unitTestName = unitTestIterator.first;
-		IUnitTest* unitTest = unitTestIterator.second;
+		const char* unitTestName = unitTest->getName();
 		CUT_LOG(LogMode::Normal, "Running unit test %s...\n", unitTestName);
 		try
 		{
 			unitTest->run();
 			throw exceptions::UnitTestSuccess();
 		}
-		catch (const exceptions::UnitTestFailure& failure)
+		catch (exceptions::UnitTestFailure& failure)
 		{
 			++failed;
 
@@ -47,11 +50,11 @@ cut::UnitTestGroup::runAllTests()
 				failure.message()
 				);
 		}
-		catch (const exceptions::UnitTestSuccess&)
+		catch (exceptions::UnitTestSuccess&)
 		{
 			CUT_LOG(LogMode::Success, "Unit test %s succeeded!\n", unitTestName);
 		}
-		catch (const std::exception& ex)
+		catch (std::exception& ex)
 		{
 			++failed;
 			CUT_LOG(LogMode::Failure,
@@ -76,4 +79,9 @@ std::size_t
 cut::UnitTestGroup::numberOfUnitTests()
 {
 	return m_unitTests.size();
+}
+
+cut::StringRef cut::UnitTestGroup::getName() const
+{
+	return m_name;
 }

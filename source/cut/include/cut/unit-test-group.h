@@ -1,14 +1,12 @@
 #pragma once
+#include "cut/string-ref.h"
 
 namespace cut
 {
-	// Forward declarations
 	class IUnitTest;
 
-	// typedefs
-	typedef std::map<const char*, IUnitTest*> UnitTestMap;
+	typedef std::vector<IUnitTest*> UnitTestContainer;
 
-	// class definitions
 	class IUnitTestGroup
 	{
 	public:
@@ -16,9 +14,11 @@ namespace cut
 
 		virtual void registerUnitTest(IUnitTest* unitTest) = 0;
 
-		virtual unsigned int runAllTests() = 0;
+		virtual std::size_t runAllTests() = 0;
 
 		virtual std::size_t numberOfUnitTests() = 0;
+
+		virtual StringRef getName() const = 0;
 	};
 
 	class UnitTestGroup :
@@ -26,20 +26,21 @@ namespace cut
 	{
 	public:
 
-		UnitTestGroup(const char* groupName);
+		UnitTestGroup(StringRef groupName);
+		virtual ~UnitTestGroup();
 
-	virtual ~UnitTestGroup();
+		virtual void registerUnitTest(IUnitTest* unitTest) CUT_OVERRIDE;
 
-		virtual void registerUnitTest(IUnitTest* unitTest) override;
-
-		virtual unsigned int runAllTests() override;
+		virtual unsigned int runAllTests() CUT_OVERRIDE;
 
 		virtual std::size_t numberOfUnitTests();
 
+		virtual StringRef getName() const CUT_OVERRIDE;
+
+
 	protected:
-
-		UnitTestMap m_unitTests;
-
-	private:
+		std::string m_name;
+		std::size_t m_numFailedTests;
+		UnitTestContainer m_unitTests;
 	};
 }

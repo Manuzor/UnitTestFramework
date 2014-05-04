@@ -1,8 +1,11 @@
 #pragma once
 #include "cut/unit-test-manager.h"
+#include "cut/unit-test-statistics.h"
 
 namespace cut
 {
+	typedef std::vector<IUnitTestGroup*> UnitTestGroupContainer;
+
 	class DefaultUnitTestManager : public IUnitTestManager
 	{
 	public:
@@ -10,15 +13,16 @@ namespace cut
 		DefaultUnitTestManager();
 		virtual ~DefaultUnitTestManager();
 
-		virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup);
+		virtual void registerUnitTestGroup(IUnitTestGroup* testGroup) CUT_OVERRIDE;
 
-		virtual void runAll();
+		virtual void runAll() CUT_OVERRIDE;
 
-		virtual std::size_t numberOfUnitTestGroups();
+		virtual void updateStatistics() CUT_OVERRIDE;
+		virtual const UnitTestStatistics& statistics() const CUT_OVERRIDE;
 
 	protected:
 	private:
 		UnitTestStatistics m_statistics;
-		UnitTestGroupMap m_unitTestGroups;
+		UnitTestGroupContainer m_unitTestGroups;
 	};
 }

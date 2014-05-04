@@ -26,18 +26,17 @@ cut::DefaultUnitTestManager::~DefaultUnitTestManager()
 {
 }
 
-void cut::DefaultUnitTestManager::registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup)
+void cut::DefaultUnitTestManager::registerUnitTestGroup(IUnitTestGroup* testGroup)
 {
-	m_unitTestGroups[groupName] = testGroup;
+	m_unitTestGroups.push_back(testGroup);
 	++m_statistics.groups;
 }
 
 void cut::DefaultUnitTestManager::runAll()
 {
-	for (auto& groupIter : m_unitTestGroups)
+	for(auto& unitTestGroup : m_unitTestGroups)
 	{
-		const char* unitTestGroupName = groupIter.first;
-		IUnitTestGroup* unitTestGroup = groupIter.second;
+		const char* unitTestGroupName = unitTestGroup->getName();
 		std::size_t numberOfTests = unitTestGroup->numberOfUnitTests();
 
 		m_statistics.tests += numberOfTests;
@@ -50,7 +49,7 @@ void cut::DefaultUnitTestManager::runAll()
 		std::size_t failed = unitTestGroup->runAllTests();
 		if (failed == 0)
 		{
-			CUT_LOG(cut::LogMode::Success,
+			CUT_LOG(LogMode::Success,
 				"=== Unit test group passed ====================================================\n"
 				"Group name: %s\n"
 				"Successful unit tests: %d/%d\n"
@@ -62,7 +61,7 @@ void cut::DefaultUnitTestManager::runAll()
 		{
 			++m_statistics.groupsFailed;
 			m_statistics.testsFailed += failed;
-			CUT_LOG(cut::LogMode::Failure,
+			CUT_LOG(LogMode::Failure,
 				"=== Unit test group failed ====================================================\n"
 				"Group name: %s\n"
 				"Successful unit tests: %d/%d\n"
@@ -79,12 +78,12 @@ void cut::DefaultUnitTestManager::runAll()
 
 	if (m_statistics.testsFailed == 0)
 	{
-		CUT_LOG(cut::LogMode::Success,
+		CUT_LOG(LogMode::Success,
 			finalMessage,
 			m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
 			m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
-		CUT_LOG(cut::LogMode::Success,
+		CUT_LOG(LogMode::Success,
 			"=== All Unit Tests Passed! ====================================================\n");
 	}
 	else
@@ -94,13 +93,24 @@ void cut::DefaultUnitTestManager::runAll()
 			m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
 			m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
 
-		CUT_LOG(cut::LogMode::Failure,
+		CUT_LOG(LogMode::Failure,
 			"=== All or Some Unit Tests Failed! ============================================\n");
 	}
 }
 
-std::size_t cut::DefaultUnitTestManager::numberOfUnitTestGroups()
+const cut::UnitTestStatistics& cut::DefaultUnitTestManager::statistics() const
 {
-	return m_unitTestGroups.size();
+	return m_statistics;
+}
+
+void cut::DefaultUnitTestManager::updateStatistics()
+{
+	m_statistics.groups = m_unitTestGroups.size();
+	m_statistics.testsFailed = 0;
+
+	for (auto group : m_unitTestGroups)
+	{
+	}
+	
 }
 
