@@ -25,13 +25,13 @@ cut::UnitTestGroup::~UnitTestGroup()
 
 }
 
-unsigned int
+std::size_t
 cut::UnitTestGroup::runAllTests()
 {
-	unsigned int failed = 0;
+	std::size_t failed = 0;
 	for (auto unitTest : m_unitTests)
 	{
-		const char* unitTestName = unitTest->getName();
+		auto unitTestName = unitTest->getName().cString();
 		CUT_LOG(LogMode::Normal, "Running unit test %s...\n", unitTestName);
 		try
 		{
@@ -42,13 +42,23 @@ cut::UnitTestGroup::runAllTests()
 		{
 			++failed;
 
-			CUT_LOG(LogMode::Failure,
-				"Unit test %s failed in file %s at line %d:\n	%s\n",
-				unitTestName,
-				failure.file(),
-				failure.line(),
-				failure.message()
-				);
+			if (failure.message())
+			{
+				CUT_LOG(LogMode::Failure,
+						"Unit test '%s' failed in file %s at line %d:\n  %s\n",
+						unitTestName,
+						failure.file(),
+						failure.line(),
+						failure.message().cString());
+			}
+			else
+			{
+				CUT_LOG(LogMode::Failure,
+						"Unit test '%s' failed in file %s at line %d.",
+						unitTestName,
+						failure.file(),
+						failure.line());
+			}
 		}
 		catch (exceptions::UnitTestSuccess&)
 		{
