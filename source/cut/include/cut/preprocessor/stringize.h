@@ -1,7 +1,12 @@
 #pragma once
 
-#define CUT_STRINGIZE_HELPER(x) #x
-#define CUT_STRINGIZE(str) CUT_STRINGIZE_HELPER(str)
+#define _CUT_TOSTRING_HELPER_4(x) #x
+#define _CUT_TOSTRING_HELPER_3(x) _CUT_TOSTRING_HELPER_4(x)
+#define _CUT_TOSTRING_HELPER_2(x) _CUT_TOSTRING_HELPER_3(x)
+#define _CUT_TOSTRING_HELPER_1(x) _CUT_TOSTRING_HELPER_2(x)
+#define _CUT_TOSTRING_HELPER(x)   _CUT_TOSTRING_HELPER_1(x)
 
-// Same thing, different name
-#define CUT_TOSTRING(str) CUT_STRINGIZE(str)
+#define CUT_TOSTRING(str) _CUT_TOSTRING_HELPER(str)
+
+// Same thing as CUT_TOSTRING, different name
+#define CUT_STRINGIZE(str) CUT_TOSTRING(str)

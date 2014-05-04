@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cut/preprocessor/concat.h"
+#include "cut/preprocessor/source-line.h"
 
 namespace cut
 {
@@ -9,8 +10,7 @@ namespace cut
 	{
 		T_Callable m_onExitFunction;
 
-		ScopeExit_tpl() : m_onExitFunction(nullptr) {}
-		explicit ScopeExit_tpl(T_Callable func) : m_onExitFunction(func) {}
+		ScopeExit_tpl(T_Callable func) : m_onExitFunction(func) {}
 		~ScopeExit_tpl() { if(m_onExitFunction) m_onExitFunction(); }
 	};
 
@@ -23,4 +23,4 @@ namespace cut
 //	{
 //		printf("You will always see me when the current scope exits!\n");
 //	}; // <- mind the semicolon!
-#define CUT_SCOPE_EXIT ::cut::ScopeExit CUT_CONCAT(scopeExit_, CUT_SOURCE_LINE); CUT_CONCAT(scopeExit_, CUT_SOURCE_LINE).m_onExitFunction = [&]()
+#define CUT_SCOPE_EXIT ::cut::ScopeExit CUT_CONCAT_2(scopeExit_, CUT_SOURCE_LINE) = [&]()

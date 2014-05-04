@@ -21,4 +21,5 @@
 #define CUT_CONCAT_7(a, b, c, d, e, f, g)    _CUT_CONCAT_HELPER(CUT_CONCAT_6(a, b, c, d, e, f), g)
 #define CUT_CONCAT_8(a, b, c, d, e, f, g, h) _CUT_CONCAT_HELPER(CUT_CONCAT_7(a, b, c, d, e, f, g), h)
 
-#define CUT_CONCAT(...) _CUT_CONCAT_HELPER(CUT_CONCAT_, CUT_VA_NUM_ARGS(__VA_ARGS__)) CUT_PASS_VA(__VA_ARGS__)
+// Note: You cannot pass a number to this function directly. For example, use CUT_TOSTRING(1) instead.
+#define CUT_VACONCAT(...) _CUT_CONCAT_HELPER(CUT_CONCAT_, CUT_VA_NUM_ARGS(__VA_ARGS__)) CUT_PASS_VA(__VA_ARGS__)
