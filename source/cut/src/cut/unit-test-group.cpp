@@ -7,7 +7,7 @@
 
 cut::UnitTestGroup::UnitTestGroup(const char* groupName)
 {
-	TestManager::instance().registerUnitTestGroup(groupName, this);
+	IUnitTestManager::instance().registerUnitTestGroup(groupName, this);
 }
 
 void

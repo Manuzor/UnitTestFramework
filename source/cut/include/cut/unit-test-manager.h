@@ -23,26 +23,4 @@ namespace cut
 	protected:
 		static IUnitTestManager* s_instance;
 	};
-
-	class DefaultUnitTestManager :
-		public IUnitTestManager
-	{
-	public:
-
-		DefaultUnitTestManager();
-		virtual ~DefaultUnitTestManager();
-
-		virtual void registerUnitTestGroup(const char* groupName, IUnitTestGroup* testGroup);
-
-		virtual void runAll();
-
-		virtual std::size_t numberOfUnitTestGroups();
-
-	protected:
-	private:
-		UnitTestStatistics m_statistics;
-		UnitTestGroupMap m_unitTestGroups;
-	};
-
-	typedef CUT_TYPE_TESTMANAGER TestManager;
 }

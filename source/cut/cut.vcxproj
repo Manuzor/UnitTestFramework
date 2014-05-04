@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\cut-detail\unit-test-manager.h" />
     <ClInclude Include="include\cut\api.h" />
     <ClInclude Include="include\cut\assert-handler.h" />
     <ClInclude Include="include\cut\assert.h" />
