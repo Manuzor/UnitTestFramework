@@ -2,6 +2,7 @@
 #include "cut-detail/unit-test-manager.h"
 #include "cut/unit-test-group.h"
 #include "cut/common.h"
+#include "cut/string-format.h"
 
 cut::IUnitTestManager* cut::IUnitTestManager::s_instance(nullptr);
 
@@ -41,60 +42,56 @@ void cut::DefaultUnitTestManager::runAll()
 
 		m_statistics.tests += numberOfTests;
 
-		CUT_LOG(LogMode::Normal,
+		logMessage(format(
 			"\n"
 			"Running unit test group %s with %d unit tests:\n",
 			unitTestGroupName,
-			numberOfTests);
+			numberOfTests));
 		std::size_t failed = unitTestGroup->runAllTests();
 		if (failed == 0)
 		{
-			CUT_LOG(LogMode::Success,
+			logSuccess(format(
 				"=== Unit test group passed ====================================================\n"
 				"Group name: %s\n"
 				"Successful unit tests: %d/%d\n"
 				"===============================================================================\n",
 				unitTestGroupName,
-				numberOfTests - failed, numberOfTests);
+				numberOfTests - failed, numberOfTests));
 		}
 		else
 		{
 			++m_statistics.groupsFailed;
 			m_statistics.testsFailed += failed;
-			CUT_LOG(LogMode::Failure,
+			logFailure(format(
 				"=== Unit test group failed ====================================================\n"
 				"Group name: %s\n"
 				"Successful unit tests: %d/%d\n"
 				"===============================================================================\n",
 				unitTestGroupName,
-				numberOfTests - failed, numberOfTests);
+				numberOfTests - failed, numberOfTests));
 		}
 	}
 
-	const char* finalMessage = "\n"
+	auto finalMessage = "\n"
 		"=== Final Statistics ==========================================================\n"
 		"Successful unit test groups:	 %d/%d\n"
 		"Successful unit tests (total): %d/%d\n";
 
 	if (m_statistics.testsFailed == 0)
 	{
-		CUT_LOG(LogMode::Success,
-			finalMessage,
-			m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
-			m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
+		logSuccess(format(finalMessage,
+						  m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
+						  m_statistics.tests - m_statistics.testsFailed, m_statistics.tests));
 
-		CUT_LOG(LogMode::Success,
-			"=== All Unit Tests Passed! ====================================================\n");
+		logSuccess(format("=== All Unit Tests Passed! ====================================================\n"));
 	}
 	else
 	{
-		CUT_LOG(LogMode::Failure,
-			finalMessage,
-			m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
-			m_statistics.tests - m_statistics.testsFailed, m_statistics.tests);
+		logSuccess(format(finalMessage,
+						  m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
+						  m_statistics.tests - m_statistics.testsFailed, m_statistics.tests));
 
-		CUT_LOG(LogMode::Failure,
-			"=== All or Some Unit Tests Failed! ============================================\n");
+		logSuccess(format("=== All or Some Unit Tests Failed! ============================================\n"));
 	}
 }
 

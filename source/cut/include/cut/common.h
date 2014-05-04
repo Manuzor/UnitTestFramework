@@ -11,5 +11,3 @@ namespace cut
 		__debugbreak();
 	}
 }
-
-#define CUT_LOG (::cut::DefaultLogManager::instance().logMessage)

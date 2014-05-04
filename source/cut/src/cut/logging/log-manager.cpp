@@ -7,11 +7,19 @@
 #define CUT_LOGFILENAME "UnitTest.log"
 #endif // CUT_LOGFILENAME
 
-cut::DefaultLogManager&
-cut::DefaultLogManager::instance()
+cut::ILogManager* cut::ILogManager::s_pInstance = nullptr;
+
+cut::ILogManager&
+cut::ILogManager::instance()
 {
-	static DefaultLogManager instance;
-	return instance;
+	static DefaultLogManager default;
+
+	if (s_pInstance == nullptr)
+	{
+		s_pInstance = &default;
+	}
+
+	return *s_pInstance;
 }
 
 cut::DefaultLogManager::DefaultLogManager() :

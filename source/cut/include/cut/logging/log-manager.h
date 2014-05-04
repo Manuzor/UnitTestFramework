@@ -12,17 +12,20 @@ namespace cut
 	class ILogManager
 	{
 	public:
+		static ILogManager& instance();
+
 		virtual ~ILogManager() = 0 {}
 
 		virtual void logMessage(LogMode mode, const char* formatString, ...) = 0;
+
+	protected:
+		static ILogManager* s_pInstance;
 	};
 
 	class DefaultLogManager :
 		public ILogManager
 	{
 	public:
-
-		static DefaultLogManager& instance();
 
 		DefaultLogManager();
 

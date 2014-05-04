@@ -5,6 +5,7 @@
 #include "cut/unit-test.h"
 #include "cut/exceptions.h"
 #include "cut/string-ref.h"
+#include "cut/string-format.h"
 
 cut::UnitTestGroup::UnitTestGroup(StringRef groupName) :
 	m_name(groupName),
@@ -22,7 +23,6 @@ cut::UnitTestGroup::registerUnitTest(IUnitTest* unitTest )
 
 cut::UnitTestGroup::~UnitTestGroup()
 {
-
 }
 
 std::size_t
@@ -32,7 +32,7 @@ cut::UnitTestGroup::runAllTests()
 	for (auto unitTest : m_unitTests)
 	{
 		auto unitTestName = unitTest->getName().cString();
-		CUT_LOG(LogMode::Normal, "Running unit test %s...\n", unitTestName);
+		logMessage(format("Running unit test %s...\n", unitTestName));
 		try
 		{
 			unitTest->run();
@@ -42,44 +42,37 @@ cut::UnitTestGroup::runAllTests()
 		{
 			++failed;
 
-			if (failure.message())
+			if (failure.message().empty())
 			{
-				CUT_LOG(LogMode::Failure,
-						"Unit test '%s' failed in file %s at line %d:\n  %s\n",
-						unitTestName,
-						failure.file(),
-						failure.line(),
-						failure.message().cString());
+				logFailure(format("Unit test '%s' failed in file %s at line %d.",
+								  unitTestName,
+								  failure.file(),
+								  failure.line()));
 			}
 			else
 			{
-				CUT_LOG(LogMode::Failure,
-						"Unit test '%s' failed in file %s at line %d.",
-						unitTestName,
-						failure.file(),
-						failure.line());
+				logFailure(format("Unit test '%s' failed in file %s at line %d:\n  %s\n",
+								  unitTestName,
+								  failure.file(),
+								  failure.line(),
+								  failure.message().cString()));
 			}
 		}
 		catch (exceptions::UnitTestSuccess&)
 		{
-			CUT_LOG(LogMode::Success, "Unit test %s succeeded!\n", unitTestName);
+			logSuccess(format("Unit test %s succeeded!\n", unitTestName));
 		}
 		catch (std::exception& ex)
 		{
 			++failed;
-			CUT_LOG(LogMode::Failure,
-				"Unit test %s failed due to an unhandled exception: %s\n",
-				unitTestName,
-				ex.what()
-				);
+			logFailure(format("Unit test %s failed due to an unhandled exception: %s\n",
+							  unitTestName,
+							  ex.what()));
 		}
 		catch (...)
 		{
 			++failed;
-			CUT_LOG(LogMode::Failure,
-				"Unit test %s failed due to an unknown exception.\n",
-				unitTestName
-				);
+			logFailure(format("Unit test %s failed due to an unknown exception.\n", unitTestName));
 		}
 	}
 	return failed;
