@@ -3,8 +3,6 @@
 
 namespace cut
 {
-	struct StringRef;
-
 	struct Assert
 	{
 		const char* fileName;
