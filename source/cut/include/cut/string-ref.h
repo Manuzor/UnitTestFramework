@@ -50,9 +50,28 @@ namespace cut
 			return nullptr;
 		}
 
-		inline operator bool()
+		inline bool valid()
 		{
 			return m_pAll != nullptr;
+		}
+
+		inline bool empty()
+		{
+			if(valid())
+			{
+				switch(m_type)
+				{
+				case CString:   return strlen(m_pCString) == 0;
+				case StdString: return m_pStdString->empty();
+				}
+			}
+			
+			return true;
+		}
+
+		inline operator bool()
+		{
+			return valid();
 		}
 
 		inline operator const char*()
