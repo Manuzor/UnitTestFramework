@@ -17,15 +17,4 @@ namespace cut
 		/// Overwrite this in your custom assert handler
 		static IAssertHandler* s_pInstance;
 	};
-	
-	class DefaultAssertHandler : public IAssertHandler
-	{
-	public:
-		DefaultAssertHandler();
-		virtual ~DefaultAssertHandler();
-
-		virtual void handleFailure(const char* file, std::size_t line, StringRef message) override;
-
-		virtual void handleSuccess(const char* file, std::size_t line, StringRef message) override;
-	};
 }

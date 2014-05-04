@@ -1,6 +1,5 @@
 #pragma once
 #include "cut/logging/log-manager.h"
-#include "cut/streams/output-file.h"
 #include "cut/logging/mode.h"
 
 namespace cut
@@ -21,7 +20,7 @@ namespace cut
 		void writeToStdOut(LogMode mode, StringRef formattedString);
 		void writeToFile(LogMode mode, StringRef formattedMessage);
 
-		streams::OutputFile m_file;
+		std::ofstream m_file;
 		std::string m_fileName;
 	};
 }

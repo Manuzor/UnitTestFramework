@@ -4,7 +4,7 @@
 #include "cut/preprocessor/construction.h"
 #include "cut/preprocessor/counter.h"
 #include "cut/preprocessor/minmax.h"
-#include "cut/preprocessor/override.h"
+#include "cut/preprocessor/override-final.h"
 #include "cut/preprocessor/parenthesis.h"
 #include "cut/preprocessor/printf-format-string.h"
 #include "cut/preprocessor/scope-exit.h"

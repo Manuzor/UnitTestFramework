@@ -27,9 +27,6 @@
     <ClInclude Include="include\cut\logging\mode.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\cut\streams\output-file.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\cut\types.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -46,9 +43,6 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\cut\preprocessor\minmax.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cut\preprocessor\override.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\cut\preprocessor\parenthesis.h">
@@ -127,6 +121,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\cut-detail\log-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\override-final.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut-detail\assert-handler.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\cut-detail\assert-handler.h" />
     <ClInclude Include="include\cut-detail\log-manager.h" />
     <ClInclude Include="include\cut-detail\unit-test-manager.h" />
     <ClInclude Include="include\cut\api.h" />
@@ -161,7 +162,7 @@
     <ClInclude Include="include\cut\preprocessor\construction.h" />
     <ClInclude Include="include\cut\preprocessor\counter.h" />
     <ClInclude Include="include\cut\preprocessor\minmax.h" />
-    <ClInclude Include="include\cut\preprocessor\override.h" />
+    <ClInclude Include="include\cut\preprocessor\override-final.h" />
     <ClInclude Include="include\cut\preprocessor\parenthesis.h" />
     <ClInclude Include="include\cut\preprocessor\printf-format-string.h" />
     <ClInclude Include="include\cut\preprocessor\scope-exit.h" />
@@ -174,7 +175,6 @@
     <ClInclude Include="include\cut\string-ref.h" />
     <ClInclude Include="include\cut\testing\unit-test-settings.h" />
     <ClInclude Include="include\stdafx.h" />
-    <ClInclude Include="include\cut\streams\output-file.h" />
     <ClInclude Include="include\cut\types.h" />
     <ClInclude Include="include\cut\testing\unit-test.h" />
     <ClInclude Include="include\cut\testing\unit-test-group.h" />
