@@ -25,8 +25,12 @@ namespace cut
 		void writeToStdOut(LogMode mode, std::ostringstream& formattedString);
 		void writeToFile(LogMode mode, std::ostringstream& formattedMessage);
 
+		virtual std::size_t getBlockIndentation() const override;
+		virtual void setBlockIndentation(std::size_t value) override;
+
 		std::ofstream m_file;
 		std::string m_fileName;
 		std::size_t m_blockLevel;
+		std::size_t m_blockIndentation;
 	};
 }

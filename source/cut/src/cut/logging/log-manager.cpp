@@ -27,7 +27,9 @@ cut::ILogManager::instance()
 
 cut::DefaultLogManager::DefaultLogManager() :
 	m_fileName("unit-tests.log"),
-	m_file()
+	m_file(),
+	m_blockLevel(0),
+	m_blockIndentation(2)
 {
 }
 
@@ -41,9 +43,9 @@ cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 {
 	std::ostringstream messageStream;
 
-	for(std::size_t i = 0; i < m_blockLevel; ++i)
+	for(std::size_t i = 0; i < m_blockLevel * m_blockIndentation; ++i)
 	{
-		messageStream << "  ";
+		messageStream << ' ';
 	}
 
 	messageStream << formattedMessage.cString() << '\n';
@@ -129,4 +131,14 @@ void cut::DefaultLogManager::blockBegin()
 void cut::DefaultLogManager::blockEnd()
 {
 	--m_blockLevel;
+}
+
+size_t cut::DefaultLogManager::getBlockIndentation() const
+{
+	return m_blockIndentation;
+}
+
+void cut::DefaultLogManager::setBlockIndentation(std::size_t value)
+{
+	m_blockIndentation = value;
 }

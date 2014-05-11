@@ -24,6 +24,9 @@ namespace cut
 		virtual void blockBegin() = 0;
 		virtual void blockEnd() = 0;
 
+		virtual std::size_t getBlockIndentation() const = 0;
+		virtual void setBlockIndentation(std::size_t value) = 0;
+
 	protected:
 		static ILogManager* s_pInstance;
 	};
