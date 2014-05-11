@@ -198,7 +198,6 @@
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\cut\unit-test-settings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\cut\testing\assert.inl" />

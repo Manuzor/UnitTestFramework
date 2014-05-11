@@ -13,5 +13,9 @@ namespace cut
 		}
 	};
 	
-	extern UnitTestSettings g_settings;
+	inline UnitTestSettings& settings()
+	{
+		static UnitTestSettings instance;
+		return instance;
+	}
 }

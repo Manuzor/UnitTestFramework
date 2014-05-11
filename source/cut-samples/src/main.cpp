@@ -6,7 +6,7 @@ void processArgument(char* arg)
 {
 	if(strcmp(arg, "-i") == 0 || strcmp(arg, "--interactive") == 0)
 	{
-		cut::g_settings.doDebugBreaks = true;
+		cut::settings().doDebugBreaks = true;
 	}
 }
 

@@ -155,9 +155,6 @@
     <ClCompile Include="src\cut\unit-test.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\cut\unit-test-settings.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\cut\string-format.cpp">
       <Filter>src</Filter>
     </ClCompile>
