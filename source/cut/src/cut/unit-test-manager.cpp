@@ -74,7 +74,7 @@ void cut::DefaultUnitTestManager::runAll()
 
 	auto finalMessage = "\n"
 		"=== Final Statistics ==========================================================\n"
-		"Successful unit test groups:	 %d/%d\n"
+		"Successful unit test groups:   %d/%d\n"
 		"Successful unit tests (total): %d/%d\n";
 
 	if (m_statistics.testsFailed == 0)
@@ -87,11 +87,11 @@ void cut::DefaultUnitTestManager::runAll()
 	}
 	else
 	{
-		logSuccess(format(finalMessage,
+		logFailure(format(finalMessage,
 						  m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
 						  m_statistics.tests - m_statistics.testsFailed, m_statistics.tests));
 
-		logSuccess(format("=== All or Some Unit Tests Failed! ============================================\n"));
+		logFailure(format("=== All or Some Unit Tests Failed! ============================================\n"));
 	}
 }
 
