@@ -1,8 +1,17 @@
 #include "stdafx.h"
+#include "cut/logging/log-manager.h"
 
 using namespace cut;
 
-UnitTestGroup g_group_logBlockTests("LogBlock tests");
+UnitTestGroup g_group_logBlockTests("LogBlock tests", [](){
+	// Initialization code.
+	logMessage(">> Level 0 start");
+	ILogManager::instance().blockBegin();
+}, [](){
+	// Shutdown code.
+	ILogManager::instance().blockEnd();
+	logMessage("<< Level 0 start");
+});
 
 UnitTest g_logBlockTests_1(g_group_logBlockTests, "Test Block Levels", [](){
 	logMessage("Level 1 start");

@@ -26,7 +26,7 @@ namespace cut
 	{
 	public:
 
-		UnitTestGroup(StringRef groupName);
+		UnitTestGroup(StringRef groupName, Lambda_t initialization = nullptr, Lambda_t shutdown = nullptr);
 		virtual ~UnitTestGroup();
 
 		virtual void registerUnitTest(IUnitTest* unitTest) CUT_OVERRIDE;
@@ -41,6 +41,8 @@ namespace cut
 	protected:
 		std::string m_name;
 		std::size_t m_numFailedTests;
+		Lambda_t m_initialization;
+		Lambda_t m_shutdown;
 		UnitTestContainer m_unitTests;
 	};
 }

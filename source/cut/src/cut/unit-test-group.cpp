@@ -8,12 +8,18 @@
 #include "cut/string-format.h"
 #include "cut/logging/log-block.h"
 
-cut::UnitTestGroup::UnitTestGroup(StringRef groupName) :
+cut::UnitTestGroup::UnitTestGroup(StringRef groupName, Lambda_t initialization, Lambda_t shutdown) :
 	m_name(groupName),
 	m_numFailedTests(0),
+	m_initialization(initialization),
+	m_shutdown(shutdown),
 	m_unitTests()
 {
 	IUnitTestManager::instance().registerUnitTestGroup(this);
+}
+
+cut::UnitTestGroup::~UnitTestGroup()
+{
 }
 
 void
@@ -22,14 +28,13 @@ cut::UnitTestGroup::registerUnitTest(IUnitTest* unitTest )
 	m_unitTests.push_back(unitTest);
 }
 
-cut::UnitTestGroup::~UnitTestGroup()
-{
-}
-
 std::size_t
 cut::UnitTestGroup::runAllTests()
 {
 	std::size_t failed = 0;
+	if(m_initialization) { m_initialization(); }
+	CUT_SCOPE_EXIT{ if(m_shutdown) { m_shutdown(); } };
+	
 	for (auto unitTest : m_unitTests)
 	{
 		auto unitTestName = unitTest->getName().cString();

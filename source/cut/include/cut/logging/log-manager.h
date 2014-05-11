@@ -21,10 +21,10 @@ namespace cut
 		virtual void setLogFileName(StringRef fileName) = 0;
 		virtual const StringRef getLogFileName() const = 0;
 
-	protected:
-		static ILogManager* s_pInstance;
-
 		virtual void blockBegin() = 0;
 		virtual void blockEnd() = 0;
+
+	protected:
+		static ILogManager* s_pInstance;
 	};
 }
