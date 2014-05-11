@@ -4,9 +4,11 @@
 #include "cut/common.h"
 #include "cut/string-format.h"
 
-cut::IUnitTestManager* cut::IUnitTestManager::s_pInstance(nullptr);
+cut::IUnitTestManager*
+cut::IUnitTestManager::s_pInstance = nullptr;
 
-cut::IUnitTestManager& cut::IUnitTestManager::instance()
+cut::IUnitTestManager&
+cut::IUnitTestManager::instance()
 {
 	static DefaultUnitTestManager default;
 
@@ -27,13 +29,15 @@ cut::DefaultUnitTestManager::~DefaultUnitTestManager()
 {
 }
 
-void cut::DefaultUnitTestManager::registerUnitTestGroup(IUnitTestGroup* testGroup)
+void
+cut::DefaultUnitTestManager::registerUnitTestGroup(IUnitTestGroup* testGroup)
 {
 	m_unitTestGroups.push_back(testGroup);
 	++m_statistics.groups;
 }
 
-void cut::DefaultUnitTestManager::runAll()
+void
+cut::DefaultUnitTestManager::runAll()
 {
 	for(auto& unitTestGroup : m_unitTestGroups)
 	{
@@ -95,12 +99,14 @@ void cut::DefaultUnitTestManager::runAll()
 	}
 }
 
-const cut::UnitTestStatistics& cut::DefaultUnitTestManager::statistics() const
+const cut::UnitTestStatistics&
+cut::DefaultUnitTestManager::statistics() const
 {
 	return m_statistics;
 }
 
-void cut::DefaultUnitTestManager::updateStatistics()
+void
+cut::DefaultUnitTestManager::updateStatistics()
 {
 	m_statistics.groups = m_unitTestGroups.size();
 	m_statistics.testsFailed = 0;

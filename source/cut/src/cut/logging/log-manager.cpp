@@ -8,7 +8,8 @@
 #include "cut/string-format.h"
 #include "cut/logging/log-block.h"
 
-cut::ILogManager* cut::ILogManager::s_pInstance = nullptr;
+cut::ILogManager*
+cut::ILogManager::s_pInstance = nullptr;
 
 cut::ILogManager&
 cut::ILogManager::instance()
@@ -58,7 +59,7 @@ cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 #ifdef _WIN32
 
 void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, std::ostringstream& formattedString)
+cut::DefaultLogManager::writeToStdOut(LogMode mode, const std::ostringstream& formattedString)
 {
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -90,14 +91,15 @@ cut::DefaultLogManager::writeToStdOut(LogMode mode, std::ostringstream& formatte
 #else
 
 void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, std::ostringstream& formattedString)
+cut::DefaultLogManager::writeToStdOut(LogMode mode, const std::ostringstream& formattedString)
 {
 	printf(formattedString.str().c_str());
 }
 
 #endif // _WIN32
 
-void cut::DefaultLogManager::writeToFile(LogMode mode, std::ostringstream& formattedMessage)
+void
+cut::DefaultLogManager::writeToFile(LogMode mode, const std::ostringstream& formattedMessage)
 {
 	if(!m_file.is_open())
 	{
@@ -106,7 +108,8 @@ void cut::DefaultLogManager::writeToFile(LogMode mode, std::ostringstream& forma
 	m_file << formattedMessage.str();
 }
 
-void cut::DefaultLogManager::setLogFileName(StringRef fileName)
+void
+cut::DefaultLogManager::setLogFileName(StringRef fileName)
 {
 	if(fileName == m_fileName) { return; }
 
@@ -118,27 +121,32 @@ void cut::DefaultLogManager::setLogFileName(StringRef fileName)
 	m_fileName = fileName;
 }
 
-const cut::StringRef cut::DefaultLogManager::getLogFileName() const
+const cut::StringRef
+cut::DefaultLogManager::getLogFileName() const
 {
 	return m_fileName;
 }
 
-void cut::DefaultLogManager::blockBegin()
+void
+cut::DefaultLogManager::blockBegin()
 {
 	++m_blockLevel;
 }
 
-void cut::DefaultLogManager::blockEnd()
+void
+cut::DefaultLogManager::blockEnd()
 {
 	--m_blockLevel;
 }
 
-size_t cut::DefaultLogManager::getBlockIndentation() const
+size_t
+cut::DefaultLogManager::getBlockIndentation() const
 {
 	return m_blockIndentation;
 }
 
-void cut::DefaultLogManager::setBlockIndentation(std::size_t value)
+void
+cut::DefaultLogManager::setBlockIndentation(std::size_t value)
 {
 	m_blockIndentation = value;
 }

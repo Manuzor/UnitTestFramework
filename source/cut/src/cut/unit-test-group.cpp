@@ -105,7 +105,8 @@ cut::UnitTestGroup::numberOfUnitTests()
 	return m_unitTests.size();
 }
 
-cut::StringRef cut::UnitTestGroup::getName() const
+cut::StringRef
+cut::UnitTestGroup::getName() const
 {
 	return m_name;
 }

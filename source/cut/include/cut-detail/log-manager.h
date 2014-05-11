@@ -22,8 +22,8 @@ namespace cut
 		virtual void blockEnd() CUT_OVERRIDE;
 
 	private:
-		void writeToStdOut(LogMode mode, std::ostringstream& formattedString);
-		void writeToFile(LogMode mode, std::ostringstream& formattedMessage);
+		void writeToStdOut(LogMode mode, const std::ostringstream& formattedString);
+		void writeToFile(LogMode mode, const std::ostringstream& formattedMessage);
 
 		virtual std::size_t getBlockIndentation() const override;
 		virtual void setBlockIndentation(std::size_t value) override;
