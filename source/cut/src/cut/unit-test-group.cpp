@@ -60,9 +60,23 @@ cut::UnitTestGroup::runAllTests()
 								  failure.message().cString()));
 			}
 		}
-		catch (exceptions::UnitTestSuccess&)
+		catch (exceptions::UnitTestSuccess& success)
 		{
-			logSuccess(format("Unit test \"%s\" succeeded prematurely!\n", unitTestName));
+			if(success.message().empty())
+			{
+				logSuccess(format("Unit test \"%s\" succeeded prematurely in file %s at line %d.\n",
+					unitTestName,
+					success.file(),
+					success.line()));
+			}
+			else
+			{
+				logSuccess(format("Unit test \"%s\" succeeded prematurely in file %s at line %d:\n  %s\n",
+					unitTestName,
+					success.file(),
+					success.line(),
+					success.message().cString()));
+			}
 		}
 		catch (std::exception& ex)
 		{

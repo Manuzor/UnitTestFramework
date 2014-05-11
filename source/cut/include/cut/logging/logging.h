@@ -23,6 +23,6 @@ namespace cut
 
 	inline void logFailure(StringRef message)
 	{
-		log(LogMode::Success, message);
+		log(LogMode::Failure, message);
 	}
 }
