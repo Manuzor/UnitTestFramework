@@ -76,27 +76,18 @@ cut::DefaultUnitTestManager::runAll()
 		}
 	}
 
-	auto finalMessage = "\n"
-		"=== Final Statistics ==========================================================\n"
-		"Successful unit test groups:   %d/%d\n"
-		"Successful unit tests (total): %d/%d\n";
+	LogMode loggingMode = m_statistics.testsFailed == 0 ? LogMode::Success : LogMode::Failure;
 
-	if (m_statistics.testsFailed == 0)
-	{
-		logSuccess(format(finalMessage,
-						  m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
-						  m_statistics.tests - m_statistics.testsFailed, m_statistics.tests));
+	log(loggingMode, format("\n"
+		" %-16s "           "|"" %6s "   "|"" %9s "      "|"" %6s\n"
+		"------------------""+""--------""+""-----------""+""--------\n"
+		" %-16s "           "|"" %6u "   "|"" %9u "      "|"" %6u\n"
+		" %-16s "           "|"" %6u "   "|"" %9u "      "|"" %6u\n",
 
-		logSuccess(format("=== All Unit Tests Passed! ====================================================\n"));
-	}
-	else
-	{
-		logFailure(format(finalMessage,
-						  m_statistics.groups - m_statistics.groupsFailed, m_statistics.groups,
-						  m_statistics.tests - m_statistics.testsFailed, m_statistics.tests));
-
-		logFailure(format("=== All or Some Unit Tests Failed! ============================================\n"));
-	}
+		"Final Statistics", "Total",             "Succeeded",                                     "Failed",
+		"Test Groups",      m_statistics.groups, m_statistics.groups - m_statistics.groupsFailed, m_statistics.groupsFailed,
+		"Tests",            m_statistics.tests,  m_statistics.tests - m_statistics.testsFailed,   m_statistics.testsFailed
+		));
 }
 
 const cut::UnitTestStatistics&
