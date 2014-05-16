@@ -8,7 +8,7 @@ namespace cut
 	class IUnitTestManager
 	{
 	public:
-		static IUnitTestManager& instance();
+		CUT_API static IUnitTestManager& instance();
 
 		virtual ~IUnitTestManager() = 0 {}
 

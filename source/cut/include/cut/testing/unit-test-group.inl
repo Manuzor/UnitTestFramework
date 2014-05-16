@@ -1,13 +1,9 @@
-#include "stdafx.h"
-#include "cut/common.h"
-#include "cut/testing/unit-test-group.h"
-#include "cut/testing/unit-test-manager.h"
-#include "cut/testing/unit-test.h"
-#include "cut/exceptions.h"
-#include "cut/string-ref.h"
-#include "cut/string-format.h"
-#include "cut/logging/log-block.h"
 
+#include "cut/exceptions.h"
+#include "cut/testing/unit-test.h"
+#include "cut/testing/unit-test-manager.h"
+
+inline
 cut::UnitTestGroup::UnitTestGroup(StringRef groupName, Lambda_t initialization, Lambda_t shutdown) :
 	m_name(groupName),
 	m_numFailedTests(0),
@@ -18,16 +14,19 @@ cut::UnitTestGroup::UnitTestGroup(StringRef groupName, Lambda_t initialization, 
 	IUnitTestManager::instance().registerUnitTestGroup(this);
 }
 
+inline
 cut::UnitTestGroup::~UnitTestGroup()
 {
 }
 
+inline
 void
 cut::UnitTestGroup::registerUnitTest(IUnitTest* unitTest )
 {
 	m_unitTests.push_back(unitTest);
 }
 
+inline
 std::size_t
 cut::UnitTestGroup::runAllTests()
 {
@@ -99,12 +98,14 @@ cut::UnitTestGroup::runAllTests()
 	return failed;
 }
 
+inline
 std::size_t
 cut::UnitTestGroup::numberOfUnitTests()
 {
 	return m_unitTests.size();
 }
 
+inline
 cut::StringRef
 cut::UnitTestGroup::getName() const
 {

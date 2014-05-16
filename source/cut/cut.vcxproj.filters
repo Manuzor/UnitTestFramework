@@ -137,9 +137,6 @@
     <ClCompile Include="src\cut\logging\log-manager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\cut\unit-test-group.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\cut\unit-test-manager.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -152,21 +149,24 @@
     <ClCompile Include="src\cut\assert-handler.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\cut\unit-test.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\cut\string-format.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\cut\assert.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\cut\logging\log-block.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\cut\testing\assert.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\cut\logging\log-block.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\cut\testing\unit-test.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\cut\testing\unit-test-group.inl">
       <Filter>include</Filter>
     </None>
   </ItemGroup>

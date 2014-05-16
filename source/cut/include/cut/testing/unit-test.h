@@ -11,7 +11,7 @@ namespace cut
 		virtual ~IUnitTest() {}
 		virtual void run() = 0;
 
-		virtual StringRef getName() const = 0;
+		virtual const StringRef getName() const = 0;
 	};
 
 	/// \brief Standard unit test class
@@ -30,10 +30,12 @@ namespace cut
 
 		virtual void run() override { m_lambda(); }
 
-		virtual StringRef getName() const CUT_OVERRIDE { return m_name; }
+		virtual const StringRef getName() const CUT_OVERRIDE { return m_name; }
 
 	private:
 		std::string m_name;
 		std::function<void()> m_lambda;
 	};
 }
+
+#include "cut/testing/unit-test.inl"

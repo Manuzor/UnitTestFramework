@@ -1,8 +1,7 @@
-#include "stdafx.h"
-#include "cut/logging/log-block.h"
-#include "cut/logging/log-manager.h"
+
 #include "cut/string-format.h"
 
+inline
 cut::LogBlock::LogBlock(StringRef name) :
 	m_begin(),
 	m_end()
@@ -14,6 +13,7 @@ cut::LogBlock::LogBlock(StringRef name) :
 	ILogManager::instance().blockBegin();
 }
 
+inline
 cut::LogBlock::~LogBlock()
 {
 	ILogManager::instance().blockEnd();

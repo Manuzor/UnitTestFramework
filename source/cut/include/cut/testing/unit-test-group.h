@@ -46,3 +46,5 @@ namespace cut
 		UnitTestContainer m_unitTests;
 	};
 }
+
+#include "cut/testing/unit-test-group.inl"

@@ -11,7 +11,7 @@ namespace cut
 	{
 		friend struct LogBlock;
 	public:
-		static ILogManager& instance();
+		CUT_API static ILogManager& instance();
 
 		virtual ~ILogManager() = 0 {}
 

@@ -4,5 +4,5 @@
 
 namespace cut
 {
-	std::string format(CUT_PRINTF_FORMAT_STRING StringRef fmt, ...);
+	CUT_API std::string format(CUT_PRINTF_FORMAT_STRING StringRef fmt, ...);
 }

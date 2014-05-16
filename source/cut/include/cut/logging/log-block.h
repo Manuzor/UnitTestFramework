@@ -3,6 +3,8 @@
 
 namespace cut
 {
+	struct LogBlockImpl;
+
 	struct LogBlock
 	{
 		LogBlock(StringRef name);
@@ -13,3 +15,5 @@ namespace cut
 		std::string m_end;
 	};
 }
+
+#include "cut/logging/log-block.inl"

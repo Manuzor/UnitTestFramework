@@ -3,7 +3,7 @@
 
 namespace cut
 {
-	struct Assert
+	struct CUT_API Assert
 	{
 		const char* fileName;
 		std::size_t lineNumber;
