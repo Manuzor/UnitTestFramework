@@ -10,6 +10,9 @@
       <AdditionalLibraryDirectories>$(POTOO_API)/lib$(PlatformArchitecture)/</AdditionalLibraryDirectories>
     </Link>
     <ClCompile />
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(POTOO_API)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
