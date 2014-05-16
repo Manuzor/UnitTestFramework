@@ -21,12 +21,16 @@ cut::IUnitTestManager::instance()
 }
 
 cut::DefaultUnitTestManager::DefaultUnitTestManager() :
+	m_initialize(nullptr),
+	m_shutdown(nullptr),
+	m_unitTestGroups(),
 	m_statistics()
 {
 }
 
 cut::DefaultUnitTestManager::~DefaultUnitTestManager()
 {
+	m_unitTestGroups.clear();
 }
 
 void
@@ -39,6 +43,9 @@ cut::DefaultUnitTestManager::registerUnitTestGroup(IUnitTestGroup* testGroup)
 void
 cut::DefaultUnitTestManager::runAll()
 {
+	if (m_initialize) { m_initialize(); }
+	CUT_SCOPE_EXIT{ if(m_shutdown) { m_shutdown(); } };
+	
 	for(auto& unitTestGroup : m_unitTestGroups)
 	{
 		const char* unitTestGroupName = unitTestGroup->getName();
@@ -107,4 +114,16 @@ cut::DefaultUnitTestManager::updateStatistics()
 	}
 	
 }
+
+cut::Lambda_t& cut::DefaultUnitTestManager::initializeFunction()
+{
+	return m_initialize;
+}
+
+cut::Lambda_t& cut::DefaultUnitTestManager::shutdownFunction()
+{
+	return m_shutdown;
+}
+
+
 

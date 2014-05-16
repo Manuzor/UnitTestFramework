@@ -12,6 +12,9 @@ namespace cut
 
 		virtual ~IUnitTestManager() = 0 {}
 
+		virtual Lambda_t& initializeFunction() = 0;
+		virtual Lambda_t& shutdownFunction() = 0;
+
 		virtual void registerUnitTestGroup(IUnitTestGroup* testGroup) = 0;
 
 		virtual void runAll() = 0;
