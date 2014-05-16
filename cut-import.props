@@ -8,6 +8,7 @@
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(POTOO_API)/lib$(PlatformArchitecture)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cut$(DebugSuffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile />
     <ClCompile>
