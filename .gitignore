@@ -1,5 +1,8 @@
 !.gitignore
 
+# Ignored directories
+output/
+
 #ignore thumbnails created by windows
 [Tt]humbs.db
 #Ignore files built by Visual Studio
