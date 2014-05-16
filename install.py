@@ -19,7 +19,7 @@ ignored_files = (
 	r"\.ilk",
 	r"\.exp",
 	r"\.gitkeep",
-	r"cut-samples\..+",
+	r"cut-samples",
 	r"cut-detail/",
 	r"stdafx\.h",
 )
