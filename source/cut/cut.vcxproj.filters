@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="property-sheets">
+      <UniqueIdentifier>{59716f32-6952-4d16-8b41-e6733bdfc8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\cut\common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\logging\logging.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\logging\mode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\types.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\logging\log-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\array-size.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\concat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\construction.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\minmax.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\parenthesis.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\scope-exit.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\source-file.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\source-line.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\stringize.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\unused.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\vararg-macros.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\api.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\exceptions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stdafx.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\string-ref.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\empty-string.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\counter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\string-format.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\printf-format-string.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut-detail\unit-test-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\debug-break.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-group.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-settings.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\unit-test-statistics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\assert.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\testing\assert-handler.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut-detail\log-manager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\preprocessor\override-final.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut-detail\assert-handler.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cut\logging\log-block.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\cut\logging\log-manager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\unit-test-manager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\exceptions.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\assert-handler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\string-format.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cut\assert.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\cut\testing\assert.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\cut\logging\log-block.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\cut\testing\unit-test.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\cut\testing\unit-test-group.inl">
+      <Filter>include</Filter>
+    </None>
+  </ItemGroup>
+</Project>

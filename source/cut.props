@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <DebugSuffix Condition="'$(Configuration)'=='Debug'">d</DebugSuffix>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)../output/bin$(PlatformArchitecture)/</OutDir>
+    <IntDir>$(SolutionDir)../temp/$(TargetName)/$(Configuration)_$(Platform)/</IntDir>
+    <TargetName>$(ProjectName)$(DebugSuffix)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <ImportLibrary>$(SolutionDir)../output/lib$(PlatformArchitecture)/$(TargetName).lib</ImportLibrary>
+      <AdditionalLibraryDirectories>$(SolutionDir)../output/lib$(PlatformArchitecture)/</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
