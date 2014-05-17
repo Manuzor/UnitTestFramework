@@ -35,5 +35,8 @@
     <ClCompile Include="src\tests\test-log-block.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\test-exceptions.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

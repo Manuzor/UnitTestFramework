@@ -1,6 +1,7 @@
+#include "cut/testing/assert-handler.h"
 
 template<typename T_Exception>
-void cut::Assert::throws(Lambda_t& lambda, StringRef message /*= nullptr*/)
+void cut::Assert::throws(Lambda_t lambda, StringRef message /*= nullptr*/)
 {
 	try
 	{

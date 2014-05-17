@@ -6,7 +6,7 @@ namespace cut
 	class IAssertHandler
 	{
 	public:
-		static IAssertHandler& instance();
+		CUT_API static IAssertHandler& instance();
 
 		virtual ~IAssertHandler() {}
 
