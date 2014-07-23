@@ -14,8 +14,8 @@ namespace cut
 		void isFalse(bool expr, StringRef message = nullptr);
 
 		template<typename T_Exception>
-		void throws(Lambda_t& lambda, StringRef message = nullptr);
-		void throwsNothing(Lambda_t& lambda, StringRef message = nullptr);
+		void throws(Lambda_t lambda, StringRef message = nullptr);
+		void throwsNothing(Lambda_t lambda, StringRef message = nullptr);
 
 		void fail(StringRef message = nullptr);
 		void succeed(StringRef message = nullptr);

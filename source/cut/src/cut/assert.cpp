@@ -25,7 +25,7 @@ void cut::Assert::isFalse(bool expr, StringRef message /*= nullptr*/)
 	}
 }
 
-void cut::Assert::throwsNothing(Lambda_t& lambda, StringRef message /*= nullptr*/)
+void cut::Assert::throwsNothing(Lambda_t lambda, StringRef message /*= nullptr*/)
 {
 	try
 	{

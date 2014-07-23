@@ -13,6 +13,9 @@ namespace cut
 		DefaultUnitTestManager();
 		virtual ~DefaultUnitTestManager();
 
+		virtual Lambda_t& initializeFunction() override;
+		virtual Lambda_t& shutdownFunction() override;
+
 		virtual void registerUnitTestGroup(IUnitTestGroup* testGroup) CUT_OVERRIDE;
 
 		virtual void runAll() CUT_OVERRIDE;
@@ -22,7 +25,9 @@ namespace cut
 
 	protected:
 	private:
-		UnitTestStatistics m_statistics;
+		Lambda_t m_initialize;
+		Lambda_t m_shutdown;
 		UnitTestGroupContainer m_unitTestGroups;
+		UnitTestStatistics m_statistics;
 	};
 }

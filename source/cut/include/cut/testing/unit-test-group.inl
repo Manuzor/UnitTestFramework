@@ -17,6 +17,7 @@ cut::UnitTestGroup::UnitTestGroup(StringRef groupName, Lambda_t initialization, 
 inline
 cut::UnitTestGroup::~UnitTestGroup()
 {
+	m_unitTests.clear();
 }
 
 inline

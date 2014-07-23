@@ -2,7 +2,6 @@
 
 import os
 import re
-from glob import glob
 from shutil import copy2
 
 destination_root = os.environ.get("POTOO_API")
@@ -12,6 +11,10 @@ roots = {
 	"source/cut" : [ "include", ],
 }
 
+root_files = (
+	"cut-import.props",
+)
+
 # A list of patterns to check if a file should be installed or not.
 # The absolute file names will be checked against these patterns.
 # Note: On Windows, the file names will have backslashes, not forward slashes
@@ -19,7 +22,7 @@ ignored_files = (
 	r"\.ilk",
 	r"\.exp",
 	r"\.gitkeep",
-	r"cut-samples\..+",
+	r"cut-samples",
 	r"cut-detail/",
 	r"stdafx\.h",
 )
@@ -34,6 +37,10 @@ def create_dirs(d):
 	if os.path.exists(d):
 		return
 	os.makedirs(d)
+
+def do_copy(s, t):
+	print("{0} => {1}".format(s, t))
+	copy2(s, t)
 
 def main():
 	print("Destination root: {0}".format(destination_root))
@@ -56,8 +63,13 @@ def main():
 					create_dirs(targetDir)
 
 					target = os.path.normpath(os.path.join(targetDir, f))
-					copy2(source, target)
-					print("{0} => {1}".format(source, target))
+					do_copy(source, target)
+	for f in root_files:
+		if is_ignored(f):
+			continue
+		source = os.path.join(working_dir, f)
+		target = os.path.join(destination_root, f)
+		do_copy(source, target)
 
 if __name__ == '__main__':
 	main()
