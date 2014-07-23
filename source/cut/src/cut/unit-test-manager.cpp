@@ -45,6 +45,8 @@ cut::DefaultUnitTestManager::runAll()
 {
 	if (m_initialize) { m_initialize(); }
 	CUT_SCOPE_EXIT{ if(m_shutdown) { m_shutdown(); } };
+
+	logMessage(format("Framework version " CUT_VERSION_STRING " (%x)", CUT_VERSION));
 	
 	for(auto& unitTestGroup : m_unitTestGroups)
 	{

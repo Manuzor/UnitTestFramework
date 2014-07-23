@@ -132,6 +132,9 @@
     <ClInclude Include="include\cut\logging\log-block.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\cut\version.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cut\logging\log-manager.cpp">
