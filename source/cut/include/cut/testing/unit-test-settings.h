@@ -13,9 +13,5 @@ namespace cut
 		}
 	};
 	
-	inline UnitTestSettings& settings()
-	{
-		static UnitTestSettings instance;
-		return instance;
-	}
+	CUT_API UnitTestSettings& settings();
 }

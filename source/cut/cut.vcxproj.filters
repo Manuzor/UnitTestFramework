@@ -158,6 +158,9 @@
     <ClCompile Include="src\cut\assert.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\cut\unit-test-settings.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\cut\testing\assert.inl">
