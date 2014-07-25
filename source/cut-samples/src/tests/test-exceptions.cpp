@@ -19,6 +19,6 @@ namespace
 	UnitTest g_test2(g_group, "throwsNothing", [](){
 		CUT_ASSERT.throwsNothing([](){
 			throw 123;
-		}, "The unit test framework catches all kind of things...");
+		}, "The unit test framework catches all kinds of things...");
 	});
 }

@@ -54,6 +54,7 @@ cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 	// TODO: Add timestamp
 	writeToStdOut(mode, messageStream);
 	writeToFile(mode, messageStream);
+	writeToVisualStudioOutput(mode, messageStream);
 }
 
 #ifdef _WIN32
@@ -107,6 +108,25 @@ cut::DefaultLogManager::writeToFile(LogMode mode, const std::ostringstream& form
 	}
 	m_file << formattedMessage.str();
 }
+
+
+#ifdef _WIN32
+
+void
+cut::DefaultLogManager::writeToVisualStudioOutput(LogMode mode, const std::ostringstream& formattedMessage)
+{
+	auto message = formattedMessage.str();
+	OutputDebugString(message.c_str());
+}
+
+#else
+
+void
+cut::DefaultLogManager::writeToVisualStudioOutput(LogMode mode, const std::ostringstream& formattedMessage)
+{
+}
+
+#endif
 
 void
 cut::DefaultLogManager::setLogFileName(StringRef fileName)
