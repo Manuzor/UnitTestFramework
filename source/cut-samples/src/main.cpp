@@ -18,7 +18,14 @@ int main(int argc, char* argv[])
 		processArgument(argv[i]);
 	}
 
-	cut::IUnitTestManager::instance().runAll();
+	auto& testManager = cut::IUnitTestManager::instance();
+
+	testManager.disableUnitTestOrGroup("Enable/Disable Groups and Tests", "Disabled1");
+	testManager.disableUnitTestOrGroup("Enable/Disable Groups and Tests", "Disabled2");
+
+	testManager.disableUnitTestOrGroup("Disabled Group");
+
+	testManager.runAll();
 
 	system("pause");
 	return 0;
