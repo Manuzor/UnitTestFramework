@@ -21,3 +21,11 @@ UnitTest g_test3(g_group_Group1, "Succeed with formatted message", [](){
 UnitTest g_test4(g_group_Group1, "Fail", [](){
 	CUT_ASSERT.fail();
 });
+
+UnitTest g_test5(g_group_Group1, "NotImplemented", [](){
+	CUT_ASSERT.notImplemented("This is the message of a test that is not implemented.");
+});
+
+UnitTest g_test6(g_group_Group1, "NotImplementedWithoutMessage", [](){
+	CUT_ASSERT.notImplemented();
+});

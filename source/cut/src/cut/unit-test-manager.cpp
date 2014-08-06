@@ -100,22 +100,17 @@ cut::DefaultUnitTestManager::runAll()
 		}
 	}
 
-	LogMode loggingMode = m_statistics.testsFailed == 0 ? LogMode::Success : LogMode::Failure;
-
-	log(loggingMode, format("\n"
-		" %-16s "           "|"" %6s "   "|"" %9s "      "|"" %6s\n"
-		"------------------""+""--------""+""-----------""+""--------\n"
-		" %-16s "           "|"" %6u "   "|"" %9u "      "|"" %6u\n"
-		" %-16s "           "|"" %6u "   "|"" %9u "      "|"" %6u\n",
-
-		"Final Statistics", "Total",             "Succeeded",                                     "Failed",
-		"Test Groups",      m_statistics.groups, m_statistics.groups - m_statistics.groupsFailed, m_statistics.groupsFailed,
-		"Tests",            m_statistics.tests,  m_statistics.tests - m_statistics.testsFailed,   m_statistics.testsFailed
-		));
+	printStats();
 }
 
 const cut::UnitTestStatistics&
 cut::DefaultUnitTestManager::statistics() const
+{
+	return m_statistics;
+}
+
+cut::UnitTestStatistics&
+cut::DefaultUnitTestManager::statistics()
 {
 	return m_statistics;
 }
@@ -236,4 +231,20 @@ bool cut::DefaultUnitTestManager::isUnitTestOrGroupEnabled(StringRef groupName, 
 	}
 
 	return true;
+}
+
+void cut::DefaultUnitTestManager::printStats() const
+{
+	LogMode loggingMode = m_statistics.testsFailed == 0 ? LogMode::Success : LogMode::Failure;
+
+	log(loggingMode, format("\n"
+		" %-16s "           "|"" %6s "   "|"" %9s "      "|"" %6s "   "|"" %15s\n"
+		"------------------""+""--------""+""-----------""+""--------""+""-----------------\n"
+		" %-16s "           "|"" %6u "   "|"" %9u "      "|"" %6u "   "|"" %15s\n"
+		" %-16s "           "|"" %6u "   "|"" %9u "      "|"" %6u "   "|"" %15u\n",
+
+		"Final Statistics", "Total", "Succeeded", "Failed", "Not Implemented",
+		"Test Groups", m_statistics.groups, m_statistics.groups - m_statistics.groupsFailed, m_statistics.groupsFailed, "",
+		"Tests", m_statistics.tests, m_statistics.tests - m_statistics.testsFailed, m_statistics.testsFailed, m_statistics.testsNotImplemented
+		));
 }

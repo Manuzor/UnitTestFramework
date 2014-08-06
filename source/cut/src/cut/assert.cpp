@@ -46,3 +46,8 @@ void cut::Assert::succeed(StringRef message /*= nullptr*/)
 {
 	IAssertHandler::instance().handleSuccess(fileName, lineNumber, message);
 }
+
+void cut::Assert::notImplemented(StringRef message /*= nullptr*/)
+{
+	IAssertHandler::instance().handleNotImplemented(fileName, lineNumber, message);
+}

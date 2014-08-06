@@ -41,3 +41,8 @@ void cut::DefaultAssertHandler::handleSuccess(const char* file, std::size_t line
 {
 	throw exceptions::UnitTestSuccess(file, line, message);
 }
+
+void cut::DefaultAssertHandler::handleNotImplemented(const char* file, std::size_t line, StringRef message)
+{
+	throw exceptions::UnitTestNotImplemented(file, line, message);
+}

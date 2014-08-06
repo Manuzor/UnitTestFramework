@@ -38,15 +38,34 @@ cut::exceptions::UnitTestSuccess::UnitTestSuccess() :
 
 }
 
-cut::exceptions::UnitTestSuccess::UnitTestSuccess(const char*  file,
+cut::exceptions::UnitTestSuccess::UnitTestSuccess(const char* file,
 												  std::size_t line,
-												  StringRef    message) :
+												  StringRef message) :
 	ExpectionBase(file, line, message)
 {
 
 }
 
 cut::exceptions::UnitTestSuccess::~UnitTestSuccess()
+{
+
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+cut::exceptions::UnitTestNotImplemented::UnitTestNotImplemented() :
+	ExpectionBase(nullptr, 0, emptyString())
+{
+}
+
+cut::exceptions::UnitTestNotImplemented::UnitTestNotImplemented(const char* file,
+																std::size_t line,
+																StringRef message) :
+	ExpectionBase(file, line, message)
+{
+}
+
+cut::exceptions::UnitTestNotImplemented::~UnitTestNotImplemented()
 {
 
 }

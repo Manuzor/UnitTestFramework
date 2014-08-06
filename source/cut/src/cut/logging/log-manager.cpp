@@ -72,6 +72,9 @@ cut::DefaultLogManager::writeToStdOut(LogMode mode, const std::ostringstream& fo
 	case LogMode::Normal:
 		SetConsoleTextAttribute(hStdOut, 0x07); // Regular
 		break;
+	case LogMode::Warning:
+		SetConsoleTextAttribute(hStdOut, 0x0E); // Yellow
+		break;
 	case LogMode::Failure:
 		SetConsoleTextAttribute(hStdOut, 0x0C); // Red
 		break;
