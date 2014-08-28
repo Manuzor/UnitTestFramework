@@ -135,6 +135,9 @@
     <ClInclude Include="include\cut\version.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\cut\logging\default-loggers.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cut\logging\log-manager.cpp">
@@ -173,6 +176,9 @@
       <Filter>include</Filter>
     </None>
     <None Include="include\cut\testing\unit-test-group.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\cut\logging\default-loggers.inl">
       <Filter>include</Filter>
     </None>
   </ItemGroup>

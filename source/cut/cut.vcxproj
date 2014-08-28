@@ -140,6 +140,7 @@
     <ClInclude Include="include\cut-detail\log-manager.h" />
     <ClInclude Include="include\cut-detail\unit-test-manager.h" />
     <ClInclude Include="include\cut\api.h" />
+    <ClInclude Include="include\cut\logging\default-loggers.h" />
     <ClInclude Include="include\cut\logging\log-block.h" />
     <ClInclude Include="include\cut\testing\assert-handler.h" />
     <ClInclude Include="include\cut\testing\assert.h" />
@@ -194,6 +195,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="include\cut\logging\default-loggers.inl" />
     <None Include="include\cut\logging\log-block.inl" />
     <None Include="include\cut\testing\assert.inl" />
     <None Include="include\cut\testing\unit-test-group.inl" />

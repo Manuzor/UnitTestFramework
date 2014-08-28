@@ -14,10 +14,9 @@ cut::ILogManager::s_pInstance = nullptr;
 cut::ILogManager&
 cut::ILogManager::instance()
 {
-	static DefaultLogManager default;
-
 	if (s_pInstance == nullptr)
 	{
+		static DefaultLogManager default; // Will only be created if the user did not specify an instance.
 		s_pInstance = &default;
 	}
 
@@ -27,21 +26,23 @@ cut::ILogManager::instance()
 //////////////////////////////////////////////////////////////////////////
 
 cut::DefaultLogManager::DefaultLogManager() :
-	m_fileName("unit-tests.log"),
-	m_file(),
 	m_blockLevel(0),
-	m_blockIndentation(2)
+	m_blockIndentation(2),
+	m_loggers()
 {
+	m_loggers.reserve(4);
 }
 
 cut::DefaultLogManager::~DefaultLogManager()
 {
-	m_file.close();
+	m_loggers.clear();
 }
 
 void
 cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 {
+	// TODO: Add timestamp?
+
 	std::ostringstream messageStream;
 
 	for(std::size_t i = 0; i < m_blockLevel * m_blockIndentation; ++i)
@@ -51,103 +52,21 @@ cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 
 	messageStream << formattedMessage.cString() << '\n';
 
-	// TODO: Add timestamp
-	writeToStdOut(mode, messageStream);
-	writeToFile(mode, messageStream);
-	writeToVisualStudioOutput(mode, messageStream);
-}
+	auto theMessage = messageStream.str();
+	formattedMessage = theMessage.c_str();
 
-#ifdef _WIN32
-
-void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, const std::ostringstream& formattedString)
-{
-	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	CONSOLE_SCREEN_BUFFER_INFO initialConsoleState;
-	GetConsoleScreenBufferInfo(hStdOut, &initialConsoleState);
-
-	switch(mode)
+	for (auto& logger : m_loggers)
 	{
-	case LogMode::Normal:
-		SetConsoleTextAttribute(hStdOut, 0x07); // Regular
-		break;
-	case LogMode::Warning:
-		SetConsoleTextAttribute(hStdOut, 0x0E); // Yellow
-		break;
-	case LogMode::Failure:
-		SetConsoleTextAttribute(hStdOut, 0x0C); // Red
-		break;
-	case LogMode::Success:
-		SetConsoleTextAttribute(hStdOut, 0x0A); // Green
-		break;
-	default:
-		debugBreak();
-		break;
+		if (logger)
+		{
+			logger(mode, formattedMessage);
+		}
 	}
-
-	printf(formattedString.str().c_str());
-
-	// Restore the default.
-	SetConsoleTextAttribute(hStdOut, initialConsoleState.wAttributes);
 }
 
-#else
-
-void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, const std::ostringstream& formattedString)
+void cut::DefaultLogManager::registerLoggerFunction(LoggerFunction_t func)
 {
-	printf(formattedString.str().c_str());
-}
-
-#endif // _WIN32
-
-void
-cut::DefaultLogManager::writeToFile(LogMode mode, const std::ostringstream& formattedMessage)
-{
-	if(!m_file.is_open())
-	{
-		m_file.open(m_fileName);
-	}
-	m_file << formattedMessage.str();
-}
-
-
-#ifdef _WIN32
-
-void
-cut::DefaultLogManager::writeToVisualStudioOutput(LogMode mode, const std::ostringstream& formattedMessage)
-{
-	auto message = formattedMessage.str();
-	OutputDebugString(message.c_str());
-}
-
-#else
-
-void
-cut::DefaultLogManager::writeToVisualStudioOutput(LogMode mode, const std::ostringstream& formattedMessage)
-{
-}
-
-#endif
-
-void
-cut::DefaultLogManager::setLogFileName(StringRef fileName)
-{
-	if(fileName == m_fileName) { return; }
-
-	if(m_file.is_open())
-	{
-		m_file.close();
-	}
-
-	m_fileName = fileName;
-}
-
-const cut::StringRef
-cut::DefaultLogManager::getLogFileName() const
-{
-	return m_fileName;
+	m_loggers.push_back(func);
 }
 
 void
