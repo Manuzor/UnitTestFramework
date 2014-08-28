@@ -90,7 +90,7 @@ cut::loggers::VisualStudioWriter::VisualStudioWriter(ILogManager& logManager)
 CUT_FORCE_INLINE
 void cut::loggers::VisualStudioWriter::logMessageHandler(LogMode mode, StringRef formattedMessage)
 {
-	OutputDebugString(formattedMessage.cString());
+	OutputDebugStringA(formattedMessage.cString());
 }
 
 #else
