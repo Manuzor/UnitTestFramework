@@ -43,23 +43,18 @@ cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 {
 	// TODO: Add timestamp?
 
-	std::ostringstream messageStream;
+	LoggerInfo info;
 
-	for(std::size_t i = 0; i < m_blockLevel * m_blockIndentation; ++i)
-	{
-		messageStream << ' ';
-	}
-
-	messageStream << formattedMessage.cString() << '\n';
-
-	auto theMessage = messageStream.str();
-	formattedMessage = theMessage.c_str();
+	info.logMode = mode;
+	info.message = formattedMessage;
+	info.indentationLevel = m_blockLevel;
+	info.indentationWidthPerLevel = m_blockIndentation;
 
 	for (auto& logger : m_loggers)
 	{
 		if (logger)
 		{
-			logger(mode, formattedMessage);
+			logger(info);
 		}
 	}
 }

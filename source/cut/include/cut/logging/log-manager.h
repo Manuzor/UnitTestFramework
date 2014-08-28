@@ -7,7 +7,15 @@ namespace cut
 {
 	struct LogBlock;
 
-	typedef std::function<void(LogMode, StringRef)> LoggerFunction_t;
+	struct LoggerInfo
+	{
+		LogMode logMode;
+		StringRef message;
+		std::size_t indentationLevel;
+		std::size_t indentationWidthPerLevel;
+	};
+
+	typedef std::function<void(const LoggerInfo&)> LoggerFunction_t;
 
 	class ILogManager
 	{

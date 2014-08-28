@@ -3,6 +3,7 @@
 #include "cut/testing/unit-test-group.h"
 #include "cut/common.h"
 #include "cut/string-format.h"
+#include "cut/logging/log-block.h"
 
 cut::IUnitTestManager*
 cut::IUnitTestManager::s_pInstance = nullptr;
@@ -62,19 +63,22 @@ cut::DefaultUnitTestManager::runAll()
 		if (!isUnitTestOrGroupEnabled(unitTestGroupName))
 		{
 			logMessage(format(
-				"\n"
-				"Skipping disabled unit test group %s.\n",
+				"Skipping disabled unit test group \"%s\".\n",
 				unitTestGroupName));
 			continue;
 		}
 
-		logMessage(format(
-			"\n"
-			"Running unit test group %s with %d unit tests:\n",
-			unitTestGroupName,
-			numberOfTests));
+		std::size_t failed(0);
 
-		std::size_t failed = unitTestGroup->runAllTests();
+		{
+			auto blockName = format(
+			"Unit test group \"%s\" with %d tests:",
+			unitTestGroupName,
+			numberOfTests);
+
+			LogBlock block(blockName);
+			unitTestGroup->runAllTests();
+		}
 
 		if (failed == 0)
 		{
@@ -237,7 +241,7 @@ void cut::DefaultUnitTestManager::printStats() const
 {
 	LogMode loggingMode = m_statistics.testsFailed == 0 ? LogMode::Success : LogMode::Failure;
 
-	log(loggingMode, format("\n"
+	log(loggingMode, format(
 		" %-16s "           "|"" %6s "   "|"" %9s "      "|"" %6s "   "|"" %15s\n"
 		"------------------""+""--------""+""-----------""+""--------""+""-----------------\n"
 		" %-16s "           "|"" %6u "   "|"" %9u "      "|"" %6u "   "|"" %15s\n"

@@ -14,14 +14,14 @@ namespace cut
 
 		virtual void registerLoggerFunction(LoggerFunction_t func) CUT_OVERRIDE;
 
+		virtual std::size_t getBlockIndentation() const CUT_OVERRIDE;
+		virtual void setBlockIndentation(std::size_t value) CUT_OVERRIDE;
+
 	protected:
 		virtual void blockBegin() CUT_OVERRIDE;
 		virtual void blockEnd() CUT_OVERRIDE;
 
 	private:
-
-		virtual std::size_t getBlockIndentation() const override;
-		virtual void setBlockIndentation(std::size_t value) override;
 
 		std::size_t m_blockLevel;
 		std::size_t m_blockIndentation;

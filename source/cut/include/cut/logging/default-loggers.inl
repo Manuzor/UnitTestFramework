@@ -4,21 +4,29 @@ CUT_FORCE_INLINE
 cut::loggers::StdOutWriter::StdOutWriter(ILogManager& logManager)
 {
 	using namespace std::placeholders;
-	logManager.registerLoggerFunction(std::bind(&StdOutWriter::logMessageHandler, this, _1, _2));
+	logManager.registerLoggerFunction(std::bind(&StdOutWriter::logMessageHandler, this, _1));
 }
 
 #ifdef _WIN32
 
 CUT_FORCE_INLINE
 void
-cut::loggers::StdOutWriter::logMessageHandler(LogMode mode, StringRef formattedMessage)
+cut::loggers::StdOutWriter::logMessageHandler(const LoggerInfo& loggerInfo)
 {
+	{
+		const auto totalIndentationWidth = loggerInfo.indentationLevel * loggerInfo.indentationWidthPerLevel;
+		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
+		{
+			printf(" ");
+		}
+	}
+
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	CONSOLE_SCREEN_BUFFER_INFO initialConsoleState;
 	GetConsoleScreenBufferInfo(hStdOut, &initialConsoleState);
 
-	switch(mode)
+	switch(loggerInfo.logMode)
 	{
 	case LogMode::Normal:
 		SetConsoleTextAttribute(hStdOut, 0x07); // Regular
@@ -37,7 +45,7 @@ cut::loggers::StdOutWriter::logMessageHandler(LogMode mode, StringRef formattedM
 		break;
 	}
 
-	printf(formattedMessage.cString());
+	printf("%s\n", loggerInfo.message.cString());
 
 	// Restore the default.
 	SetConsoleTextAttribute(hStdOut, initialConsoleState.wAttributes);
@@ -47,9 +55,17 @@ cut::loggers::StdOutWriter::logMessageHandler(LogMode mode, StringRef formattedM
 
 CUT_FORCE_INLINE
 void
-cut::loggers::StdOutWriter::logMessageHandler(LogMode mode, StringRef formattedMessage)
+cut::loggers::StdOutWriter::logMessageHandler(const LoggerInfo& loggerInfo)
 {
-	printf(formattedMessage.cString());
+	{
+		const auto totalIndentationWidth = loggerInfo.indentationLevel * loggerInfo.indentationWidthPerLevel;
+		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
+		{
+			printf(" ");
+		}
+	}
+
+	printf("%s \n", loggerInfo.message.cString());
 }
 
 #endif // _WIN32
@@ -61,7 +77,7 @@ cut::loggers::FileWriter::FileWriter(ILogManager& logManager, StringRef fileName
 	m_file(fileName.cString())
 {
 	using namespace std::placeholders;
-	logManager.registerLoggerFunction(std::bind(&FileWriter::logMessageHandler, this, _1, _2));
+	logManager.registerLoggerFunction(std::bind(&FileWriter::logMessageHandler, this, _1));
 }
 
 CUT_FORCE_INLINE
@@ -71,9 +87,19 @@ cut::loggers::FileWriter::~FileWriter()
 }
 
 CUT_FORCE_INLINE
-void cut::loggers::FileWriter::logMessageHandler(LogMode mode, StringRef formattedMessage)
+void
+cut::loggers::FileWriter::logMessageHandler(const LoggerInfo& loggerInfo)
 {
-	m_file << formattedMessage.cString();
+	{
+		const auto totalIndentationWidth = loggerInfo.indentationLevel * loggerInfo.indentationWidthPerLevel;
+		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
+		{
+		m_file << ' ';
+		}
+	}
+
+	m_file << loggerInfo.message.cString()
+		   << '\n';
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -82,21 +108,32 @@ CUT_FORCE_INLINE
 cut::loggers::VisualStudioWriter::VisualStudioWriter(ILogManager& logManager)
 {
 	using namespace std::placeholders;
-	logManager.registerLoggerFunction(std::bind(&VisualStudioWriter::logMessageHandler, this, _1, _2));
+	logManager.registerLoggerFunction(std::bind(&VisualStudioWriter::logMessageHandler, this, _1));
 }
 
 #ifdef _WIN32
 
 CUT_FORCE_INLINE
-void cut::loggers::VisualStudioWriter::logMessageHandler(LogMode mode, StringRef formattedMessage)
+void
+cut::loggers::VisualStudioWriter::logMessageHandler(const LoggerInfo& loggerInfo)
 {
-	OutputDebugStringA(formattedMessage.cString());
+	{
+		const auto totalIndentationWidth = loggerInfo.indentationLevel * loggerInfo.indentationWidthPerLevel;
+		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
+		{
+			OutputDebugStringA(" ");
+		}
+	}
+
+	OutputDebugStringA(loggerInfo.message.cString());
+	OutputDebugStringA("\n");
 }
 
 #else
 
 CUT_FORCE_INLINE
-void cut::loggers::VisualStudioWriter::logMessageHandler(LogMode mode, StringRef formattedMessage)
+void
+cut::loggers::VisualStudioWriter::logMessageHandler(const LoggerInfo& loggerInfo)
 {
 }
 
