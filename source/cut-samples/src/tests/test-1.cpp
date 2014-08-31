@@ -2,7 +2,7 @@
 
 using namespace cut;
 
-UnitTestGroup g_group_Group1("Group 1");
+UnitTestGroup g_group_Group1("My First Group");
 
 UnitTest g_test1(g_group_Group1, "Succeed", [](){
 	CUT_ASSERT.isTrue(true);
@@ -28,4 +28,7 @@ UnitTest g_test5(g_group_Group1, "NotImplemented", [](){
 
 UnitTest g_test6(g_group_Group1, "NotImplementedWithoutMessage", [](){
 	CUT_ASSERT.notImplemented();
+});
+
+UnitTest g_test7(g_group_Group1, "Silence...", [](){
 });

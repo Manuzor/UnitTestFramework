@@ -48,9 +48,11 @@ cut::UnitTestGroup::runAllTests()
 			continue;
 		}
 
+		LogBlock runSingleTest("Unit Test");
+		logMessage(format("Name: \"%s\".", unitTestName));
+
 		try
 		{
-			LogBlock runSingleTest(format("Test \"%s\"", unitTestName));
 			unitTest->run();
 		}
 		catch (exceptions::UnitTestFailure& failure)

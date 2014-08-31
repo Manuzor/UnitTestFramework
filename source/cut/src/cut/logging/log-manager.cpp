@@ -59,21 +59,66 @@ cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 	}
 }
 
-void cut::DefaultLogManager::registerLoggerFunction(LoggerFunction_t func)
+void
+cut::DefaultLogManager::addLoggerFunction(LoggerFunction_t func)
 {
 	m_loggers.push_back(func);
 }
 
 void
-cut::DefaultLogManager::blockBegin()
+cut::DefaultLogManager::addBlockListener(BlockListenerFunction_t func)
 {
+	m_blockListeners.push_back(func);
+}
+
+void
+cut::DefaultLogManager::blockBegin(StringRef blockName)
+{
+	if (!m_blockListeners.empty())
+	{
+		LogBlockInfo info
+		{
+			LogBlockAction::Begin,
+			m_blockLevel,
+			m_blockIndentation,
+			blockName
+		};
+
+		for (auto& listener : m_blockListeners)
+		{
+			if (listener)
+			{
+				listener(info);
+			}
+		}
+	}
+
 	++m_blockLevel;
 }
 
 void
-cut::DefaultLogManager::blockEnd()
+cut::DefaultLogManager::blockEnd(StringRef blockName)
 {
 	--m_blockLevel;
+
+	if (!m_blockListeners.empty())
+	{
+		LogBlockInfo info
+		{
+			LogBlockAction::End,
+			m_blockLevel,
+			m_blockIndentation,
+			blockName
+		};
+
+		for (auto& listener : m_blockListeners)
+		{
+			if (listener)
+			{
+				listener(info);
+			}
+		}
+	}
 }
 
 size_t

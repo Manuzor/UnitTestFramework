@@ -13,6 +13,7 @@ namespace cut
 			StdOutWriter(ILogManager& logManager);
 
 			void logMessageHandler(const LoggerInfo& loggerInfo);
+			void blockHandler(const LogBlockInfo& blockinfo);
 		};
 
 		struct FileWriter
@@ -21,6 +22,7 @@ namespace cut
 			~FileWriter();
 
 			void logMessageHandler(const LoggerInfo& loggerInfo);
+			void blockHandler(const LogBlockInfo& blockinfo);
 
 		private:
 			std::ofstream m_file;
@@ -31,6 +33,7 @@ namespace cut
 			VisualStudioWriter(ILogManager& logManager);
 
 			void logMessageHandler(const LoggerInfo& loggerInfo);
+			void blockHandler(const LogBlockInfo& blockinfo);
 		};
 	}
 }

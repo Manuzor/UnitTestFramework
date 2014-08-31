@@ -4,7 +4,8 @@ CUT_FORCE_INLINE
 cut::loggers::StdOutWriter::StdOutWriter(ILogManager& logManager)
 {
 	using namespace std::placeholders;
-	logManager.registerLoggerFunction(std::bind(&StdOutWriter::logMessageHandler, this, _1));
+	logManager.addLoggerFunction(std::bind(&StdOutWriter::logMessageHandler, this, _1));
+	logManager.addBlockListener(std::bind(&StdOutWriter::blockHandler, this, _1));
 }
 
 #ifdef _WIN32
@@ -70,6 +71,20 @@ cut::loggers::StdOutWriter::logMessageHandler(const LoggerInfo& loggerInfo)
 
 #endif // _WIN32
 
+CUT_FORCE_INLINE
+void
+cut::loggers::StdOutWriter::blockHandler(const LogBlockInfo& blockInfo)
+{
+	{
+		const auto totalIndentationWidth = blockInfo.indentationLevel * blockInfo.indentationWidthPerLevel;
+		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
+		{
+			printf(" ");
+		}
+	}
+	printf("%s %s\n", blockInfo.action == LogBlockAction::Begin ? ">>" : "<<", blockInfo.name.cString());
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 CUT_FORCE_INLINE
@@ -77,7 +92,8 @@ cut::loggers::FileWriter::FileWriter(ILogManager& logManager, StringRef fileName
 	m_file(fileName.cString())
 {
 	using namespace std::placeholders;
-	logManager.registerLoggerFunction(std::bind(&FileWriter::logMessageHandler, this, _1));
+	logManager.addLoggerFunction(std::bind(&FileWriter::logMessageHandler, this, _1));
+	logManager.addBlockListener(std::bind(&FileWriter::blockHandler, this, _1));
 }
 
 CUT_FORCE_INLINE
@@ -94,11 +110,28 @@ cut::loggers::FileWriter::logMessageHandler(const LoggerInfo& loggerInfo)
 		const auto totalIndentationWidth = loggerInfo.indentationLevel * loggerInfo.indentationWidthPerLevel;
 		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
 		{
-		m_file << ' ';
+			m_file << ' ';
 		}
 	}
 
 	m_file << loggerInfo.message.cString()
+		   << '\n';
+}
+
+CUT_FORCE_INLINE
+void
+cut::loggers::FileWriter::blockHandler(const LogBlockInfo& blockInfo)
+{
+	{
+		const auto totalIndentationWidth = blockInfo.indentationLevel * blockInfo.indentationWidthPerLevel;
+		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
+		{
+			m_file << ' ';
+		}
+	}
+
+	m_file << (blockInfo.action == LogBlockAction::Begin ? ">> " : "<< ")
+		   << blockInfo.name.cString()
 		   << '\n';
 }
 
@@ -108,7 +141,8 @@ CUT_FORCE_INLINE
 cut::loggers::VisualStudioWriter::VisualStudioWriter(ILogManager& logManager)
 {
 	using namespace std::placeholders;
-	logManager.registerLoggerFunction(std::bind(&VisualStudioWriter::logMessageHandler, this, _1));
+	logManager.addLoggerFunction(std::bind(&VisualStudioWriter::logMessageHandler, this, _1));
+	logManager.addBlockListener(std::bind(&VisualStudioWriter::blockHandler, this, _1));
 }
 
 #ifdef _WIN32
@@ -129,11 +163,37 @@ cut::loggers::VisualStudioWriter::logMessageHandler(const LoggerInfo& loggerInfo
 	OutputDebugStringA("\n");
 }
 
+CUT_FORCE_INLINE
+void
+cut::loggers::VisualStudioWriter::blockHandler(const LogBlockInfo& blockInfo)
+{
+	{
+		const auto totalIndentationWidth = blockInfo.indentationLevel * blockInfo.indentationWidthPerLevel;
+		for(std::size_t i = 0; i < totalIndentationWidth; ++i)
+		{
+			OutputDebugStringA(" ");
+		}
+	}
+	if (blockInfo.action == LogBlockAction::Begin)
+		OutputDebugStringA(">> ");
+	else
+		OutputDebugStringA("<< ");
+
+	OutputDebugStringA(blockInfo.name.cString());
+	OutputDebugStringA("\n");
+}
+
 #else
 
 CUT_FORCE_INLINE
 void
-cut::loggers::VisualStudioWriter::logMessageHandler(const LoggerInfo& loggerInfo)
+cut::loggers::VisualStudioWriter::logMessageHandler(const LoggerInfo&)
+{
+}
+
+CUT_FORCE_INLINE
+void
+cut::loggers::FileWriter::blockHandler(const LogBlockInfo&)
 {
 }
 

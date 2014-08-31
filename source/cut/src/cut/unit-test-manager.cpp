@@ -62,22 +62,23 @@ cut::DefaultUnitTestManager::runAll()
 
 		if (!isUnitTestOrGroupEnabled(unitTestGroupName))
 		{
-			logMessage(format(
-				"Skipping disabled unit test group \"%s\".\n",
-				unitTestGroupName));
+			logSuccess(format(
+				"=== Unit test group skipped ===================================================\n"
+				"Group name: %s\n"
+				"Skipped unit tests: %d\n"
+				"===============================================================================\n",
+				unitTestGroupName,
+				numberOfTests));
 			continue;
 		}
 
-		std::size_t failed(0);
+		decltype(unitTestGroup->runAllTests()) failed(0);
 
 		{
-			auto blockName = format(
-			"Unit test group \"%s\" with %d tests:",
-			unitTestGroupName,
-			numberOfTests);
+			LogBlock runGroup("Unit Test Group");
+			logMessage(format("Name:  \"%s\".", unitTestGroupName));
 
-			LogBlock block(blockName);
-			unitTestGroup->runAllTests();
+			failed = unitTestGroup->runAllTests();
 		}
 
 		if (failed == 0)
