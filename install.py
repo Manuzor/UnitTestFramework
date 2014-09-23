@@ -1,10 +1,13 @@
 #!/bin/env python
 
-import os
-import re
+import os, re, sys
 from shutil import copy2
 
-destination_root = os.environ.get("POTOO_API")
+try:
+	destination_root = os.environ.get("POTOO_API") or sys.argv[1]
+except:
+	print("Error: You must supply a destination_root by either using the POTOO_API environment variable or supplying the path as first argument to this script.")
+	exit(-1)
 
 roots = {
 	"output" : [
@@ -46,14 +49,15 @@ def do_copy(s, t):
 	copy2(s, t)
 
 def main():
+	global destination_root
+	destination_root = os.path.abspath(destination_root)
 	print("Destination root: {0}".format(destination_root))
 	if destination_root is None:
-		print("Invalid destination_root")
+		print("Invalid destination_root.")
 		exit(-1)
 
-	buf = []
-
 	working_dir = os.getcwd()
+
 	for root in roots.keys():
 		os.chdir(os.path.join(working_dir, root))
 		for subdir in roots[root]:
