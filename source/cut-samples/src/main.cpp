@@ -35,6 +35,8 @@ int main(int argc, char* argv[])
 
 	// Run all unit tests.
 	testManager.runAll();
+	testManager.run("My First Group", "Run Twice");
+	testManager.printStatistics();
 
 	// Pause before exiting.
 	system("pause");

@@ -32,3 +32,7 @@ UnitTest g_test6(g_group_Group1, "NotImplementedWithoutMessage", [](){
 
 UnitTest g_test7(g_group_Group1, "Silence...", [](){
 });
+
+UnitTest g_test8(g_group_Group1, "Run Twice", []{
+	CUT_ASSERT.succeed("I will run tiwce!");
+});

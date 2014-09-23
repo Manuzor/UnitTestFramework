@@ -45,6 +45,32 @@ cut::DefaultUnitTestManager::registerUnitTestGroup(IUnitTestGroup* testGroup)
 	++m_statistics.groups;
 }
 
+void cut::DefaultUnitTestManager::run(StringRef groupName, StringRef testName)
+{
+	IUnitTestGroup* pGroup = nullptr;
+
+	for (auto pGroupCandidate : m_unitTestGroups)
+	{
+		if (pGroupCandidate->getName() == groupName)
+		{
+			pGroup = pGroupCandidate;
+			break;
+		}
+	}
+
+	if(!pGroup)
+	{
+		throw std::logic_error(format("No such unit test group: \"%s\"", groupName));
+	}
+
+	auto pTest = pGroup->getTest(testName);
+
+	if (pGroup->runTest(pTest).failed())
+	{
+		m_statistics.testsFailed++;
+	}
+}
+
 void
 cut::DefaultUnitTestManager::runAll()
 {
@@ -104,8 +130,6 @@ cut::DefaultUnitTestManager::runAll()
 				numberOfTests - failed, numberOfTests));
 		}
 	}
-
-	printStats();
 }
 
 const cut::UnitTestStatistics&
@@ -238,7 +262,7 @@ bool cut::DefaultUnitTestManager::isUnitTestOrGroupEnabled(StringRef groupName, 
 	return true;
 }
 
-void cut::DefaultUnitTestManager::printStats() const
+void cut::DefaultUnitTestManager::printStatistics() const
 {
 	LogMode loggingMode = m_statistics.testsFailed == 0 ? LogMode::Success : LogMode::Failure;
 
