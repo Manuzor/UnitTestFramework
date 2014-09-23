@@ -3,21 +3,51 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <DebugSuffix Condition="'$(Configuration)'=='Debug'">d</DebugSuffix>
+    <CUT_Root>$(SolutionDir)../</CUT_Root>
+    <CUT_BinDir>$(CUT_Root)/output/bin</CUT_BinDir>
+    <CUT_LibDir>$(CUT_Root)/output/lib</CUT_LibDir>
+    <CUT_TempDir>$(CUT_Root)/temp</CUT_TempDir>
+    <CUT_SourceDir>$(CUT_Root)/source</CUT_SourceDir>
+    <CUT_OutputFolderName>WinVs2013$(Configuration)$(PlatformArchitecture)</CUT_OutputFolderName>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>$(SolutionDir)../output/bin$(PlatformArchitecture)/</OutDir>
-    <IntDir>$(SolutionDir)../temp/$(TargetName)/$(Configuration)_$(Platform)/</IntDir>
-    <TargetName>$(ProjectName)$(DebugSuffix)</TargetName>
+    <OutDir>$(CUT_BinDir)/$(CUT_OutputFolderName)/</OutDir>
+    <IntDir>$(CUT_TempDir)/$(ProjectName)/$(CUT_OutputFolderName)/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <ImportLibrary>$(SolutionDir)../output/lib$(PlatformArchitecture)/$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(SolutionDir)../output/lib$(PlatformArchitecture)/</AdditionalLibraryDirectories>
+      <ImportLibrary>$(CUT_LibDir)/$(CUT_OutputFolderName)/$(TargetName).lib</ImportLibrary>
+      <AdditionalLibraryDirectories>$(CUT_LibDir)/$(CUT_OutputFolderName)/</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalIncludeDirectories>$(CUT_SourceDir)/cut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BuildMacro Include="CUT_Root">
+      <Value>$(CUT_Root)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="CUT_BinDir">
+      <Value>$(CUT_BinDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="CUT_LibDir">
+      <Value>$(CUT_LibDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="CUT_TempDir">
+      <Value>$(CUT_TempDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="CUT_SourceDir">
+      <Value>$(CUT_SourceDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CUT_OutputFolderName">
+      <Value>$(CUT_OutputFolderName)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
 </Project>

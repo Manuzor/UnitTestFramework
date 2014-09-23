@@ -7,7 +7,10 @@ from shutil import copy2
 destination_root = os.environ.get("POTOO_API")
 
 roots = {
-	"output" : [ "bin32", "bin64", "lib32", "lib64", ],
+	"output" : [
+		"bin/WinVs2013Debug32", "bin/WinVs2013Debug64", "bin/WinVs2013Release32", "bin/WinVs2013Release64",
+		"lib/WinVs2013Debug32", "lib/WinVs2013Debug64", "lib/WinVs2013Release32", "lib/WinVs2013Release64",
+		],
 	"source/cut" : [ "include", ],
 }
 

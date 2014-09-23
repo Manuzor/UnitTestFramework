@@ -29,27 +29,27 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -140,6 +140,7 @@
     <ClInclude Include="include\cut-detail\log-manager.h" />
     <ClInclude Include="include\cut-detail\unit-test-manager.h" />
     <ClInclude Include="include\cut\api.h" />
+    <ClInclude Include="include\cut\logging\default-loggers.h" />
     <ClInclude Include="include\cut\logging\log-block.h" />
     <ClInclude Include="include\cut\testing\assert-handler.h" />
     <ClInclude Include="include\cut\testing\assert.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="src\cut\logging\log-manager.cpp" />
     <ClCompile Include="src\cut\exceptions.cpp" />
     <ClCompile Include="src\cut\unit-test-manager.cpp" />
+    <ClCompile Include="src\cut\unit-test-settings.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -193,6 +195,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="include\cut\logging\default-loggers.inl" />
     <None Include="include\cut\logging\log-block.inl" />
     <None Include="include\cut\testing\assert.inl" />
     <None Include="include\cut\testing\unit-test-group.inl" />

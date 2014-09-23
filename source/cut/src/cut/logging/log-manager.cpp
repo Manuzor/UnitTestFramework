@@ -14,10 +14,9 @@ cut::ILogManager::s_pInstance = nullptr;
 cut::ILogManager&
 cut::ILogManager::instance()
 {
-	static DefaultLogManager default;
-
 	if (s_pInstance == nullptr)
 	{
+		static DefaultLogManager default; // Will only be created if the user did not specify an instance.
 		s_pInstance = &default;
 	}
 
@@ -27,116 +26,99 @@ cut::ILogManager::instance()
 //////////////////////////////////////////////////////////////////////////
 
 cut::DefaultLogManager::DefaultLogManager() :
-	m_fileName("unit-tests.log"),
-	m_file(),
 	m_blockLevel(0),
-	m_blockIndentation(2)
+	m_blockIndentation(2),
+	m_loggers()
 {
+	m_loggers.reserve(4);
 }
 
 cut::DefaultLogManager::~DefaultLogManager()
 {
-	m_file.close();
+	m_loggers.clear();
 }
 
 void
 cut::DefaultLogManager::logMessage(LogMode mode, StringRef formattedMessage)
 {
-	std::ostringstream messageStream;
+	// TODO: Add timestamp?
 
-	for(std::size_t i = 0; i < m_blockLevel * m_blockIndentation; ++i)
+	LoggerInfo info;
+
+	info.logMode = mode;
+	info.message = formattedMessage;
+	info.indentationLevel = m_blockLevel;
+	info.indentationWidthPerLevel = m_blockIndentation;
+
+	for (auto& logger : m_loggers)
 	{
-		messageStream << ' ';
+		if (logger)
+		{
+			logger(info);
+		}
+	}
+}
+
+void
+cut::DefaultLogManager::addLoggerFunction(LoggerFunction_t func)
+{
+	m_loggers.push_back(func);
+}
+
+void
+cut::DefaultLogManager::addBlockListener(BlockListenerFunction_t func)
+{
+	m_blockListeners.push_back(func);
+}
+
+void
+cut::DefaultLogManager::blockBegin(StringRef blockName)
+{
+	if (!m_blockListeners.empty())
+	{
+		LogBlockInfo info
+		{
+			LogBlockAction::Begin,
+			m_blockLevel,
+			m_blockIndentation,
+			blockName
+		};
+
+		for (auto& listener : m_blockListeners)
+		{
+			if (listener)
+			{
+				listener(info);
+			}
+		}
 	}
 
-	messageStream << formattedMessage.cString() << '\n';
-
-	// TODO: Add timestamp
-	writeToStdOut(mode, messageStream);
-	writeToFile(mode, messageStream);
-}
-
-#ifdef _WIN32
-
-void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, const std::ostringstream& formattedString)
-{
-	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	CONSOLE_SCREEN_BUFFER_INFO initialConsoleState;
-	GetConsoleScreenBufferInfo(hStdOut, &initialConsoleState);
-
-	switch(mode)
-	{
-	case LogMode::Normal:
-		SetConsoleTextAttribute(hStdOut, 0x07); // Regular
-		break;
-	case LogMode::Failure:
-		SetConsoleTextAttribute(hStdOut, 0x0C); // Red
-		break;
-	case LogMode::Success:
-		SetConsoleTextAttribute(hStdOut, 0x0A); // Green
-		break;
-	default:
-		debugBreak();
-		break;
-	}
-
-	printf(formattedString.str().c_str());
-
-	// Restore the default.
-	SetConsoleTextAttribute(hStdOut, initialConsoleState.wAttributes);
-}
-
-#else
-
-void
-cut::DefaultLogManager::writeToStdOut(LogMode mode, const std::ostringstream& formattedString)
-{
-	printf(formattedString.str().c_str());
-}
-
-#endif // _WIN32
-
-void
-cut::DefaultLogManager::writeToFile(LogMode mode, const std::ostringstream& formattedMessage)
-{
-	if(!m_file.is_open())
-	{
-		m_file.open(m_fileName);
-	}
-	m_file << formattedMessage.str();
-}
-
-void
-cut::DefaultLogManager::setLogFileName(StringRef fileName)
-{
-	if(fileName == m_fileName) { return; }
-
-	if(m_file.is_open())
-	{
-		m_file.close();
-	}
-
-	m_fileName = fileName;
-}
-
-const cut::StringRef
-cut::DefaultLogManager::getLogFileName() const
-{
-	return m_fileName;
-}
-
-void
-cut::DefaultLogManager::blockBegin()
-{
 	++m_blockLevel;
 }
 
 void
-cut::DefaultLogManager::blockEnd()
+cut::DefaultLogManager::blockEnd(StringRef blockName)
 {
 	--m_blockLevel;
+
+	if (!m_blockListeners.empty())
+	{
+		LogBlockInfo info
+		{
+			LogBlockAction::End,
+			m_blockLevel,
+			m_blockIndentation,
+			blockName
+		};
+
+		for (auto& listener : m_blockListeners)
+		{
+			if (listener)
+			{
+				listener(info);
+			}
+		}
+	}
 }
 
 size_t
